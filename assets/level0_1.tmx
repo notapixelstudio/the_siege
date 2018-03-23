@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="right-down" width="33" height="25" tilewidth="16" tileheight="16" infinite="0" nextobjectid="1">
- <tileset firstgid="1" source="../maps/tilemap_1.tsx"/>
+ <tileset firstgid="1" source="../tilesets/maps/tilemap_1.tsx"/>
  <layer name="base" width="33" height="25">
   <data encoding="csv">
 64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,40,41,42,64,64,64,64,64,64,64,64,64,64,64,64,64,64,
