@@ -9,9 +9,7 @@ var grid = []
 var map
 var tiledict
 
-enum ENTITY_TYPES {PLAYER, OBSTACLE}
-
-onready var Obstacle = preload("res://Obstacle.tscn")
+enum ENTITY_TYPES {PLAYER}
 
 func _ready():
 	map = get_node("GridMap/base")
@@ -30,32 +28,19 @@ func _ready():
 	var start_pos = update_child_pos($Player)
 	$Player.position = start_pos
 	
-	"""
-	# 2. Create obstacles
-	var positions = []
-	for n in range(5):
-		var grid_pos = Vector2(randi() % int(grid_size.x), randi() %int(grid_size.y))
-		if not grid_pos in positions:
-			positions.append(grid_pos)
-	
-	for pos in positions:
-		var new_obstacle = Obstacle.instance()
-		new_obstacle.position = get_node("GridMap/base").map_to_world(pos) + half_tile_size
-		# IMPORTANT. We have to store in the array of the grid, what is in it
-		grid[pos.x][pos.y] = OBSTACLE
-		add_child(new_obstacle)
-	"""
-	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
 	# Return true if the cell is vacant, else false
 
 	var grid_pos = map.world_to_map(pos) + direction
 	
+	var tile_id = map.get_cellv(grid_pos)
+	var solid = tile_id in tiledict and tiledict[tile_id]["solid"]
+	
 	# world boundaries
 	if grid_pos.x < grid_size.x and grid_pos.x >=0:
 		if grid_pos.y < grid_size.y and grid_pos.y >=0:
-			return grid[grid_pos.x][grid_pos.y] == null and tiledict[map.get_cellv(grid_pos)]
+			return grid[grid_pos.x][grid_pos.y] == null and not solid
 			
 	return false
 	
@@ -63,7 +48,6 @@ func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array
 	# Returns the new target world position of the child
 	var grid_pos = map.world_to_map(child_node.position)
-	print(grid_pos)
 	grid[grid_pos.x][grid_pos.y] = null
 	
 	var new_grid_pos = grid_pos + child_node.direction

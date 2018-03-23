@@ -523,6 +523,7 @@ func build_tileset_for_scene(tilesets, source_path, options):
 		var spacing = int(ts.spacing) if "spacing" in ts and str(ts.spacing).is_valid_integer() else 0
 		var margin = int(ts.margin) if "margin" in ts and str(ts.margin).is_valid_integer() else 0
 		var firstgid = int(ts.firstgid)
+		var columns = int(ts.columns) if "columns" in ts and str(ts.columns).is_valid_integer() else -1
 
 		var image = null
 		var imagesize = Vector2()
@@ -543,6 +544,7 @@ func build_tileset_for_scene(tilesets, source_path, options):
 		var y = margin
 
 		var i = 0
+		var column = 0
 		while i < tilecount:
 			var tilepos = Vector2(x, y)
 			var region = Rect2(tilepos, tilesize)
@@ -593,19 +595,21 @@ func build_tileset_for_scene(tilesets, source_path, options):
 
 			if options.custom_properties and options.tile_metadata and "tileproperties" in ts \
 					and "tilepropertytypes" in ts and rel_id in ts.tileproperties and rel_id in ts.tilepropertytypes:
-				tile_meta[rel_id] = get_custom_properties(ts.tileproperties[rel_id], ts.tilepropertytypes[rel_id])
+				tile_meta[gid] = get_custom_properties(ts.tileproperties[rel_id], ts.tilepropertytypes[rel_id])
 			if options.save_tiled_properties and rel_id in ts.tiles:
 				for property in whitelist_properties:
 					if property in ts.tiles[rel_id]:
-						if not rel_id in tile_meta: tile_meta[rel_id] = {}
-						tile_meta[rel_id][property] = ts.tiles[rel_id][property]
+						if not gid in tile_meta: tile_meta[gid] = {}
+						tile_meta[gid][property] = ts.tiles[rel_id][property]
 
 			gid += 1
+			column += 1
 			i += 1
 			x += int(tilesize.x) + spacing
-			if x >= int(imagesize.x) - margin:
+			if (columns > 0 and column >= columns) or x >= int(imagesize.x) - margin or (x + int(tilesize.x)) > int(imagesize.x):
 				x = margin
 				y += int(tilesize.y) + spacing
+				column = 0
 
 		if str(ts.name) != "":
 			result.resource_name = ts.name
@@ -631,7 +635,7 @@ func build_tileset(source_path, options):
 		return ERR_INVALID_DATA
 
 	# Just to validate and build correctly using the existing builder
-	set["firstgid"] = 1
+	set["firstgid"] = 0
 
 	return build_tileset_for_scene([set], source_path, options)
 
