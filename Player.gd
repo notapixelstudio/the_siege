@@ -19,32 +19,32 @@ var target_direction = Vector2()
 var is_moving = false
 
 var type
-var grid
+var battlefield
 
 
 func _ready():
-	grid = get_parent().get_node("GridMap")
-	type = grid.PLAYER
+	battlefield = get_parent()
+	type = battlefield.PLAYER
 
 	
 func _physics_process(delta):
 	direction = Vector2()
 	speed = 0
 	
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_just_pressed("ui_up"):
 		direction.y = -1
-	elif Input.is_action_pressed("ui_down"):
+	elif Input.is_action_just_pressed("ui_down"):
 		direction.y = 1
 
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_just_pressed("ui_left"):
 		direction.x = -1
-	elif Input.is_action_pressed("ui_right"):
+	elif Input.is_action_just_pressed("ui_right"):
 		direction.x = 1
 
 	if not is_moving and direction != Vector2():
 		target_direction = direction
-		if grid.is_cell_vacant(position, target_direction):
-			target_pos = grid.update_child_pos(self)
+		if battlefield.is_cell_vacant(position, target_direction):
+			target_pos = battlefield.update_child_pos(self)
 			is_moving = true
 	elif is_moving:
 		speed = MAX_SPEED

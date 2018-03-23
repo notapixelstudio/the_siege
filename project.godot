@@ -11,12 +11,32 @@ config_version=3
 [application]
 
 config/name="THE SIEGE"
-run/main_scene="res://Battlefield.tscn"
+run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
 
 enabled=PoolStringArray( "vnen.tiled_importer" )
+
+[importer_defaults]
+
+vnen.tiled_tileset_importer={
+"custom_properties": true,
+"embed_internal_images": false,
+"image_flags": 7,
+"post_import_script": "",
+"save_tiled_properties": true,
+"tile_metadata": true
+}
+vnen.tiled_importer={
+"custom_properties": true,
+"embed_internal_images": false,
+"image_flags": 7,
+"post_import_script": "",
+"save_tiled_properties": true,
+"tile_metadata": true,
+"uv_clip": true
+}
 
 [rendering]
 
