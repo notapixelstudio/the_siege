@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tilemap_1.png-73b277d21c19bb6581ea0dd78081d74a.stex"
+path="res://.import/pawn_attack.png-f5f80ce0042e2d3b08d501b79ec737ed.stex"
 
 [deps]
 
-source_file="res://assets/tilemap_1.png"
-source_md5="64eecb582e2aba18c0a8474d8314f5b2"
+source_file="res://assets/pawn_attack.png"
+source_md5="0f458bd0fe7071c819d5f6d93c5f05c3"
 
-dest_files=[ "res://.import/tilemap_1.png-73b277d21c19bb6581ea0dd78081d74a.stex" ]
-dest_md5="715f58ccaf3a0b8363bbb051919811fc"
+dest_files=[ "res://.import/pawn_attack.png-f5f80ce0042e2d3b08d501b79ec737ed.stex" ]
+dest_md5="15aff526ed1b0da9d335028428467323"
 
 [params]
 

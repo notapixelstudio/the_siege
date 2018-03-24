@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+
 var direction = Vector2()
 const TOP = Vector2(0, -1)
 const RIGHT = Vector2(1, 0)
@@ -25,7 +26,7 @@ var battlefield
 func _ready():
 	battlefield = get_parent()
 	type = battlefield.PAWN
-	
+	$sprite.play('spawn')
 	
 func _physics_process(delta):
 	speed = 0
@@ -45,12 +46,18 @@ func _physics_process(delta):
 		if abs(velocity.x) > distance_to_target.x: 
 			velocity.x = distance_to_target.x * target_direction.x
 			is_moving = false
-
+			
 		if abs(velocity.y) > distance_to_target.y: 
 			velocity.y = distance_to_target.y * target_direction.y
 			is_moving = false
 		move_and_collide(velocity)
-	
+		
+	if $sprite.animation == 'attack' and $sprite.frame == 1:
+		idle()
+	elif $sprite.animation == 'spawn' and $sprite.frame == 1:
+		idle()
+		
+	# frame-based updates
 	last_target_direction = target_direction
 	
 func march():
@@ -58,6 +65,13 @@ func march():
 
 func stop():
 	direction = Vector2()
+	idle()
 	
-func break_walls():
+func attack():
 	battlefield.break_cell(position, last_target_direction)
+	$sprite.play('attack')
+	
+func idle():
+	$sprite.play('idle')
+	get_parent().busy_pawns -= 1
+	

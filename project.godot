@@ -16,7 +16,7 @@ config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "vnen.tiled_importer" )
+enabled=PoolStringArray( "net.kivano.fsm", "vnen.tiled_importer" )
 
 [importer_defaults]
 
