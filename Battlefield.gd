@@ -9,6 +9,8 @@ var grid = []
 var map
 var tiledict
 
+var Pawn
+
 enum ENTITY_TYPES {PLAYER}
 
 func _ready():
@@ -25,8 +27,9 @@ func _ready():
 		for y in range(grid_size.y):
 			grid[x].append(null)
 	
-	var start_pos = update_child_pos($Player)
-	$Player.position = start_pos
+	Pawn = load('res://Pawn.tscn')
+	spawn_pawn(Vector2(0,0))
+	spawn_pawn(Vector2(0,1))
 	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
@@ -49,7 +52,7 @@ func break_cell(pos, direction):
 	var breakable = tile_id in tiledict and tiledict[tile_id]["breakable"]
 	
 	if breakable:
-		map.set_cellv(grid_pos, 38)
+		map.set_cellv(grid_pos, 38) # ground tile
 	
 func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array
@@ -62,3 +65,10 @@ func update_child_pos(child_node):
 	
 	var target_pos = map.map_to_world(new_grid_pos) + half_tile_size
 	return target_pos
+
+func spawn_pawn(pos):
+	var pawn = Pawn.instance()
+	pawn.position = map.map_to_world(pos) + half_tile_size # bleargh
+	var start_pos = update_child_pos(pawn)
+	pawn.position = start_pos
+	add_child(pawn)
