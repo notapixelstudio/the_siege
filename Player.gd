@@ -16,6 +16,7 @@ var velocity = Vector2()
 
 var target_pos = Vector2()
 var target_direction = Vector2()
+var last_target_direction = Vector2()
 var is_moving = false
 
 var type
@@ -60,3 +61,7 @@ func _physics_process(delta):
 			is_moving = false
 		move_and_collide(velocity)
 	
+	if Input.is_action_just_pressed("ui_select"):
+		battlefield.break_cell(position, last_target_direction)
+		
+	last_target_direction = target_direction

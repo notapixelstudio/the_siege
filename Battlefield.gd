@@ -33,7 +33,6 @@ func is_cell_vacant(pos, direction):
 	# Return true if the cell is vacant, else false
 
 	var grid_pos = map.world_to_map(pos) + direction
-	
 	var tile_id = map.get_cellv(grid_pos)
 	var solid = tile_id in tiledict and tiledict[tile_id]["solid"]
 	
@@ -43,6 +42,14 @@ func is_cell_vacant(pos, direction):
 			return grid[grid_pos.x][grid_pos.y] == null and not solid
 			
 	return false
+	
+func break_cell(pos, direction):
+	var grid_pos = map.world_to_map(pos) + direction
+	var tile_id = map.get_cellv(grid_pos)
+	var breakable = tile_id in tiledict and tiledict[tile_id]["breakable"]
+	
+	if breakable:
+		map.set_cellv(grid_pos, 38)
 	
 func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array
