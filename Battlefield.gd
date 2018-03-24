@@ -1,5 +1,8 @@
 extends Node
 
+signal attack_done
+signal spawn_done
+signal move_done
 
 var tile_size
 
