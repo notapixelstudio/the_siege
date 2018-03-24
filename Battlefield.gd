@@ -2,7 +2,6 @@ extends Node
 
 
 var tile_size
-var half_tile_size
 
 var grid_size = Vector2(33, 25)
 var grid = []
@@ -19,14 +18,13 @@ var step = 0 # TO BE REMOVED
 enum ENTITY_TYPES {PAWN}
 
 func _ready():
+	# set up a new random seed
+	# FIXME this should be done at game level
 	randomize()
 	
 	map = get_node("GridMap/base")
 	tiledict = map.get_tileset().get_meta('tile_meta')
 	tile_size = map.get_cell_size()
-	
-	# in order to put the object at the center
-	half_tile_size = tile_size / 2
 	
 	# Create the grid Array
 	for x in range(grid_size.x):
@@ -93,13 +91,13 @@ func update_child_pos(child_node):
 	var new_grid_pos = grid_pos + child_node.direction
 	grid[new_grid_pos.x][new_grid_pos.y] = child_node.type
 	
-	var target_pos = map.map_to_world(new_grid_pos) + half_tile_size
+	var target_pos = map.map_to_world(new_grid_pos) + tile_size/2
 	return target_pos
 
 func spawn_pawn(pos, direction):
 	var pawn = Pawn.instance()
 	pawns.append(pawn)
-	pawn.position = map.map_to_world(pos) + half_tile_size # bleargh
+	pawn.position = map.map_to_world(pos) + tile_size/2 # bleargh
 	pawn.facing = direction
 	var start_pos = update_child_pos(pawn)
 	pawn.position = start_pos
