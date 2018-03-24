@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 var state = 'idle'
 var busy_pawns = 0
@@ -12,6 +12,7 @@ var tile_size
 var grid_size = Vector2(33, 25)
 var grid = []
 var map
+var buildings_map
 var tiledict
 
 var Pawn
@@ -32,6 +33,7 @@ func _ready():
 	randomize()
 	
 	map = get_node("GridMap/base")
+	buildings_map = get_node("GridMap/buildings")
 	cursor_map = get_node("GridMap/cursor")
 	tiledict = map.get_tileset().get_meta('tile_meta')
 	tile_size = map.get_cell_size()
@@ -46,13 +48,13 @@ func _ready():
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			var tile_id = get_node("GridMap/spawn").get_cell(x, y)
-			if tile_id == 55:
+			if tile_id == 74:
 				spawn_points[1].append(Vector2(x,y))
-			elif tile_id == 56:
+			elif tile_id == 75:
 				spawn_points[2].append(Vector2(x,y))
-			elif tile_id == 57:
+			elif tile_id == 76:
 				spawn_points[0].append(Vector2(x,y))
-			elif tile_id == 58:
+			elif tile_id == 77:
 				spawn_points[3].append(Vector2(x,y))
 				
 	Pawn = load('res://Pawn.tscn')
@@ -63,7 +65,8 @@ func is_cell_vacant(pos, direction):
 
 	var grid_pos = map.world_to_map(pos) + direction
 	var tile_id = map.get_cellv(grid_pos)
-	var solid = tile_id in tiledict and tiledict[tile_id]["solid"]
+	var buildings_tile_id = buildings_map.get_cellv(grid_pos)
+	var solid = tile_id in tiledict and tiledict[tile_id]["solid"] or buildings_tile_id in tiledict and tiledict[buildings_tile_id]["solid"]
 	
 	# world boundaries
 	if grid_pos.x < grid_size.x and grid_pos.x >=0:
@@ -148,11 +151,11 @@ func _process(delta):
 
 func _input(event):
 	if (event is InputEventMouseMotion):
-		var pos = Vector2(int(event.global_position.x/tile_size.x), int(event.global_position.y/tile_size.y))
+		var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
 		if pos != last_cursor_pos:
 			for cell in cursor_shape:
 				cursor_map.set_cellv(cell + last_cursor_pos, -1)
 			last_cursor_pos = pos
 			for cell in cursor_shape:
-				cursor_map.set_cellv(cell + pos, 65)
+				cursor_map.set_cellv(cell + pos, 78)
 			
