@@ -54,11 +54,11 @@ func _input(event):
 	if event.is_action_pressed('ui_select') and not event.is_echo():
 		print(step)
 		if step == 0:
-			pawns_attack()
+			do_attack()
 		elif step == 1:
-			spawn_pawns()
+			do_spawn()
 		elif step == 2:
-			move_pawns()
+			do_move()
 			
 		step = (step + 1) % 3
 	
@@ -106,7 +106,7 @@ func spawn_pawn(pos, direction):
 	pawn.position = start_pos
 	add_child(pawn)
 	
-func spawn_pawns():
+func do_spawn():
 	# choose a random direction
 	var random_dir_index = randi() % 4
 	var direction = [Vector2(0,1),Vector2(0,-1),Vector2(1,0),Vector2(-1,0)][random_dir_index]
@@ -116,11 +116,11 @@ func spawn_pawns():
 	for spawn_point in active_spawn_points:
 		spawn_pawn(spawn_point, direction)
 	
-func move_pawns():
+func do_move():
 	for pawn in pawns:
 		pawn.march()
 		
-func pawns_attack():
+func do_attack():
 	for pawn in pawns:
 		pawn.break_walls()
 		
