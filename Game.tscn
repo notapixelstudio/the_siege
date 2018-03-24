@@ -1,24 +1,21 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Battlefield.gd" type="Script" id=1]
-[ext_resource path="res://assets/level0_1.tmx" type="PackedScene" id=2]
-[ext_resource path="res://GridVisualizer.gd" type="Script" id=3]
+[ext_resource path="res://Game.gd" type="Script" id=1]
+[ext_resource path="res://Battlefield.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI.tscn" type="PackedScene" id=3]
 
 [node name="Game" type="Node" index="0"]
 
-[node name="UI" type="Node" parent="." index="0"]
-
-[node name="Battlefield" type="Node" parent="." index="1"]
-
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="GridMap" parent="Battlefield" index="0" instance=ExtResource( 2 )]
+[node name="Battlefield" parent="." index="0" instance=ExtResource( 2 )]
 
-[node name="GridVisualizer" type="Node2D" parent="Battlefield/GridMap" index="2"]
+[node name="UI" parent="." index="1" instance=ExtResource( 3 )]
 
-visible = false
-script = ExtResource( 3 )
-_sections_unfolded = [ "Visibility" ]
+[connection signal="attack_done" from="Battlefield" to="." method="_on_attack_done"]
+
+[connection signal="move_done" from="Battlefield" to="." method="_on_move_done"]
+
+[connection signal="spawn_done" from="Battlefield" to="." method="_on_spawn_done"]
 
 

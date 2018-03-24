@@ -1,5 +1,11 @@
 extends Node
 
+var state = 'idle'
+var busy_pawns = 0
+
+signal attack_done
+signal spawn_done
+signal move_done
 
 var tile_size
 
@@ -13,9 +19,12 @@ var pawns = []
 
 var spawn_points = [[], [], [], []] # NSWE
 
-var step = 0 # TO BE REMOVED
-
 enum ENTITY_TYPES {PAWN}
+
+# cursor
+var cursor_shape = [Vector2(0,-1),Vector2(0,0),Vector2(0,1)]
+var last_cursor_pos = Vector2(0,0)
+var cursor_map
 
 func _ready():
 	# set up a new random seed
@@ -23,6 +32,7 @@ func _ready():
 	randomize()
 	
 	map = get_node("GridMap/base")
+	cursor_map = get_node("GridMap/cursor")
 	tiledict = map.get_tileset().get_meta('tile_meta')
 	tile_size = map.get_cell_size()
 	
@@ -46,18 +56,6 @@ func _ready():
 				spawn_points[3].append(Vector2(x,y))
 				
 	Pawn = load('res://Pawn.tscn')
-	
-func _input(event):
-	if event.is_action_pressed('ui_select') and not event.is_echo():
-		print(step)
-		if step == 0:
-			pawns_attack()
-		elif step == 1:
-			spawn_pawns()
-		elif step == 2:
-			move_pawns()
-			
-		step = (step + 1) % 3
 	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
@@ -103,7 +101,11 @@ func spawn_pawn(pos, direction):
 	pawn.position = start_pos
 	add_child(pawn)
 	
-func spawn_pawns():
+	return pawn
+	
+func do_spawn():
+	state = 'spawn'
+	
 	# choose a random direction
 	var random_dir_index = randi() % 4
 	var direction = [Vector2(0,1),Vector2(0,-1),Vector2(1,0),Vector2(-1,0)][random_dir_index]
@@ -112,12 +114,45 @@ func spawn_pawns():
 	# spawn one pawn from each spawn point, directed towards the center
 	for spawn_point in active_spawn_points:
 		spawn_pawn(spawn_point, direction)
+		
+	busy_pawns = len(active_spawn_points)
 	
-func move_pawns():
+func do_move():
+	state = 'move'
+	busy_pawns = len(pawns)
+	
 	for pawn in pawns:
 		pawn.march()
 		
-func pawns_attack():
+func do_attack():
+	state = 'attack'
+	busy_pawns = len(pawns)
+	
 	for pawn in pawns:
-		pawn.break_walls()
+		pawn.attack()
 		
+func _process(delta):
+	if busy_pawns == 0:
+		if state == 'spawn':
+			print('spawn_done')
+			state = 'idle'
+			emit_signal('spawn_done')
+		elif state == 'attack':
+			print('attack_done')
+			state = 'idle'
+			emit_signal('attack_done')
+		elif state == 'move':
+			print('move_done')
+			state = 'idle'
+			emit_signal('move_done')
+
+func _input(event):
+	if (event is InputEventMouseMotion):
+		var pos = Vector2(int(event.global_position.x/tile_size.x), int(event.global_position.y/tile_size.y))
+		if pos != last_cursor_pos:
+			for cell in cursor_shape:
+				cursor_map.set_cellv(cell + last_cursor_pos, -1)
+			last_cursor_pos = pos
+			for cell in cursor_shape:
+				cursor_map.set_cellv(cell + pos, 65)
+			
