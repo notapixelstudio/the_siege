@@ -132,7 +132,3 @@ func picked_counselor(counselor):
 	else:
 		show_cards()	
 	
-	
-
-func _on_Battlefield_move_done():
-	pass # replace with function body
