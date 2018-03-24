@@ -21,12 +21,17 @@ var spawn_points = [[], [], [], []] # NSWE
 
 enum ENTITY_TYPES {PAWN}
 
+# cursor
+var last_cursor_pos = Vector2(0,0)
+var cursor_map
+
 func _ready():
 	# set up a new random seed
 	# FIXME this should be done at game level
 	randomize()
 	
 	map = get_node("GridMap/base")
+	cursor_map = get_node("GridMap/cursor")
 	tiledict = map.get_tileset().get_meta('tile_meta')
 	tile_size = map.get_cell_size()
 	
@@ -139,4 +144,12 @@ func _process(delta):
 			print('move_done')
 			state = 'idle'
 			emit_signal('move_done')
-	
+
+func _input(event):
+	if (event is InputEventMouseMotion):
+		var pos = Vector2(int(event.global_position.x/tile_size.x), int(event.global_position.y/tile_size.y))
+		if pos != last_cursor_pos:
+			cursor_map.set_cellv(last_cursor_pos, -1)
+			last_cursor_pos = pos
+			cursor_map.set_cellv(pos, 65)
+			print(last_cursor_pos)
