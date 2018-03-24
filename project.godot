@@ -18,6 +18,8 @@ config/icon="res://icon.png"
 
 window/size/width=1600
 window/size/height=900
+window/stretch/aspect="keep"
+window/stretch/shrink="0.9"
 
 [editor_plugins]
 
