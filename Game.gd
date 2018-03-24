@@ -137,18 +137,14 @@ func _on_btn_wizard_pressed():
 # from card chos
 func _on_btn_action_pressed():
 	print("GAME: Card picked, starting Player attack")
-	get_node("UI/chooseCards").hide()
+	# get_node("UI/chooseCards").hide()
 	turn_AI()
 	
 func picked_counselor(counselor):
-	var id_regnant = int(get_node("UI/pickCounselor/VBoxContainer/id").text);
-	
+	var id_regnant = int(get_node("UI/pickCounselor/VBoxContainer/id").text)
 	print("GAME: The " + regnant_dict[id_regnant] + " summons the " + counselor_dict[counselor])
-	regnants[id_regnant].summons = counselor;
-	
-	counselors[counselor].summoned = true;
-	get_node("UI/pickCounselor").hide()
-	
+	regnants[id_regnant].summons = counselor
+	counselors[counselor].summoned = true
 	
 	if regnants_alive == 2 and id_regnant == KING:
 		summon_counselor(QUEEN)
