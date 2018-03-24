@@ -11,9 +11,13 @@ var tiledict
 
 var Pawn
 
+var spawn_points = [[], [], [], []] # NSWE
+
 enum ENTITY_TYPES {PLAYER}
 
 func _ready():
+	randomize()
+	
 	map = get_node("GridMap/base")
 	tiledict = map.get_tileset().get_meta('tile_meta')
 	tile_size = map.get_cell_size()
@@ -21,15 +25,27 @@ func _ready():
 	# in order to put the object at the center
 	half_tile_size = tile_size / 2
 	
-	# 1. Create the grid Array
+	# Create the grid Array
 	for x in range(grid_size.x):
 		grid.append([])
 		for y in range(grid_size.y):
 			grid[x].append(null)
-	
+			
+	# Load spawn points from tilemap
+	for x in range(grid_size.x):
+		for y in range(grid_size.y):
+			var tile_id = get_node("GridMap/spawn").get_cell(x, y)
+			if tile_id == 55:
+				spawn_points[1].append(Vector2(x,y))
+			elif tile_id == 56:
+				spawn_points[2].append(Vector2(x,y))
+			elif tile_id == 57:
+				spawn_points[0].append(Vector2(x,y))
+			elif tile_id == 58:
+				spawn_points[3].append(Vector2(x,y))
+				
 	Pawn = load('res://Pawn.tscn')
-	spawn_pawn(Vector2(0,0))
-	spawn_pawn(Vector2(0,1))
+	spawn_pawns()
 	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
@@ -72,3 +88,12 @@ func spawn_pawn(pos):
 	var start_pos = update_child_pos(pawn)
 	pawn.position = start_pos
 	add_child(pawn)
+	
+func spawn_pawns():
+	# choose a random direction
+	var active_spawn_points = spawn_points[randi() % 4]
+	
+	# spawn one pawn from each spawn point
+	for spawn_point in active_spawn_points:
+		spawn_pawn(spawn_point)
+	
