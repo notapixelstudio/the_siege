@@ -115,12 +115,21 @@ func do_spawn():
 	# spawn one pawn from each spawn point, directed towards the center
 	for spawn_point in active_spawn_points:
 		spawn_pawn(spawn_point, direction)
+		
+	# FIXME there should be a delay / animation
+	emit_signal('spawn_done')
 	
 func do_move():
 	for pawn in pawns:
 		pawn.march()
 		
+	# FIXME there should be a delay / animation
+	emit_signal('move_done')
+		
 func do_attack():
 	for pawn in pawns:
 		pawn.break_walls()
 		
+	# FIXME there should be a delay / animation
+	emit_signal('attack_done')
+	
