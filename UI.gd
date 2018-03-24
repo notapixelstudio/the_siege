@@ -6,7 +6,7 @@ func _ready():
 func do_show_popup_counselor(i,name):
 	
 	print("The " + name + " summons")
-	get_node("pickCounselor/VBoxContainer/title").text = "The " + regnant.name + " summons:"
+	get_node("pickCounselor/VBoxContainer/title").text = "The " + name + " summons:"
 	get_node("pickCounselor/VBoxContainer/id").text = str(i);
 	get_node("pickCounselor").show();
 	 

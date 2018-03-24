@@ -7,17 +7,17 @@ path="res://.import/level0_1.tmx-7492138d11fcbe30b63d79580994b4ad.scn"
 [deps]
 
 source_file="res://assets/level0_1.tmx"
-source_md5="085934668dc51cd9205d2fc6fd8743f5"
+source_md5="b570b61960e1672b5078ef86614d05ce"
 
 dest_files=[ "res://.import/level0_1.tmx-7492138d11fcbe30b63d79580994b4ad.scn" ]
-dest_md5="156c72647214b995f2b57e34ad8cd231"
+dest_md5="7cc5bf25ee900020210459505b35fdff"
 
 [params]
 
 custom_properties=true
 tile_metadata=true
 uv_clip=true
-image_flags=7
-embed_internal_images=false
+image_flags=0
+embed_internal_images=true
 save_tiled_properties=true
 post_import_script=""

@@ -51,9 +51,10 @@ func setup_game():
 
 
 func _ready():
-	print("setup")	
+	print("setup")
 	setup_game()
 	turn_AI()
+	
 	
 func turn_AI():
 	print("Turn AI")	
@@ -71,12 +72,15 @@ func move():
 	print("move")
 	$Battlefield.do_move()
 
+# from signal attack_done
 func _on_attack_done():
 	spawn()
 
+# from signal spawn_done
 func _on_spawn_done():
 	move()
 
+# from signal move_done
 func _on_move_done():
 	turn_player()
 
@@ -129,4 +133,6 @@ func picked_counselor(counselor):
 		show_cards()	
 	
 	
- 
+
+func _on_Battlefield_move_done():
+	pass # replace with function body

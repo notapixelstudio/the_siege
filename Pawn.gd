@@ -1,21 +1,21 @@
 extends KinematicBody2D
 
 var direction = Vector2()
-
-
 const TOP = Vector2(0, -1)
 const RIGHT = Vector2(1, 0)
 const DOWN = Vector2(0, -1)
 const LEFT = Vector2(-1, 0)
 
 
-const MAX_SPEED = 400
+const MAX_SPEED = 3
 
 var speed = 0
 var velocity = Vector2()
 
+var facing = Vector2()
 var target_pos = Vector2()
 var target_direction = Vector2()
+var last_target_direction = Vector2()
 var is_moving = false
 
 var type
@@ -24,28 +24,19 @@ var battlefield
 
 func _ready():
 	battlefield = get_parent()
-	type = battlefield.PLAYER
-
+	type = battlefield.PAWN
+	
 	
 func _physics_process(delta):
-	direction = Vector2()
 	speed = 0
 	
-	if Input.is_action_just_pressed("ui_up"):
-		direction.y = -1
-	elif Input.is_action_just_pressed("ui_down"):
-		direction.y = 1
-
-	if Input.is_action_just_pressed("ui_left"):
-		direction.x = -1
-	elif Input.is_action_just_pressed("ui_right"):
-		direction.x = 1
-
 	if not is_moving and direction != Vector2():
 		target_direction = direction
 		if battlefield.is_cell_vacant(position, target_direction):
 			target_pos = battlefield.update_child_pos(self)
 			is_moving = true
+		else:
+			stop()
 	elif is_moving:
 		speed = MAX_SPEED
 		velocity = speed * target_direction
@@ -60,3 +51,13 @@ func _physics_process(delta):
 			is_moving = false
 		move_and_collide(velocity)
 	
+	last_target_direction = target_direction
+	
+func march():
+	direction = facing
+
+func stop():
+	direction = Vector2()
+	
+func break_walls():
+	battlefield.break_cell(position, last_target_direction)

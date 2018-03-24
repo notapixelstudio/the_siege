@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Battlefield.gd" type="Script" id=2]
 [ext_resource path="res://assets/level0_1.tmx" type="PackedScene" id=3]
 [ext_resource path="res://GridVisualizer.gd" type="Script" id=4]
-[ext_resource path="res://Player.gd" type="Script" id=5]
-[ext_resource path="res://icon.png" type="Texture" id=6]
-[ext_resource path="res://UI.gd" type="Script" id=7]
+[ext_resource path="res://UI.gd" type="Script" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 
@@ -27,25 +25,13 @@ script = ExtResource( 2 )
 
 [node name="GridVisualizer" type="Node2D" parent="Battlefield/GridMap" index="2"]
 
+visible = false
 script = ExtResource( 4 )
 _sections_unfolded = [ "Visibility" ]
 
-[node name="Player" type="KinematicBody2D" parent="Battlefield" index="1"]
-
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
-script = ExtResource( 5 )
-_sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index", "collision" ]
-
-[node name="Sprite" type="Sprite" parent="Battlefield/Player" index="0"]
-
-texture = ExtResource( 6 )
-
 [node name="UI" type="Node" parent="." index="1"]
 
-script = ExtResource( 7 )
+script = ExtResource( 5 )
 
 [node name="pickCounselor" type="NinePatchRect" parent="UI" index="0"]
 
@@ -198,6 +184,12 @@ group = null
 text = "Wizard"
 flat = false
 align = 1
+
+[connection signal="attack_done" from="Battlefield" to="." method="_on_attack_done"]
+
+[connection signal="move_done" from="Battlefield" to="." method="_on_move_done"]
+
+[connection signal="spawn_done" from="Battlefield" to="." method="_on_spawn_done"]
 
 [connection signal="pressed" from="UI/pickCounselor/VBoxContainer/btn_commander" to="." method="_on_btn_commander_pressed"]
 
