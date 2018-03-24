@@ -11,6 +11,7 @@ enum enum_counselor {COMMANDER , CARPENTER, WIZARD}
 enum enum_turn      {AI, PLAYER}
 enum enum_moods     {HAPPY, QUIET, SAD, ANGRY}
 
+# mapping enum to string
 var regnant_dict	= {KING: "King" , QUEEN: "Queen"}
 var counselor_dict 	= {COMMANDER : "Commander" , CARPENTER : "Carpenter", WIZARD: "Wizard"}
 var turn_dict 		= {AI: "Enemy", PLAYER:"Player"}
@@ -21,7 +22,6 @@ var regnants_alive = 2
 var num_rounds = 4;
 var curr_round = 0;
 var curr_turn = AI;
-
 
 
 class Counselor:
@@ -47,7 +47,6 @@ class Regnant:
  		
 		
 func setup_game():
-
 	for i in range(NUM_REGNANTS):
 		regnants.append(Regnant.new(regnant_dict[i]))
 
@@ -62,22 +61,23 @@ func _ready():
 	print("Game: Setup")
 	setup_game()
 	turn_AI()
-	
-	
+
+# turn AI: 
+# 1. attack
+# 2. spawn
+# 3. everybody moves
 func turn_AI():
 	curr_round +=1
 	curr_turn = turn_dict[AI]
 	print("Game: Round " + str(curr_round) + ", Turn AI") 	
 	
-
 	$UI.update_ui(curr_round,curr_turn)
-	
 	attack()
 	
 func attack():
-	print("Game: do_attack")	
+	print("Game: do_attack")
 	$Battlefield.do_attack()
-		
+	
 func spawn():
 	print("Game: do_spawn")
 	$Battlefield.do_spawn()
@@ -98,39 +98,33 @@ func _on_spawn_done():
 func _on_move_done():
 	turn_player()
 
+"""
+# turn PLAYER:
+#phase 1
+#summon counselors	
+
+#phase 2
+#show cards	
+
+#phase 3
+#pick cards
+#select target
+#execute actions
+"""
 
 func turn_player():
-	print("Game: Round " + str(curr_round) + ", Turn Player") 	
-
+	print("Game: Round " + str(curr_round) + ", Turn Player")
 	curr_turn = turn_dict[PLAYER]
 	$UI.update_ui(curr_round,curr_turn)
-
-
-	summon_counselor(KING);
-
-	#phase 1
-	#summon counselors	
+	summon_counselor(KING)
 	
-	#phase 2
-	#show cards	
-	
-	#phase 3
-	#pick cards
-		#select target
-		#execute actions	
-	
-
-
 func summon_counselor(i):
 	var regnant = regnants[i]
 	$UI.do_show_popup_counselor(i,regnant.name)
 	 
 func show_cards():
-	
 	$UI.do_show_cards(regnants,counselors)
 	
-
- 
 func _on_btn_commander_pressed():
 	picked_counselor(COMMANDER)
 	
@@ -140,17 +134,16 @@ func _on_btn_carpenter_pressed():
 func _on_btn_wizard_pressed():
 	picked_counselor(WIZARD)
 
+# from card chos
 func _on_btn_action_pressed():
 	print("GAME: Card picked, starting Player attack")
 	get_node("UI/chooseCards").hide()
 	turn_AI()
 	
 func picked_counselor(counselor):
-	
 	var id_regnant = int(get_node("UI/pickCounselor/VBoxContainer/id").text);
 	
 	print("GAME: The " + regnant_dict[id_regnant] + " summons the " + counselor_dict[counselor])
-	
 	regnants[id_regnant].summons = counselor;
 	
 	counselors[counselor].summoned = true;
@@ -160,5 +153,5 @@ func picked_counselor(counselor):
 	if regnants_alive == 2 and id_regnant == KING:
 		summon_counselor(QUEEN)
 	else:
-		show_cards()	
+		show_cards()
 	
