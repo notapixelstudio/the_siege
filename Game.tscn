@@ -187,6 +187,10 @@ align = 1
 
 [connection signal="attack_done" from="Battlefield" to="." method="_on_attack_done"]
 
+[connection signal="move_done" from="Battlefield" to="." method="_on_move_done"]
+
+[connection signal="spawn_done" from="Battlefield" to="." method="_on_spawn_done"]
+
 [connection signal="pressed" from="UI/pickCounselor/VBoxContainer/btn_commander" to="." method="_on_btn_commander_pressed"]
 
 [connection signal="pressed" from="UI/pickCounselor/VBoxContainer/btn_carpenter" to="." method="_on_btn_carpenter_pressed"]

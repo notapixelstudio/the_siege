@@ -133,3 +133,6 @@ func picked_counselor(counselor):
 		show_cards()	
 	
 	
+
+func _on_Battlefield_move_done():
+	pass # replace with function body
