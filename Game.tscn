@@ -1,208 +1,21 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
-[ext_resource path="res://Battlefield.gd" type="Script" id=2]
-[ext_resource path="res://assets/level0_1.tmx" type="PackedScene" id=3]
-[ext_resource path="res://GridVisualizer.gd" type="Script" id=4]
-[ext_resource path="res://Player.gd" type="Script" id=5]
-[ext_resource path="res://icon.png" type="Texture" id=6]
-[ext_resource path="res://UI.gd" type="Script" id=7]
-
-[sub_resource type="AtlasTexture" id=1]
-
-flags = 0
-region = Rect2( 0, 0, 0, 0 )
-margin = Rect2( 0, 0, 0, 0 )
-filter_clip = false
+[ext_resource path="res://Battlefield.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI.tscn" type="PackedScene" id=3]
 
 [node name="Game" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
-[node name="Battlefield" type="Node" parent="." index="0"]
+[node name="Battlefield" parent="." index="0" instance=ExtResource( 2 )]
 
-script = ExtResource( 2 )
+[node name="UI" parent="." index="1" instance=ExtResource( 3 )]
 
-[node name="GridMap" parent="Battlefield" index="0" instance=ExtResource( 3 )]
+[connection signal="attack_done" from="Battlefield" to="." method="_on_attack_done"]
 
-[node name="GridVisualizer" type="Node2D" parent="Battlefield/GridMap" index="2"]
+[connection signal="move_done" from="Battlefield" to="." method="_on_move_done"]
 
-script = ExtResource( 4 )
-_sections_unfolded = [ "Visibility" ]
-
-[node name="Player" type="KinematicBody2D" parent="Battlefield" index="1"]
-
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
-script = ExtResource( 5 )
-_sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index", "collision" ]
-
-[node name="Sprite" type="Sprite" parent="Battlefield/Player" index="0"]
-
-texture = ExtResource( 6 )
-
-[node name="UI" type="Node" parent="." index="1"]
-
-script = ExtResource( 7 )
-
-[node name="pickCounselor" type="NinePatchRect" parent="UI" index="0"]
-
-pause_mode = 2
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -151.5
-margin_top = -100.5
-margin_right = 151.5
-margin_bottom = 100.5
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-texture = SubResource( 1 )
-_sections_unfolded = [ "Margin", "Pause", "Visibility" ]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/pickCounselor" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 126.0
-margin_bottom = 86.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-
-[node name="title" type="Label" parent="UI/pickCounselor/VBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 126.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_colors/font_color = Color( 0.0117188, 0.0117188, 0.0117188, 1 )
-text = "The King summons:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors" ]
-
-[node name="id" type="Label" parent="UI/pickCounselor/VBoxContainer" index="1"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 126.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_colors/font_color = Color( 0.0117188, 0.0117188, 0.0117188, 1 )
-text = "1"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Visibility", "custom_colors" ]
-
-[node name="btn_commander" type="Button" parent="UI/pickCounselor/VBoxContainer" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 18.0
-margin_right = 126.0
-margin_bottom = 38.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Commander"
-flat = false
-align = 1
-
-[node name="btn_carpenter" type="Button" parent="UI/pickCounselor/VBoxContainer" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 42.0
-margin_right = 126.0
-margin_bottom = 62.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Carpenter"
-flat = false
-align = 1
-
-[node name="btn_wizard" type="Button" parent="UI/pickCounselor/VBoxContainer" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 66.0
-margin_right = 126.0
-margin_bottom = 86.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Wizard"
-flat = false
-align = 1
-
-[connection signal="pressed" from="UI/pickCounselor/VBoxContainer/btn_commander" to="." method="_on_btn_commander_pressed"]
-
-[connection signal="pressed" from="UI/pickCounselor/VBoxContainer/btn_carpenter" to="." method="_on_btn_carpenter_pressed"]
-
-[connection signal="pressed" from="UI/pickCounselor/VBoxContainer/btn_wizard" to="." method="_on_btn_wizard_pressed"]
+[connection signal="spawn_done" from="Battlefield" to="." method="_on_spawn_done"]
 
 
