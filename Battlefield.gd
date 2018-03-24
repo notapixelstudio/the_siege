@@ -16,7 +16,7 @@ var spawn_points = [[], [], [], []] # NSWE
 
 var step = 0 # TO BE REMOVED
 
-enum ENTITY_TYPES {PLAYER}
+enum ENTITY_TYPES {PAWN}
 
 func _ready():
 	randomize()

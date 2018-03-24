@@ -7,7 +7,7 @@ const DOWN = Vector2(0, -1)
 const LEFT = Vector2(-1, 0)
 
 
-const MAX_SPEED = 400
+const MAX_SPEED = 3
 
 var speed = 0
 var velocity = Vector2()
@@ -24,7 +24,7 @@ var battlefield
 
 func _ready():
 	battlefield = get_parent()
-	type = battlefield.PLAYER
+	type = battlefield.PAWN
 	
 	
 func _physics_process(delta):
