@@ -10,13 +10,13 @@ source_file="res://assets/tilemap_1.tsx"
 source_md5="16db11a5fd63643bbd47f91dd2255f43"
 
 dest_files=[ "res://.import/tilemap_1.tsx-cb560af10ba02041f9c3e007a17a4409.res" ]
-dest_md5="818791971db036283ed20c5263521c78"
+dest_md5="970b6d822d7c1160d7dfe73ba86d4318"
 
 [params]
 
 custom_properties=true
 tile_metadata=true
-image_flags=7
-embed_internal_images=false
+image_flags=0
+embed_internal_images=true
 save_tiled_properties=true
 post_import_script=""

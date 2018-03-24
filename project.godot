@@ -22,16 +22,16 @@ enabled=PoolStringArray( "vnen.tiled_importer" )
 
 vnen.tiled_tileset_importer={
 "custom_properties": true,
-"embed_internal_images": false,
-"image_flags": 7,
+"embed_internal_images": true,
+"image_flags": 0,
 "post_import_script": "",
 "save_tiled_properties": true,
 "tile_metadata": true
 }
 vnen.tiled_importer={
 "custom_properties": true,
-"embed_internal_images": false,
-"image_flags": 7,
+"embed_internal_images": true,
+"image_flags": 0,
 "post_import_script": "",
 "save_tiled_properties": true,
 "tile_metadata": true,
