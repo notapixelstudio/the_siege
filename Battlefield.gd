@@ -22,6 +22,7 @@ var spawn_points = [[], [], [], []] # NSWE
 enum ENTITY_TYPES {PAWN}
 
 # cursor
+var cursor_shape = [Vector2(0,-1),Vector2(0,0),Vector2(0,1)]
 var last_cursor_pos = Vector2(0,0)
 var cursor_map
 
@@ -149,7 +150,9 @@ func _input(event):
 	if (event is InputEventMouseMotion):
 		var pos = Vector2(int(event.global_position.x/tile_size.x), int(event.global_position.y/tile_size.y))
 		if pos != last_cursor_pos:
-			cursor_map.set_cellv(last_cursor_pos, -1)
+			for cell in cursor_shape:
+				cursor_map.set_cellv(cell + last_cursor_pos, -1)
 			last_cursor_pos = pos
-			cursor_map.set_cellv(pos, 65)
-			print(last_cursor_pos)
+			for cell in cursor_shape:
+				cursor_map.set_cellv(cell + pos, 65)
+			
