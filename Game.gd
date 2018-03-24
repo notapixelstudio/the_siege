@@ -61,13 +61,15 @@ func turn_AI():
 	
 func attack():
 	print("attack")	
+	$Battlefield.do_attack()
 		
 func spawn():
 	print("spawn")
+	$Battlefield.do_spawn()
 	
 func move():
 	print("move")
-
+	$Battlefield.do_move()
 
 func _on_attack_done():
 	spawn()
@@ -77,19 +79,7 @@ func _on_spawn_done():
 
 func _on_move_done():
 	turn_player()
-	
-	
 
-
-func summon_counselor(i):
-	var regnant = regnants[i]
-	print("The " + regnant.name + " summons")
-	get_node("UI/pickCounselor/VBoxContainer/title").text = "The " + regnant.name + " summons:"
-	get_node("UI/pickCounselor").show();
-	 
-func show_cards():
-	pass
-	
 
 func turn_player():
 	print("Turn Player")
@@ -104,7 +94,17 @@ func turn_player():
 	#phase 3
 	#pick cards
 		#select target
-		#execute actions
+		#execute actions	
+	
+
+
+func summon_counselor(i):
+	var regnant = regnants[i]
+	$UI.do_show_popup_counselor(i,regnant.name)
+	 
+func show_cards():
+	pass
+	
 
 	
 func _on_btn_commander_pressed():
@@ -119,7 +119,6 @@ func _on_btn_wizard_pressed():
 	
 func picked_counselor(counselor):
 	var id_regnant = get_node("UI/pickCounselor/VBoxContainer/id").text;
-	
 	counselors[counselor].summoned_by = int(id_regnant);
 	print("you have been chosen by " + id_regnant)
 	get_node("UI/pickCounselor").hide()
