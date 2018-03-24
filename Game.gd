@@ -18,7 +18,7 @@ var moods_dict 		= {HAPPY: "Happy", QUIET: "Quiet", SAD = "Sad", ANGRY = "Angry"
  
 
 var regnants_alive = 2
-var num_rounds = 2;
+var num_rounds = 4;
 var curr_round = 0;
 var curr_turn = AI;
 
@@ -140,6 +140,10 @@ func _on_btn_carpenter_pressed():
 func _on_btn_wizard_pressed():
 	picked_counselor(WIZARD)
 
+func _on_btn_action_pressed():
+	print("GAME: Card picked, starting Player attack")
+	get_node("UI/chooseCards").hide()
+	turn_AI()
 	
 func picked_counselor(counselor):
 	

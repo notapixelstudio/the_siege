@@ -9,13 +9,14 @@ region = Rect2( 0, 0, 0, 0 )
 margin = Rect2( 0, 0, 0, 0 )
 filter_clip = false
 
-[node name="UI" type="Node" index="0"]
+[node name="UI" type="Node"]
 
 script = ExtResource( 1 )
 
 [node name="pickCounselor" type="NinePatchRect" parent="." index="0"]
 
 pause_mode = 2
+editor/display_folded = true
 visible = false
 anchor_left = 1.0
 anchor_top = 0.5
@@ -186,6 +187,7 @@ max_lines_visible = -1
 
 [node name="chooseCards" type="NinePatchRect" parent="." index="2"]
 
+editor/display_folded = true
 anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -239,7 +241,6 @@ _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Margin", "Rect" ]
 
 [node name="counselor1" type="Label" parent="chooseCards/VBoxContainer" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0

@@ -11,6 +11,9 @@ func _ready():
 	btn_wizard.connect("pressed",get_node("/root/Game"),"_on_btn_wizard_pressed")
 	get_node("pickCounselor").hide()
 	get_node("chooseCards").hide()
+	
+	var btn_action = get_node("chooseCards/VBoxContainer/counselor1/btn_action1")
+	btn_action.connect("pressed", get_node("/root/Game"),"_on_btn_action_pressed")
 
 
 
