@@ -10,8 +10,11 @@ var map
 var tiledict
 
 var Pawn
+var pawns = []
 
 var spawn_points = [[], [], [], []] # NSWE
+
+var step = 0 # TO BE REMOVED
 
 enum ENTITY_TYPES {PLAYER}
 
@@ -45,7 +48,18 @@ func _ready():
 				spawn_points[3].append(Vector2(x,y))
 				
 	Pawn = load('res://Pawn.tscn')
-	spawn_pawns()
+	
+func _input(event):
+	if event.is_action_pressed('ui_select') and not event.is_echo():
+		print(step)
+		if step == 0:
+			pawns_attack()
+		elif step == 1:
+			spawn_pawns()
+		elif step == 2:
+			move_pawns()
+			
+		step = (step + 1) % 3
 	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
@@ -82,18 +96,30 @@ func update_child_pos(child_node):
 	var target_pos = map.map_to_world(new_grid_pos) + half_tile_size
 	return target_pos
 
-func spawn_pawn(pos):
+func spawn_pawn(pos, direction):
 	var pawn = Pawn.instance()
+	pawns.append(pawn)
 	pawn.position = map.map_to_world(pos) + half_tile_size # bleargh
+	pawn.facing = direction
 	var start_pos = update_child_pos(pawn)
 	pawn.position = start_pos
 	add_child(pawn)
 	
 func spawn_pawns():
 	# choose a random direction
-	var active_spawn_points = spawn_points[randi() % 4]
+	var random_dir_index = randi() % 4
+	var direction = [Vector2(0,1),Vector2(0,-1),Vector2(1,0),Vector2(-1,0)][random_dir_index]
+	var active_spawn_points = spawn_points[random_dir_index]
 	
-	# spawn one pawn from each spawn point
+	# spawn one pawn from each spawn point, directed towards the center
 	for spawn_point in active_spawn_points:
-		spawn_pawn(spawn_point)
+		spawn_pawn(spawn_point, direction)
 	
+func move_pawns():
+	for pawn in pawns:
+		pawn.march()
+		
+func pawns_attack():
+	for pawn in pawns:
+		pawn.break_walls()
+		
