@@ -1,5 +1,8 @@
 extends Node
 
+var state = 'idle'
+var busy_pawns = 0
+
 signal attack_done
 signal spawn_done
 signal move_done
@@ -15,8 +18,6 @@ var Pawn
 var pawns = []
 
 var spawn_points = [[], [], [], []] # NSWE
-
-var step = 0 # TO BE REMOVED
 
 enum ENTITY_TYPES {PAWN}
 
@@ -49,18 +50,6 @@ func _ready():
 				spawn_points[3].append(Vector2(x,y))
 				
 	Pawn = load('res://Pawn.tscn')
-	
-func _input(event):
-	if event.is_action_pressed('ui_select') and not event.is_echo():
-		print(step)
-		if step == 0:
-			do_attack()
-		elif step == 1:
-			do_spawn()
-		elif step == 2:
-			do_move()
-			
-		step = (step + 1) % 3
 	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
@@ -106,7 +95,11 @@ func spawn_pawn(pos, direction):
 	pawn.position = start_pos
 	add_child(pawn)
 	
+	return pawn
+	
 func do_spawn():
+	state = 'spawn'
+	
 	# choose a random direction
 	var random_dir_index = randi() % 4
 	var direction = [Vector2(0,1),Vector2(0,-1),Vector2(1,0),Vector2(-1,0)][random_dir_index]
@@ -115,12 +108,35 @@ func do_spawn():
 	# spawn one pawn from each spawn point, directed towards the center
 	for spawn_point in active_spawn_points:
 		spawn_pawn(spawn_point, direction)
+		
+	busy_pawns = len(active_spawn_points)
 	
 func do_move():
+	state = 'move'
+	busy_pawns = len(pawns)
+	
 	for pawn in pawns:
 		pawn.march()
 		
 func do_attack():
+	state = 'attack'
+	busy_pawns = len(pawns)
+	
 	for pawn in pawns:
-		pawn.break_walls()
+		pawn.attack()
 		
+func _process(delta):
+	if busy_pawns == 0:
+		if state == 'spawn':
+			print('spawn_done')
+			state = 'idle'
+			emit_signal('spawn_done')
+		elif state == 'attack':
+			print('attack_done')
+			state = 'idle'
+			emit_signal('attack_done')
+		elif state == 'move':
+			print('move_done')
+			state = 'idle'
+			emit_signal('move_done')
+	
