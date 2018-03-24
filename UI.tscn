@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/king.png" type="Texture" id=2]
@@ -7,171 +7,11 @@
 [ext_resource path="res://assets/characters/commander.png" type="Texture" id=5]
 [ext_resource path="res://assets/characters/wizard.png" type="Texture" id=6]
 
-[sub_resource type="AtlasTexture" id=1]
-
-flags = 0
-region = Rect2( 0, 0, 0, 0 )
-margin = Rect2( 0, 0, 0, 0 )
-filter_clip = false
-
 [node name="UI" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
-[node name="pickCounselor" type="NinePatchRect" parent="." index="0"]
-
-pause_mode = 2
-editor/display_folded = true
-visible = false
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -188.0
-margin_top = -99.0
-margin_bottom = 99.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-texture = SubResource( 1 )
-_sections_unfolded = [ "Margin", "Pause", "Visibility" ]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="pickCounselor" index="0"]
-
-anchor_left = 0.5
-anchor_top = 0.0
-anchor_right = 0.5
-anchor_bottom = 0.0
-margin_left = -63.0
-margin_right = 63.0
-margin_bottom = 86.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-
-[node name="title" type="Label" parent="pickCounselor/VBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 126.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_colors/font_color = Color( 0.0117188, 0.0117188, 0.0117188, 1 )
-text = "The King summons:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors" ]
-
-[node name="id" type="Label" parent="pickCounselor/VBoxContainer" index="1"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 126.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_colors/font_color = Color( 0.0117188, 0.0117188, 0.0117188, 1 )
-text = "1"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Visibility", "custom_colors" ]
-
-[node name="btn_commander" type="Button" parent="pickCounselor/VBoxContainer" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 18.0
-margin_right = 126.0
-margin_bottom = 38.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Commander"
-flat = false
-align = 1
-
-[node name="btn_carpenter" type="Button" parent="pickCounselor/VBoxContainer" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 42.0
-margin_right = 126.0
-margin_bottom = 62.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Carpenter"
-flat = false
-align = 1
-
-[node name="btn_wizard" type="Button" parent="pickCounselor/VBoxContainer" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 66.0
-margin_right = 126.0
-margin_bottom = 86.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Wizard"
-flat = false
-align = 1
-
-[node name="turn_label" type="Label" parent="." index="1"]
+[node name="turn_label" type="Label" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -193,269 +33,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="chooseCards" type="NinePatchRect" parent="." index="2"]
-
-editor/display_folded = true
-anchor_left = 1.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 0.0
-margin_left = -177.0
-margin_right = -137.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-region_rect = Rect2( -200, 0, 400, 300 )
-_sections_unfolded = [ "Anchor", "Margin", "Patch Margin" ]
-
-[node name="title" type="Label" parent="chooseCards" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Select two actions:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts", "custom_styles" ]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="chooseCards" index="1"]
-
-editor/display_folded = true
-anchor_left = 0.5
-anchor_top = 0.0
-anchor_right = 0.5
-anchor_bottom = 0.0
-margin_top = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Margin", "Rect" ]
-
-[node name="counselor1" type="Label" parent="chooseCards/VBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 72.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Counselor1"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Anchor", "Margin", "custom_fonts", "custom_styles" ]
-
-[node name="btn_action1" type="Button" parent="chooseCards/VBoxContainer/counselor1" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 19.0
-margin_right = 59.0
-margin_bottom = 39.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "action1"
-flat = false
-align = 1
-
-[node name="btn_action2" type="Button" parent="chooseCards/VBoxContainer/counselor1" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 48.0
-margin_right = 66.0
-margin_bottom = 68.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "action2"
-flat = false
-align = 1
-
-[node name="btn_action3" type="Button" parent="chooseCards/VBoxContainer/counselor1" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 78.0
-margin_right = 59.0
-margin_bottom = 98.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "action3"
-flat = false
-align = 1
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="chooseCards" index="2"]
-
-editor/display_folded = true
-anchor_left = 0.5
-anchor_top = 0.0
-anchor_right = 0.5
-anchor_bottom = 0.0
-margin_top = 158.0
-margin_right = 72.0
-margin_bottom = 172.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Margin", "Rect" ]
-
-[node name="counselor1" type="Label" parent="chooseCards/VBoxContainer2" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 72.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Counselor1"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Anchor", "Margin", "custom_fonts", "custom_styles" ]
-
-[node name="btn_action1" type="Button" parent="chooseCards/VBoxContainer2/counselor1" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 19.0
-margin_right = 59.0
-margin_bottom = 39.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "action1"
-flat = false
-align = 1
-
-[node name="btn_action2" type="Button" parent="chooseCards/VBoxContainer2/counselor1" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 48.0
-margin_right = 66.0
-margin_bottom = 68.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "action2"
-flat = false
-align = 1
-
-[node name="btn_action3" type="Button" parent="chooseCards/VBoxContainer2/counselor1" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 78.0
-margin_right = 59.0
-margin_bottom = 98.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "action3"
-flat = false
-align = 1
-
-[node name="TextureKing" type="TextureRect" parent="." index="3"]
+[node name="TextureKing" type="TextureRect" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -475,7 +53,7 @@ texture = ExtResource( 2 )
 stretch_mode = 0
 _sections_unfolded = [ "Grow Direction", "Margin" ]
 
-[node name="TextureQueen" type="TextureRect" parent="." index="4"]
+[node name="TextureQueen" type="TextureRect" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -495,7 +73,7 @@ texture = ExtResource( 3 )
 stretch_mode = 0
 _sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="TextureCarpenter" type="TextureButton" parent="." index="5"]
+[node name="TextureCarpenter" type="TextureButton" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -519,7 +97,7 @@ group = null
 texture_normal = ExtResource( 4 )
 _sections_unfolded = [ "Margin", "Textures" ]
 
-[node name="TextureCommander" type="TextureButton" parent="." index="6"]
+[node name="TextureCommander" type="TextureButton" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -543,7 +121,7 @@ group = null
 texture_normal = ExtResource( 5 )
 _sections_unfolded = [ "Margin", "Textures" ]
 
-[node name="TextureWizard" type="TextureButton" parent="." index="7"]
+[node name="TextureWizard" type="TextureButton" parent="." index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -567,7 +145,7 @@ group = null
 texture_normal = ExtResource( 6 )
 _sections_unfolded = [ "Margin", "Rect", "Textures" ]
 
-[node name="TextureCard1" type="TextureButton" parent="." index="8"]
+[node name="TextureCard1" type="TextureButton" parent="." index="6"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -590,7 +168,7 @@ shortcut = null
 group = null
 _sections_unfolded = [ "Margin", "Textures" ]
 
-[node name="TextureCard2" type="TextureButton" parent="." index="9"]
+[node name="TextureCard2" type="TextureButton" parent="." index="7"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -613,7 +191,7 @@ shortcut = null
 group = null
 _sections_unfolded = [ "Margin" ]
 
-[node name="TextureCard3" type="TextureButton" parent="." index="10"]
+[node name="TextureCard3" type="TextureButton" parent="." index="8"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -636,7 +214,7 @@ shortcut = null
 group = null
 _sections_unfolded = [ "Margin" ]
 
-[node name="TextureCard4" type="TextureButton" parent="." index="11"]
+[node name="TextureCard4" type="TextureButton" parent="." index="9"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -659,7 +237,7 @@ shortcut = null
 group = null
 _sections_unfolded = [ "Margin" ]
 
-[node name="TextureCard5" type="TextureButton" parent="." index="12"]
+[node name="TextureCard5" type="TextureButton" parent="." index="10"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -682,7 +260,7 @@ shortcut = null
 group = null
 _sections_unfolded = [ "Margin" ]
 
-[node name="TextureCard6" type="TextureButton" parent="." index="13"]
+[node name="TextureCard6" type="TextureButton" parent="." index="11"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -705,7 +283,7 @@ shortcut = null
 group = null
 _sections_unfolded = [ "Margin" ]
 
-[node name="message" type="Label" parent="." index="14"]
+[node name="message" type="Label" parent="." index="12"]
 
 anchor_left = 0.0
 anchor_top = 0.0
