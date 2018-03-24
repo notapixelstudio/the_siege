@@ -5,6 +5,7 @@ const NUM_COUNSELORS = 3
 
 var regnants = []
 var counselors = []
+var regnants_alive = 2
 
 enum roleRegnant {KING , QUEEN }
 enum roleCounselor {COMMANDER , CARPENTER, WIZARD}
@@ -47,105 +48,86 @@ func setup_game():
 	for i in range(NUM_COUNSELORS):
 		counselors.append(Counselor.new(stringCounserlor[i]))
 
- 
-       
 
-func attack():
-	print("attack")
+
+func _ready():
+	print("setup")	
+	setup_game()
+	turn_AI()
 	
+func turn_AI():
+	print("Turn AI")	
+	attack()
+	
+func attack():
+	print("attack")	
+		
 func spawn():
 	print("spawn")
 	
 func move():
 	print("move")
-		
-func turn_AI():
-	attack()
+
+
+func _on_attack_done():
 	spawn()
+
+func _on_spawn_done():
 	move()
+
+func _on_move_done():
+	turn_player()
+	
 	
 
-func show_popup(regnant):
+
+func summon_counselor(i):
+	var regnant = regnants[i]
 	print("The " + regnant.name + " summons")
 	get_node("UI/pickCounselor/VBoxContainer/title").text = "The " + regnant.name + " summons:"
 	get_node("UI/pickCounselor").show();
 	 
+func show_cards():
+	pass
 	
 
 func turn_player():
+	print("Turn Player")
+	summon_counselor(KING);
 
 	#phase 1
-	for i in range(len(regnants)):
-		#show and pick counselor
-		show_popup(regnants[i])
-		
+	#summon counselors	
 	
 	#phase 2
-	#for all consuelor
-		#show cards
-#	for i in range(NUM_COUNSELORS):
-#		if counselors[i].summoned_by != null:
-#			show_cards(counselors[i])
-
-
+	#show cards	
 	
-		
 	#phase 3
-	#for each consuelor
-		#pick card
-			#select target
-			#execute actions
-			 
-	
-		
+	#pick cards
+		#select target
+		#execute actions
 
-func _ready():
- 	
-	setup_game()
- 
 	
-	for i in range(num_rounds):
-		print("round " + str(i))
-		
-		#turn 1
-		turn_AI()
-		
-		turn_player()
-		
-		
-		
-		
-		
-		
-	
-	
-	
-	
-
 func _on_btn_commander_pressed():
+	picked_counselor(COMMANDER)
 	
-	var id_regnant = get_node("UI/pickCounselor/VBoxContainer/id").text;
-	
-	counselors[COMMANDER].summoned_by = int(id_regnant);
-	print("you have been chosen by " + id_regnant)
-	get_tree().paused = false
-	get_node("UI/pickCounselor").hide()
-	
-	
-
 func _on_btn_carpenter_pressed():
-	var id_regnant = get_node("UI/pickCounselor/VBoxContainer/id").text;
-	
-	counselors[CARPENTER].summoned_by = int(id_regnant);
-	print("you have been chosen by " + id_regnant)
-	get_tree().paused = false
-	get_node("UI/pickCounselor").hide()
-
-
+	picked_counselor(CARPENTER)
+	 
 func _on_btn_wizard_pressed():
+	picked_counselor(WIZARD)
+
+	
+func picked_counselor(counselor):
 	var id_regnant = get_node("UI/pickCounselor/VBoxContainer/id").text;
 	
-	counselors[WIZARD].summoned_by = int(id_regnant);
+	counselors[counselor].summoned_by = int(id_regnant);
 	print("you have been chosen by " + id_regnant)
-	get_tree().paused = false
 	get_node("UI/pickCounselor").hide()
+	
+	if regnants_alive == 2 and int(id_regnant) == KING:
+		summon_counselor(QUEEN)
+	else:
+		show_cards()	
+	
+	
+ 
