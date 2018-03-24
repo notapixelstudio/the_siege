@@ -73,5 +73,9 @@ func update_ui(this_round,this_turn):
 	get_node("turn_label").text = string 
 
 func do_flip_cards(cards):
+	var i = 1
+	for card in cards:
+		get_node("TextureCard"+str(i)).texture_normal = load(card.res_front)
+		i+=1
 	pass
 	

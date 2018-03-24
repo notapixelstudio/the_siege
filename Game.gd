@@ -24,6 +24,8 @@ var curr_round = 0
 var curr_turn = AI
 var curr_regnant = KING
 
+var these_cards = []
+
 var MAX_CARDS=3
 
 class Card:
@@ -55,6 +57,7 @@ class Counselor:
 		mood = HAPPY
 		for i in range(3):
 			cards.append(Card.new(self.id, cards_dict[self.id]))
+		print(cards)
 
 class Regnant:
 	var name
@@ -162,16 +165,21 @@ func picked_counselor(counselor):
 	regnants[curr_regnant].summons = counselor
 	counselors[counselor].summoned = true
 	show_cards(regnants[curr_regnant], counselors[counselor])
+	for i in range(3):
+		these_cards.append(counselors[counselor].cards[i])
 
 	$UI.hide_message()	
+	
+	if curr_regnant == QUEEN:
+		# show and choose cards
+		flip_cards(these_cards)
+		print(these_cards)
+		pass
+		
 	if regnants_alive == 2 and curr_regnant == KING:
 		curr_regnant = QUEEN
 		summon_counselor(curr_regnant)
 		
-	if curr_regnant == QUEEN:
-		# show and choose cards
-		#flip_cards(these_cards)
-		pass
 		
 func flip_cards(cards):
 	print("GAME: flip the cards")
