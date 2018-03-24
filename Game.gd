@@ -127,8 +127,7 @@ func summon_counselor(i):
 	 
 func show_cards():
 	
-	
-	$UI.do_show_cards()
+	$UI.do_show_cards(regnants,counselors)
 	
 
  
