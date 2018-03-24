@@ -6,78 +6,95 @@ const NUM_COUNSELORS = 3
 var regnants = []
 var counselors = []
 
-enum enum_regnant   {KING , QUEEN }
+enum enum_regnant   {KING , QUEEN}
 enum enum_counselor {COMMANDER , CARPENTER, WIZARD}
 enum enum_turn      {AI, PLAYER}
 enum enum_moods     {HAPPY, QUIET, SAD, ANGRY}
 
+# mapping enum to string
 var regnant_dict	= {KING: "King" , QUEEN: "Queen"}
 var counselor_dict 	= {COMMANDER : "Commander" , CARPENTER : "Carpenter", WIZARD: "Wizard"}
 var turn_dict 		= {AI: "Enemy", PLAYER:"Player"}
 var moods_dict 		= {HAPPY: "Happy", QUIET: "Quiet", SAD = "Sad", ANGRY = "Angry"}
+var cards_dict = {COMMANDER: "res://assets/cards/commander_card_front.png", CARPENTER: "res://assets/cards/carpenter_card_front.png", WIZARD:"res://assets/cards/wizard_card_front.png"}
  
-
 var regnants_alive = 2
-var num_rounds = 4;
-var curr_round = 0;
-var curr_turn = AI;
+var num_rounds = 4
+var curr_round = 0
+var curr_turn = AI
+var curr_regnant = KING
 
+var these_cards = []
 
+var MAX_CARDS=3
 
+class Card:
+	var counselor_id
+	var cursor_shape
+	var type
+	var id
+	var name
+	var res_front
+	var res_back
+	
+	func _init(counselor_id, res):
+		self.counselor_id = counselor_id
+		self.res_front = res
+		
 class Counselor:
 	var name
+	var id
 	var summoned
 	var alive
 	var mood
+	var cards = []
 	
-	func _init(var n):
+	func _init(n, id, cards_dict):
 		name = n
+		self.id = id
 		summoned = false
 		alive = true
 		mood = HAPPY
+		for i in range(3):
+			cards.append(Card.new(self.id, cards_dict[self.id]))
+		print(cards)
 
 class Regnant:
 	var name
+	var id
 	var alive
 	var summons
 	
-	func _init(var n):
+	func _init(n,id):
 		name = n
+		self.id = id
 		alive = true
- 		
 		
 func setup_game():
-
 	for i in range(NUM_REGNANTS):
-		regnants.append(Regnant.new(regnant_dict[i]))
-
+		regnants.append(Regnant.new(regnant_dict[i], i))
 	for i in range(NUM_COUNSELORS):
-		counselors.append(Counselor.new(counselor_dict[i]))
-
-	get_node("UI/pickCounselor").hide()
+		counselors.append(Counselor.new(counselor_dict[i], i, cards_dict))
 	
-
-
 func _ready():
 	print("Game: Setup")
 	setup_game()
 	turn_AI()
-	
-	
+	# turn AI: 
+	# 1. attack
+	# 2. spawn
+	# 3. everybody moves
 func turn_AI():
 	curr_round +=1
 	curr_turn = turn_dict[AI]
 	print("Game: Round " + str(curr_round) + ", Turn AI") 	
-	
-
 	$UI.update_ui(curr_round,curr_turn)
-	
 	attack()
 	
 func attack():
-	print("Game: do_attack")	
+	print("Game: do_attack")
 	$Battlefield.do_attack()
-		
+	
 func spawn():
 	print("Game: do_spawn")
 	$Battlefield.do_spawn()
@@ -97,40 +114,34 @@ func _on_spawn_done():
 # from signal move_done
 func _on_move_done():
 	turn_player()
+	
+"""
+# turn PLAYER:
+#phase 1
+#summon counselors
 
+#phase 2
+#show cards
+
+#phase 3
+#pick cards
+#select target
+#execute actions
+"""
 
 func turn_player():
-	print("Game: Round " + str(curr_round) + ", Turn Player") 	
-
+	print("Game: Round " + str(curr_round) + ", Turn Player")
 	curr_turn = turn_dict[PLAYER]
 	$UI.update_ui(curr_round,curr_turn)
-
-
-	summon_counselor(KING);
-
-	#phase 1
-	#summon counselors	
+	summon_counselor(curr_regnant)
 	
-	#phase 2
-	#show cards	
-	
-	#phase 3
-	#pick cards
-		#select target
-		#execute actions	
-	
-
-
-func summon_counselor(i):
-	var regnant = regnants[i]
-	$UI.do_show_popup_counselor(i,regnant.name)
+func summon_counselor(id):
+	var regnant = regnants[id]
+	$UI.do_show_popup_counselor(id,regnant.name)
 	 
-func show_cards():
+func show_cards(regnant, counselor):
+	$UI.do_show_cards(regnant,counselor)
 	
-	$UI.do_show_cards(regnants,counselors)
-	
-
- 
 func _on_btn_commander_pressed():
 	picked_counselor(COMMANDER)
 	
@@ -140,25 +151,36 @@ func _on_btn_carpenter_pressed():
 func _on_btn_wizard_pressed():
 	picked_counselor(WIZARD)
 
+# from card chos
 func _on_btn_action_pressed():
 	print("GAME: Card picked, starting Player attack")
-	get_node("UI/chooseCards").hide()
+	# get_node("UI/chooseCards").hide()
 	turn_AI()
 	
+func get_cards(counselor):
+	return counselor.cards
+
 func picked_counselor(counselor):
+	print("GAME: The " + regnant_dict[curr_regnant] + " summons the " + counselor_dict[counselor])
+	regnants[curr_regnant].summons = counselor
+	counselors[counselor].summoned = true
+	show_cards(regnants[curr_regnant], counselors[counselor])
+	for i in range(3):
+		these_cards.append(counselors[counselor].cards[i])
+
+	$UI.hide_message()	
 	
-	var id_regnant = int(get_node("UI/pickCounselor/VBoxContainer/id").text);
-	
-	print("GAME: The " + regnant_dict[id_regnant] + " summons the " + counselor_dict[counselor])
-	
-	regnants[id_regnant].summons = counselor;
-	
-	counselors[counselor].summoned = true;
-	get_node("UI/pickCounselor").hide()
-	
-	
-	if regnants_alive == 2 and id_regnant == KING:
-		summon_counselor(QUEEN)
-	else:
-		show_cards()	
-	
+	if curr_regnant == QUEEN:
+		# show and choose cards
+		flip_cards(these_cards)
+		print(these_cards)
+		pass
+		
+	if regnants_alive == 2 and curr_regnant == KING:
+		curr_regnant = QUEEN
+		summon_counselor(curr_regnant)
+		
+		
+func flip_cards(cards):
+	print("GAME: flip the cards")
+	$UI.do_flip_cards(cards)
