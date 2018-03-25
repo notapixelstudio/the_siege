@@ -4,6 +4,9 @@ var btn_commander
 var btn_carpenter
 var btn_wizard
 
+var ctn_message
+var message_label
+
 var btn_cards = []
 
 var path_cards = ["res://assets/cards/commander_card_back.png", "res://assets/cards/carpenter_card_back.png" , "res://assets/cards/wizard_card_back.png"]
@@ -17,6 +20,8 @@ func _ready():
 	btn_carpenter.connect("pressed",get_node("/root/Game"),"_on_btn_carpenter_pressed")
 	btn_wizard.connect("pressed",get_node("/root/Game"),"_on_btn_wizard_pressed")
 	
+	ctn_message = get_node("ctn_message")
+	message_label = get_node("ctn_message/message")
 
 
 func do_show_popup_counselor(i,name):
@@ -26,13 +31,13 @@ func do_show_popup_counselor(i,name):
 	show_message()
 
 func update_message(text):
-	get_node("message").text = text
+	message_label.text = text
 
 func hide_message():
-	get_node("message").hide()
+	ctn_message.hide()
 	
 func show_message():
-	get_node("message").show()
+	ctn_message.show()
 
 func do_show_cards(regnant,counselor):
 	var counselors_id = [] 
@@ -118,7 +123,7 @@ func show_all_cards():
 func update_ui(this_round,this_turn):
 	var string = this_turn + " turn: #" + str(this_round)
 	print("UI: printed ->" + string) 
-	get_node("turn_label").text = string 
+	get_node("ctn_turn/turn_label").text = string 
 
 func do_flip_cards(cards):
 	var i = 1
