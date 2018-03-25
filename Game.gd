@@ -28,19 +28,6 @@ var these_cards = []
 
 var MAX_CARDS=3
 
-class Card:
-	var counselor_id
-	var cursor_shape
-	var type
-	var id
-	var name
-	var res_front
-	var res_back
-	
-	func _init(counselor_id, res):
-		self.counselor_id = counselor_id
-		self.res_front = res
-		
 class Counselor:
 	var name
 	var id
@@ -48,14 +35,16 @@ class Counselor:
 	var alive
 	var mood
 	var cards = []
+	const MAX_CARDS = 3
 	
 	func _init(n, id, cards_dict):
+		var Card = preload("res://Card.gd").new().Card
 		name = n
 		self.id = id
 		summoned = false
 		alive = true
 		mood = HAPPY
-		for i in range(3):
+		for i in range(MAX_CARDS):
 			cards.append(Card.new(self.id, cards_dict[self.id]))
 		print(cards)
 
@@ -77,6 +66,7 @@ func setup_game():
 		counselors.append(Counselor.new(counselor_dict[i], i, cards_dict))
 	
 func _ready():
+	
 	print("Game: Setup")
 	setup_game()
 	turn_AI()
