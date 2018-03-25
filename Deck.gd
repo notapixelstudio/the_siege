@@ -98,7 +98,7 @@ class Deck:
 			add('desperate_shot')
 			add('desperate_shot')
 			add('desperate_shot')
-			
+
 			add('rain_of_arrows')
 			add('rain_of_arrows')
 			add('rain_of_arrows')
@@ -147,7 +147,7 @@ class Deck:
 			add('fireball')
 			add('fireball')
 
-			# TBD shuffle
+		self.cards = shuffleList(self.cards)
 
 	func add(card_id):
 		var card_data = all_cards[self.counselor_name][card_id]
@@ -160,3 +160,14 @@ class Deck:
 
 		return hand
 		
+# from https://godotengine.org/qa/2547/how-to-randomize-a-list-array
+func shuffleList(list):
+	var shuffledList = []
+	var indexList = range(list.size())
+	for i in range(list.size()):
+			randomize()
+			var x = randi()%indexList.size()
+			shuffledList.append(list[x])
+			indexList.remove(x)
+			list.remove(x)
+	return shuffledList
