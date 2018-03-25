@@ -150,6 +150,9 @@ func _input(event):
 # board-altering methods
 # ---
 
+func set_cursor_shape(card):
+	pass
+	
 func raise_wall(pos):
 	buildings_map.set_cellv(pos, 17) # single tile wall
 

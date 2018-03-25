@@ -217,8 +217,10 @@ func _on_btn_attackcommander_pressed():
 	$UI.disable_all_cards()
 	$UI.disable_counsellors()
 	$UI.hide_all_cards()
-	$UI.reset_cards()
 
+	#TODO here I choose hardcoded the card of the counselor. change it
+	$Battlefield.set_cursor_shape(these_cards[curr_regnant*MAX_CARDS])
+	$UI.reset_cards()
 	turn_AI()
 	pass
 	
