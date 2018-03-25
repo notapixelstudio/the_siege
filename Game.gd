@@ -56,8 +56,6 @@ class Counselor:
 		alive = true
 		mood = HAPPY
 		# TODO: will be deleted. We just need Deck
-		for i in range(MAX_CARDS):
-			cards.append(Card.new(self.id, cards_dict[self.id]))
 		
 		self.deck = Deck.new(name)
 		
@@ -190,20 +188,15 @@ func picked_counselor(counselor):
 	counselors[counselor].summoned = true
 
 	# assign to the regnant the hand
-	regnants[curr_regnant].hand = counselor.draw(MAX_CARDS)
+	regnants[curr_regnant].hand = counselors[counselor].deck.draw(MAX_CARDS)
 	
 	show_cards(regnants[curr_regnant])
 
-	# save the cards for now
-	for i in range(MAX_CARDS):
-		these_cards.append(counselors[counselor].cards[i])
-	
 	if curr_regnant == QUEEN:
 		# show and choose cards
 		$UI.disable_counsellors()
 		flip_cards(these_cards)
 		print(these_cards)
-		pass
 		
 	if regnants_alive == 2 and curr_regnant == KING:
 		curr_regnant = QUEEN
@@ -229,7 +222,7 @@ func _on_btn_attackcommander_pressed():
 	$UI.hide_all_cards()
 
 	#TODO here I choose hardcoded the card of the counselor. change it
-	$Battlefield.set_cursor_shape(these_cards[curr_regnant*MAX_CARDS])
+#	$Battlefield.set_cursor_shape()
 	$UI.reset_cards()
 	turn_AI()
 	pass

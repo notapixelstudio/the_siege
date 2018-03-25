@@ -8,11 +8,14 @@ var ctn_message
 var message_label
 
 var btn_cards = []
+var game_node
 
+var counselor_id
 #back card
 var path_cards = ["res://assets/cards/commander_card_back.png", "res://assets/cards/carpenter_card_back.png" , "res://assets/cards/wizard_card_back.png"]
 func _ready():
-
+	
+	game_node = get_node("/root/Game")
 	btn_commander = get_node("TextureCommander")
 	btn_carpenter = get_node("TextureCarpenter")
 	btn_wizard = get_node("TextureWizard")
@@ -43,58 +46,33 @@ func show_message():
 func do_show_cards(regnant):
 	var counselors_id = [] 
 	# get three cards for each chosen counselour
-	print("UI: do_show_cards, for counselor "+ counselor.name)
-	var card1 
-	var card2 
-	var card3
-	
-	if regnant.name == "King": 
-		# get cards for king
-		card1 = get_node("TextureCard1")
-		card2 = get_node("TextureCard2")
-		card3 = get_node("TextureCard3")
-		
-	elif regnant.name == "Queen":
-		# get cards for king
-		card1 = get_node("TextureCard4")
-		card2 = get_node("TextureCard5")
-		card3 = get_node("TextureCard6")
-		
-
-	# show them
-	card1.show()
-	card2.show()
-	card3.show()
+	var container_hand
+	print(regnant.name)
+	if regnant.name == "King":
+		container_hand = get_node("cnt_king_hand")
+	else:
+		container_hand = get_node("cnt_queen_hand")
+	container_hand.show()
 	
 	#apply texture
+	var i = 0
 	for card in regnant.hand:
-		card1.texture_normal = card.image_back
-		card2.texture_normal = load(path_cards[counselor.id])
-		card3.texture_normal = load(path_cards[counselor.id])
+		var card_button = container_hand.get_child(i)
+		card_button.texture_normal = card.image_back
+		counselor_id = regnant.summons
+		var func_to_be_called
+		if counselor_id == game_node.enum_counselor.COMMANDER:
+			func_to_be_called = "_on_btn_attackcommander_pressed"
+		elif counselor_id == game_node.enum_counselor.CARPENTER:
+			func_to_be_called = "_on_btn_attackcarpenter_pressed"
+		elif counselor_id == game_node.enum_counselor.WIZARD:
+			func_to_be_called = "_on_btn_attackwizard_pressed"
+		card_button.connect("pressed", get_node("/root/Game"), func_to_be_called) 
+		i+=1
+		
+		btn_cards.append(card_button)
 	
-	if (counselor.id == 0):
-		card1.connect("pressed",get_node("/root/Game"),"_on_btn_attackcommander_pressed")
-		card2.connect("pressed",get_node("/root/Game"),"_on_btn_attackcommander_pressed")
-		card3.connect("pressed",get_node("/root/Game"),"_on_btn_attackcommander_pressed")
-	elif(counselor.id == 1):
-		card1.connect("pressed",get_node("/root/Game"),"_on_btn_attackcarpenter_pressed")
-		card2.connect("pressed",get_node("/root/Game"),"_on_btn_attackcarpenter_pressed")
-		card3.connect("pressed",get_node("/root/Game"),"_on_btn_attackcarpenter_pressed")
-	elif(counselor.id == 3):
-		card1.connect("pressed",get_node("/root/Game"),"_on_btn_attackwizard_pressed")
-		card2.connect("pressed",get_node("/root/Game"),"_on_btn_attackwizard_pressed")
-		card3.connect("pressed",get_node("/root/Game"),"_on_btn_attackwizard_pressed")
-	
-	
-	
-	btn_cards.append(card1);
-	btn_cards.append(card2);
-	btn_cards.append(card3);
-	
-	
-	
-	
-func disable_counsellors():	
+func disable_counsellors():
 	btn_commander.disabled = true
 	btn_carpenter.disabled = true
 	btn_wizard.disabled = true 

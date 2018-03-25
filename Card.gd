@@ -11,8 +11,8 @@ class Card:
 		self.id = id
 		self.name = data.name
 		self.effects_shape = data.effects_shape
-		self.image_front = load('res://assets/cards/'+counselor_name+'_card_front.png'
-		self.image_back = load('res://assets/cards/'+counselor_name+'_card_back.png'
+		self.image_front = load('res://assets/cards/'+counselor_name+'_card_front.png')
+		self.image_back = load('res://assets/cards/'+counselor_name+'_card_back.png')
 
 	func get_shape():
 		var shape = []
