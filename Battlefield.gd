@@ -25,10 +25,17 @@ var cursor_shape = [Vector2(0,-1),Vector2(0,0),Vector2(0,1)]
 var last_cursor_pos = Vector2(0,0)
 var cursor_map
 
+# card action
+var chosen_card
+
+var game_node
+
 func _ready():
 	# set up a new random seed
 	# FIXME this should be done at game level
 	randomize()
+	
+	game_node = get_node("/root/Game")
 	
 	map = get_node("GridMap/base")
 	buildings_map = get_node("GridMap/buildings")
@@ -137,21 +144,26 @@ func _process(delta):
 			emit_signal('move_done')
 
 func _input(event):
-	if event is InputEventMouseMotion:
-		var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
-		if pos != last_cursor_pos:
-			for cell in cursor_shape:
-				cursor_map.set_cellv(cell + last_cursor_pos, -1)
-			last_cursor_pos = pos
-			for cell in cursor_shape:
-				cursor_map.set_cellv(cell + pos, 78)
-				
+	if game_node.game_state == game_node.P_EXEC_C1 or game_node.game_state == game_node.P_EXEC_C1 :
+		if event is InputEventMouseMotion:
+			var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
+			if pos != last_cursor_pos:
+				for cell in cursor_shape:
+					cursor_map.set_cellv(cell + last_cursor_pos, -1)
+				last_cursor_pos = pos
+				for cell in cursor_shape:
+					cursor_map.set_cellv(cell + pos, 78)
+		if event is InputEventMouseButton:
+			print("KABOOOM")
+			chosen_card.resolve(get_node("/root/Game/Battlefield"), last_cursor_pos)
+		
 # ---
 # board-altering methods
 # ---
 
 func set_cursor_shape(card):
 	cursor_shape = card.get_shape()
+	chosen_card = card
 	pass
 	
 func raise_wall(pos):

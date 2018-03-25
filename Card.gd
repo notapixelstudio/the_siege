@@ -23,5 +23,5 @@ class Card:
 		
 	func resolve(battlefield, pos):
 		for effect_tile in effects_shape:
-			battlefield.call(effect_tile.effect, effect_tile.pos)
+			battlefield.call(effect_tile["effect"], effect_tile["pos"] + pos)
 			

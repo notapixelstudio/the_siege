@@ -91,17 +91,18 @@ func enable_all_cards(regnant):
 		var card_button = container_hand.get_child(i)
 		card_button.texture_normal = card.image_front
 		card_button.disabled = false
+		card_button.show()
 		i += 1
 		#counselor_id = regnant.summons
 			
 		
 func hide_all_cards():
-	for card in btn_cards:
-		card.hide()
+	get_node("cnt_king_hand").hide()
+	get_node("cnt_queen_hand").hide()
 		
 func show_all_cards():
-	for card in btn_cards:
-		card.show()
+	get_node("cnt_king_hand").show()
+	get_node("cnt_queen_hand").show()
 
 	
 func update_ui(this_round,this_turn):
@@ -110,12 +111,9 @@ func update_ui(this_round,this_turn):
 	get_node("ctn_turn/turn_label").text = string 
 
 func do_flip_cards(regnant):
-	
 	enable_all_cards(regnant)
 	
 		
 func reset_cards():
-	
 	btn_cards = []
-	
 	
