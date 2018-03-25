@@ -27,7 +27,7 @@ var curr_turn = AI
 var curr_regnant = KING
 
 
-enum enum_player_state {SETUP,AI_ATTACK, AI_SPAWN, AI_MOVE, AI_END_TURN, P_SUMMON_C, P_PICKED_C, P_FLIP_C,P_EXEC_C,P_END_TURN,P_END_GAME }
+enum enum_player_state {SETUP,AI_ATTACK, AI_SPAWN, AI_MOVE, AI_END_TURN, P_BEGIN, P_SUMMON_C1,P_SUMMON_C2, P_PICKED_C1,P_PICKED_C2, P_FLIP_C,P_EXEC_C1,P_EXEC_C2,P_END_TURN,P_END_GAME }
 var game_state = SETUP
 
 
@@ -44,7 +44,7 @@ class Counselor:
 	var mood
 	var cards = []
 	var deck
-	
+
 	const MAX_CARDS = 3
 	
 	func _init(n, id, cards_dict):
@@ -55,10 +55,9 @@ class Counselor:
 		summoned = false
 		alive = true
 		mood = HAPPY
-		# TODO: will be deleted. We just need Deck
-		
+
 		self.deck = Deck.new(name)
-		
+
 
 class Regnant:
 	var name
@@ -66,7 +65,7 @@ class Regnant:
 	var alive
 	var summons
 	var hand
-	
+
 	func _init(n,id):
 		name = n
 		self.id = id
@@ -144,6 +143,8 @@ func _on_move_done():
 
 func turn_player():
 	#Change state
+
+	game_state = P_BEGIN
 	curr_turn = turn_dict[PLAYER]
 	#print log info
 	print("Game: Round " + str(curr_round) + ", Turn Player")
@@ -153,12 +154,21 @@ func turn_player():
 	#update ui
 	$UI.update_ui(curr_round,curr_turn)
 	$UI.enable_counsellors()
+	$UI.reset_cards()
+
 	#next action
 	summon_counselor(curr_regnant)
 	
 func summon_counselor(id):
 	#Change state
-	game_state = P_SUMMON_C
+	if game_state == P_BEGIN:
+		if regnants_alive == 2:
+			game_state = P_SUMMON_C1
+		else:
+			game_state = P_SUMMON_C2
+	if game_state == P_PICKED_C1:
+		game_state = P_SUMMON_C2
+
 	#print log info
 	print("Summon a counselor")
 	# update ui
@@ -176,7 +186,16 @@ func _on_btn_wizard_pressed():
 
 func picked_counselor(counselor):
 	#Change state
-	game_state = P_PICKED_C
+	if game_state == P_SUMMON_C1:
+		if regnants_alive == 2:
+			game_state = P_PICKED_C1
+		else:
+			game_state = P_PICKED_C2
+	elif game_state == P_SUMMON_C2:
+			game_state = P_PICKED_C2
+
+
+
 	#Print log info
 	print("GAME: The " + regnant_dict[curr_regnant] + " summons the " + counselor_dict[counselor])
 
@@ -189,67 +208,71 @@ func picked_counselor(counselor):
 
 	# assign to the regnant the hand
 	regnants[curr_regnant].hand = counselors[counselor].deck.draw(MAX_CARDS)
-	
+
 	show_cards(regnants[curr_regnant])
 
-	if curr_regnant == QUEEN:
-		# show and choose cards
+	if game_state == P_PICKED_C1 and regnants_alive == 2:
+		curr_regnant = QUEEN
+		summon_counselor(curr_regnant)
+
+	# show and choose cards
+	if game_state == P_PICKED_C2:
 		$UI.disable_counsellors()
 		flip_cards(these_cards)
 		print(these_cards)
-		
-	if regnants_alive == 2 and curr_regnant == KING:
-		curr_regnant = QUEEN
-		summon_counselor(curr_regnant)
-		
-func show_cards(regnant):
-	$UI.do_show_cards(regnant)
+
+
+
+func show_cards(regnant, counselor):
+	$UI.do_show_cards(regnant,counselor)
 
 func get_cards(counselor):
 	return counselor.cards
 
 func flip_cards(cards):
 	print("GAME: flip the cards")
+
+	game_state = P_FLIP_C
+	$UI.disable_counsellors()
+
 	$UI.do_flip_cards(cards)
 	
-	
+func player_end_turn():
+
+	game_state = P_END_TURN
+	turn_AI()
+
+func player_execute_cards(counselor_id):
+
+	if game_state == P_FLIP_C:
+		if regnants_alive == 2:
+			game_state = P_EXEC_C1
+		else:
+			game_state = P_EXEC_C2
+	else:
+		if game_state == P_EXEC_C1:
+			game_state = P_EXEC_C2
+
+	#DO some stuff
+	#TODO here I choose hardcoded the card of the counselor. change it
+	if game_state == P_EXEC_C1:
+		$Battlefield.set_cursor_shape(these_cards[0])
+		#TODO disable only three cards
+	else:
+		$Battlefield.set_cursor_shape(these_cards[3])
+		#TODO disable only three cards
+
+	if game_state == P_EXEC_C2:
+		player_end_turn()
+
+
 # Player turn ATTACK
 func _on_btn_attackcommander_pressed():
-	
-	print("GAME: ATTACCCK")
-	$UI.disable_all_cards()
-	$UI.disable_counsellors()
-	$UI.hide_all_cards()
+	player_execute_cards(COMMANDER)
 
-	#TODO here I choose hardcoded the card of the counselor. change it
-#	$Battlefield.set_cursor_shape()
-	$UI.reset_cards()
-	turn_AI()
-	pass
-	
 func _on_btn_attackcarpenter_pressed():
-	
-	print("GAME: BUIILLD!")
-	$UI.disable_all_cards()
-	$UI.disable_counsellors()
-	$UI.hide_all_cards()
-	$UI.reset_cards()
-	turn_AI()
-	
-	pass
+	player_execute_cards(CARPENTER)
 	
 func _on_btn_attackwizard_pressed():
-	
-	print("GAME: YOU SHALL NOT PASS!")
-	$UI.disable_all_cards()
-	$UI.disable_counsellors()
-	$UI.hide_all_cards()
-	$UI.reset_cards()
-	
-	 
-	turn_AI()
-	pass
-	
- 
-	
-	
+	player_execute_cards(WIZARD)
+
