@@ -20,6 +20,13 @@ var pawns = []
 
 var spawn_points = [[], [], [], []] # NSWE
 
+# health of buildings
+var castle_health = 6
+const CASTLE_SEVERE_HITPOINTS = 2
+var wizard_building_health = 3
+var commander_building_health = 3
+var carpenter_building_health = 3
+
 # cursor
 var cursor_shape = [Vector2(0,-1),Vector2(0,0),Vector2(0,1)]
 var last_cursor_pos = Vector2(0,0)
@@ -88,7 +95,37 @@ func break_cell(pos, direction):
 	
 	if breakable:
 		destroy_building(grid_pos)
-	
+	elif tile_id in [5,6,7,25,26,27,45,46,47]: # castle
+		castle_health -= 1
+		if castle_health == CASTLE_SEVERE_HITPOINTS:
+			game_node.on_castle_severely_hit()
+		elif castle_health <= 0:
+			for x in [15,16,17]:
+				for y in [12,13,14]:
+					destroy_building(Vector2(x,y))
+			game_node.on_castle_destroyed()
+	elif tile_id in [8,9,28,29]: # carpenter's building
+		carpenter_building_health -= 1
+		if carpenter_building_health <= 0:
+			for x in [12,13]:
+				for y in [14,15]:
+					destroy_building(Vector2(x,y))
+			game_node.on_building_destroyed(game_node.enum_counselor.CARPENTER)
+	elif tile_id in [10,11,30,31]: # commander's building
+		commander_building_health -= 1
+		if commander_building_health <= 0:
+			for x in [19,20]:
+				for y in [11,12]:
+					destroy_building(Vector2(x,y))
+			game_node.on_building_destroyed(game_node.enum_counselor.COMMANDER)
+	elif tile_id in [12,13,32,33]: # wizard's building
+		wizard_building_health -= 1
+		if wizard_building_health <= 0:
+			for x in [14,15]:
+				for y in [9,10]:
+					destroy_building(Vector2(x,y))
+			game_node.on_building_destroyed(game_node.enum_counselor.WIZARD)
+			
 func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array
 	# Returns the new target world position of the child
