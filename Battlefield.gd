@@ -152,9 +152,10 @@ func _input(event):
 					cursor_map.set_cellv(cell + last_cursor_pos, -1)
 				last_cursor_pos = pos
 				for cell in cursor_shape:
-					cursor_map.set_cellv(cell + pos, 78)
+					var cursor_tile = cell + pos
+					if is_within_the_grid(cursor_tile):
+						cursor_map.set_cellv(cursor_tile, 78)
 		if event is InputEventMouseButton:
-			print("KABOOOM")
 			chosen_card.resolve(get_node("/root/Game/Battlefield"), last_cursor_pos)
 			if game_node.game_state == game_node.P_EXEC_C2:
 				game_node.player_end_turn()
@@ -166,17 +167,29 @@ func set_cursor_shape(card):
 # ---
 # board-altering methods
 # ---
+
+func is_within_the_grid(pos):
+	return pos.x >= 0 and pos.x < grid_size.x and pos.y >= 0 and pos.y < grid_size.y
 	
 func raise_wall(pos):
+	if not is_within_the_grid(pos):
+		return
+		
 	if grid[pos.x][pos.y] != null:
 		return
 
 	buildings_map.set_cellv(pos, 17) # single tile wall
 
 func destroy_building(pos):
+	if not is_within_the_grid(pos):
+		return
+		
 	buildings_map.set_cellv(pos, -1)
 
 func spawn_pawn(pos, direction):
+	if not is_within_the_grid(pos):
+		return
+		
 	var pawn = Pawn.instance()
 	pawns.append(pawn)
 	pawn.position = map.map_to_world(pos) + tile_size/2 # bleargh
@@ -188,6 +201,9 @@ func spawn_pawn(pos, direction):
 	return pawn
 
 func kill_pawn(pos):
+	if not is_within_the_grid(pos):
+		return
+		
 	var pawn = grid[pos.x][pos.y]
 	if pawn != null:
 		var i = 0
