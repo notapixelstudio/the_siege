@@ -77,11 +77,11 @@ func is_cell_vacant(pos, direction):
 	
 func break_cell(pos, direction):
 	var grid_pos = map.world_to_map(pos) + direction
-	var tile_id = map.get_cellv(grid_pos)
+	var tile_id = buildings_map.get_cellv(grid_pos)
 	var breakable = tile_id in tiledict and tiledict[tile_id]["breakable"]
 	
 	if breakable:
-		map.set_cellv(grid_pos, 38) # ground tile
+		buildings_map.set_cellv(grid_pos, -1)
 	
 func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array
