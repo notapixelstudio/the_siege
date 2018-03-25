@@ -106,7 +106,9 @@ func update_child_pos(child_node):
 	
 func do_spawn():
 	state = 'spawn'
-	
+	busy_pawns = wave() + wave()
+
+func wave():
 	# choose a random direction
 	var random_dir_index = randi() % 4
 	var direction = [Vector2(0,1),Vector2(0,-1),Vector2(1,0),Vector2(-1,0)][random_dir_index]
@@ -116,7 +118,7 @@ func do_spawn():
 	for spawn_point in active_spawn_points:
 		spawn_pawn(spawn_point, direction)
 		
-	busy_pawns = len(active_spawn_points)
+	return len(active_spawn_points)
 	
 func do_move():
 	state = 'move'
@@ -234,6 +236,9 @@ func destroy_building(pos):
 
 func spawn_pawn(pos, direction):
 	if not is_within_the_grid(pos):
+		return
+
+	if grid[pos.x][pos.y] != null:
 		return
 		
 	var pawn = Pawn.instance()
