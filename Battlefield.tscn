@@ -6,6 +6,10 @@
 
 [node name="Battlefield" type="Node" index="0"]
 
+<<<<<<< Updated upstream
+=======
+position = Vector2( 300, 10 )
+>>>>>>> Stashed changes
 script = ExtResource( 1 )
 
 [node name="GridMap" parent="." index="0" instance=ExtResource( 2 )]
