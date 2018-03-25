@@ -5,10 +5,25 @@ class Deck:
 	var all_cards = {
 		'Carpenter': {
 			'small_wall': {
-				'name': 'Small wall',
+				'name': 'Small Wall',
 				'effects_shape': [
 					{'effect': 'raise_wall', 'pos': Vector2( 0,-1)},
 					{'effect': 'raise_wall', 'pos': Vector2( 0, 0)}
+				]
+			},
+			'tiny_wall': {
+				'name': 'Tiny Wall',
+				'effects_shape': [
+					{'effect': 'raise_wall', 'pos': Vector2( 0, 0)}
+				]
+			},
+			'thick_wall': {
+				'name': 'Thick Wall',
+				'effects_shape': [
+					{'effect': 'raise_wall', 'pos': Vector2( 0, 0)},
+					{'effect': 'raise_wall', 'pos': Vector2( 0, 1)},
+					{'effect': 'raise_wall', 'pos': Vector2( 1, 0)},
+					{'effect': 'raise_wall', 'pos': Vector2( 1, 1)}
 				]
 			}
 		},
@@ -19,6 +34,13 @@ class Deck:
 					{'effect': 'kill_pawn', 'pos': Vector2( 0,-1)},
 					{'effect': 'kill_pawn', 'pos': Vector2( 0, 0)},
 					{'effect': 'kill_pawn', 'pos': Vector2(-1, 0)}
+				]
+			},
+			'desperate_shot': {
+				'name': 'Desperate Shot',
+				'effects_shape': [
+					{'effect': 'kill_pawn', 'pos': Vector2(-1,-1)},
+					{'effect': 'kill_pawn', 'pos': Vector2( 0, 0)}
 				]
 			}
 		},
@@ -42,77 +64,41 @@ class Deck:
 		self.counselor_name = counselor_name
 
 		if counselor_name == 'Carpenter':
+			add('thick_wall')
+			add('thick_wall')
+			add('thick_wall')
+			
 			add('small_wall')
 			add('small_wall')
 			add('small_wall')
 			add('small_wall')
 			add('small_wall')
 			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
+			
+			add('tiny_wall')
+			add('tiny_wall')
+			add('tiny_wall')
+			add('tiny_wall')
+			add('tiny_wall')
+			add('tiny_wall')
+			add('tiny_wall')
+			add('tiny_wall')
+			add('tiny_wall')
+			
 		elif counselor_name == 'Commander':
+			add('desperate_shot')
+			add('desperate_shot')
+			add('desperate_shot')
+			add('desperate_shot')
+			add('desperate_shot')
+			add('desperate_shot')
+			add('desperate_shot')
+			add('desperate_shot')
+			add('desperate_shot')
+			add('desperate_shot')
+			add('desperate_shot')
+			add('desperate_shot')
+			
 			add('rain_of_arrows')
 			add('rain_of_arrows')
 			add('rain_of_arrows')
@@ -122,30 +108,7 @@ class Deck:
 			add('rain_of_arrows')
 			add('rain_of_arrows')
 			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
+			
 		elif counselor_name == 'Wizard':
 			add('fireball')
 			add('fireball')
