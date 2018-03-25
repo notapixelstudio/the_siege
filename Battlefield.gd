@@ -20,8 +20,6 @@ var pawns = []
 
 var spawn_points = [[], [], [], []] # NSWE
 
-enum ENTITY_TYPES {PAWN}
-
 # cursor
 var cursor_shape = [Vector2(0,-1),Vector2(0,0),Vector2(0,1)]
 var last_cursor_pos = Vector2(0,0)
@@ -81,7 +79,7 @@ func break_cell(pos, direction):
 	var breakable = tile_id in tiledict and tiledict[tile_id]["breakable"]
 	
 	if breakable:
-		buildings_map.set_cellv(grid_pos, -1)
+		destroy_building(grid_pos)
 	
 func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array
@@ -90,21 +88,10 @@ func update_child_pos(child_node):
 	grid[grid_pos.x][grid_pos.y] = null
 	
 	var new_grid_pos = grid_pos + child_node.direction
-	grid[new_grid_pos.x][new_grid_pos.y] = child_node.type
+	grid[new_grid_pos.x][new_grid_pos.y] = child_node
 	
 	var target_pos = map.map_to_world(new_grid_pos) + tile_size/2
 	return target_pos
-
-func spawn_pawn(pos, direction):
-	var pawn = Pawn.instance()
-	pawns.append(pawn)
-	pawn.position = map.map_to_world(pos) + tile_size/2 # bleargh
-	pawn.facing = direction
-	var start_pos = update_child_pos(pawn)
-	pawn.position = start_pos
-	add_child(pawn)
-	
-	return pawn
 	
 func do_spawn():
 	state = 'spawn'
@@ -150,7 +137,7 @@ func _process(delta):
 			emit_signal('move_done')
 
 func _input(event):
-	if (event is InputEventMouseMotion):
+	if event is InputEventMouseMotion:
 		var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
 		if pos != last_cursor_pos:
 			for cell in cursor_shape:
@@ -158,4 +145,38 @@ func _input(event):
 			last_cursor_pos = pos
 			for cell in cursor_shape:
 				cursor_map.set_cellv(cell + pos, 78)
+				
+# ---
+# board-altering methods
+# ---
+
+func raise_wall(pos):
+	buildings_map.set_cellv(pos, 17) # single tile wall
+
+func destroy_building(pos):
+	buildings_map.set_cellv(pos, -1)
+
+func spawn_pawn(pos, direction):
+	var pawn = Pawn.instance()
+	pawns.append(pawn)
+	pawn.position = map.map_to_world(pos) + tile_size/2 # bleargh
+	pawn.facing = direction
+	var start_pos = update_child_pos(pawn)
+	pawn.position = start_pos
+	add_child(pawn)
+	
+	return pawn
+
+func kill_pawn(pos):
+	var pawn = grid[pos.x][pos.y]
+	if pawn != null:
+		var i = 0
+		for p in pawns:
+			if p == pawn:
+				break
+			i += 1
 			
+		pawns.remove(i)
+		pawn.queue_free()
+		grid[pos.x][pos.y] = null
+		
