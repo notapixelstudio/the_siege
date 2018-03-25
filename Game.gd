@@ -64,6 +64,7 @@ func setup_game():
 		regnants.append(Regnant.new(regnant_dict[i], i))
 	for i in range(NUM_COUNSELORS):
 		counselors.append(Counselor.new(counselor_dict[i], i, cards_dict))
+	$UI.hide_message()
 	
 func _ready():
 	
@@ -161,7 +162,7 @@ func picked_counselor(counselor):
 	for i in range(3):
 		these_cards.append(counselors[counselor].cards[i])
 
-	$UI.hide_message()	
+	$UI.hide_message()
 	
 	if curr_regnant == QUEEN:
 		# show and choose cards
