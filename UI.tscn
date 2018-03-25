@@ -74,7 +74,7 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 texture_normal = ExtResource( 4 )
-_sections_unfolded = [ "Margin", "Rect", "Textures" ]
+_sections_unfolded = [ "Margin", "Rect", "Textures", "Visibility" ]
 
 [node name="TextureCommander" type="TextureButton" parent="." index="3"]
 
@@ -271,7 +271,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-_sections_unfolded = [ "Grow Direction", "Margin", "Textures" ]
+_sections_unfolded = [ "Grow Direction", "Margin", "Textures", "Visibility" ]
 
 [node name="TextureCard2" type="TextureButton" parent="cnt_king_hand" index="1"]
 

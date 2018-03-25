@@ -154,7 +154,7 @@ func turn_player():
 	#update ui
 	$UI.update_ui(curr_round,curr_turn)
 	$UI.enable_counsellors()
-	$UI.reset_cards()
+	 
 
 	#next action
 	summon_counselor(curr_regnant)
@@ -239,6 +239,8 @@ func flip_cards(regnant):
 	
 func player_end_turn():
 
+	$UI.disable_all_cards(regnants[curr_regnant])	
+			
 	game_state = P_END_TURN
 	turn_AI()
 
@@ -260,7 +262,8 @@ func player_execute_cards(regnant_id, card_id):
 	#DO some stuff
 	#TODO here I choose hardcoded the card of the counselor. change it
 	$Battlefield.set_cursor_shape(regnants[regnant_id].hand[card_id])
-	
+	$UI.disable_all_cards(regnants[regnant_id])	
+			
 
 	
 # Player turn ATTACK

@@ -29,6 +29,7 @@ var cursor_map
 var chosen_card
 
 var game_node
+var ui_node
 
 func _ready():
 	# set up a new random seed
@@ -36,7 +37,7 @@ func _ready():
 	randomize()
 	
 	game_node = get_node("/root/Game")
-	
+	ui_node = get_node("/root/Game/UI")
 	map = get_node("GridMap/base")
 	buildings_map = get_node("GridMap/buildings")
 	cursor_map = get_node("GridMap/cursor")
@@ -157,6 +158,9 @@ func _input(event):
 						cursor_map.set_cellv(cursor_tile, 78)
 		if event is InputEventMouseButton:
 			chosen_card.resolve(get_node("/root/Game/Battlefield"), last_cursor_pos)
+			
+			
+			
 			if game_node.game_state == game_node.P_EXEC_C2:
 				game_node.player_end_turn()
 		

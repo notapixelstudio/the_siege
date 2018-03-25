@@ -4,6 +4,7 @@ class Card:
 	var id
 	var name
 	var image_front
+	var image_front_disabled
 	var image_back
 	
 	func _init(counselor_name, id, data):
@@ -12,6 +13,7 @@ class Card:
 		self.name = data.name
 		self.effects_shape = data.effects_shape
 		self.image_front = load('res://assets/cards/'+counselor_name+'_card_front.png')
+		self.image_front_disabled = load('res://assets/cards/'+counselor_name+'_card_front_disabled.png')
 		self.image_back = load('res://assets/cards/'+counselor_name+'_card_back.png')
 
 	func get_shape():
