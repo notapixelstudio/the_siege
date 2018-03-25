@@ -144,7 +144,7 @@ func _process(delta):
 			emit_signal('move_done')
 
 func _input(event):
-	if game_node.game_state == game_node.P_EXEC_C1 or game_node.game_state == game_node.P_EXEC_C1 :
+	if game_node.game_state == game_node.P_EXEC_C1 or game_node.game_state == game_node.P_EXEC_C2 :
 		if event is InputEventMouseMotion:
 			var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
 			if pos != last_cursor_pos:
@@ -156,6 +156,8 @@ func _input(event):
 		if event is InputEventMouseButton:
 			print("KABOOOM")
 			chosen_card.resolve(get_node("/root/Game/Battlefield"), last_cursor_pos)
+			if game_node.game_state == game_node.P_EXEC_C2:
+				game_node.player_end_turn()
 		
 func set_cursor_shape(card):
 	cursor_shape = card.get_shape()
