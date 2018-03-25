@@ -117,3 +117,7 @@ func do_flip_cards(regnant):
 func reset_cards():
 	btn_cards = []
 	
+
+func _on_btn_ok_pressed():
+	hide_message()
+	pass # replace with function body
