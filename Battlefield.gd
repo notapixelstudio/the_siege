@@ -157,16 +157,18 @@ func _input(event):
 			print("KABOOOM")
 			chosen_card.resolve(get_node("/root/Game/Battlefield"), last_cursor_pos)
 		
-# ---
-# board-altering methods
-# ---
-
 func set_cursor_shape(card):
 	cursor_shape = card.get_shape()
 	chosen_card = card
-	pass
+	
+# ---
+# board-altering methods
+# ---
 	
 func raise_wall(pos):
+	if grid[pos.x][pos.y] != null:
+		return
+
 	buildings_map.set_cellv(pos, 17) # single tile wall
 
 func destroy_building(pos):
