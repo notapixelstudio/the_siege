@@ -88,6 +88,7 @@ func turn_AI():
 	curr_round +=1
 	curr_turn = turn_dict[AI]
 	print("Game: Round " + str(curr_round) + ", Turn AI") 	
+	$UI.disable_counsellors()
 	$UI.update_ui(curr_round,curr_turn)
 	attack()
 	
@@ -131,8 +132,14 @@ func _on_move_done():
 
 func turn_player():
 	print("Game: Round " + str(curr_round) + ", Turn Player")
+	
+	
+	these_cards = []
+	curr_regnant = KING;
+	
 	curr_turn = turn_dict[PLAYER]
 	$UI.update_ui(curr_round,curr_turn)
+	$UI.enable_counsellors()
 	summon_counselor(curr_regnant)
 	
 func summon_counselor(id):
@@ -151,12 +158,8 @@ func _on_btn_carpenter_pressed():
 func _on_btn_wizard_pressed():
 	picked_counselor(WIZARD)
 
-# from card chos
-func _on_btn_action_pressed():
-	print("GAME: Card picked, starting Player attack")
-	# get_node("UI/chooseCards").hide()
-	turn_AI()
-	
+
+
 func get_cards(counselor):
 	return counselor.cards
 
@@ -172,6 +175,7 @@ func picked_counselor(counselor):
 	
 	if curr_regnant == QUEEN:
 		# show and choose cards
+		$UI.disable_counsellors()
 		flip_cards(these_cards)
 		print(these_cards)
 		pass
@@ -184,3 +188,43 @@ func picked_counselor(counselor):
 func flip_cards(cards):
 	print("GAME: flip the cards")
 	$UI.do_flip_cards(cards)
+	
+	
+	
+func _on_btn_attackcommander_pressed():
+	
+	print("GAME: ATTACCCK")
+	$UI.disable_all_cards()
+	$UI.disable_counsellors()
+	$UI.hide_all_cards()
+	$UI.reset_cards()
+
+	turn_AI()
+	pass
+	
+func _on_btn_attackcarpenter_pressed():
+	
+	print("GAME: BUIILLD!")
+	$UI.disable_all_cards()
+	$UI.disable_counsellors()
+	$UI.hide_all_cards()
+	$UI.reset_cards()
+	turn_AI()
+	
+	pass
+	
+func _on_btn_attackwizard_pressed():
+	
+	print("GAME: YOU SHALL NOT PASS!")
+	$UI.disable_all_cards()
+	$UI.disable_counsellors()
+	$UI.hide_all_cards()
+	$UI.reset_cards()
+	
+	 
+	turn_AI()
+	pass
+	
+ 
+	
+	
