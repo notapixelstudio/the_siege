@@ -7,10 +7,10 @@ path="res://.import/fireball.png-4f19027e4c8642238f14849deaf09467.stex"
 [deps]
 
 source_file="res://assets/cards/wizard/fireball.png"
-source_md5="2cfa11848bd132ca7461875b2169f6bc"
+source_md5="98342fae52a4aa4fd22a4661c4cdebba"
 
 dest_files=[ "res://.import/fireball.png-4f19027e4c8642238f14849deaf09467.stex" ]
-dest_md5="ce2a582dddd1043ce656a51a9af8f582"
+dest_md5="f2b00459f7e26ba2834bb2016e2077a4"
 
 [params]
 

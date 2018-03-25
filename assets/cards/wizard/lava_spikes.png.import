@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/master.svg-dc1ba6d28d61b58ed361c75707e7d886.stex"
+path="res://.import/lava_spikes.png-7c49a9a90ffd3b4e4a2dc76a162295b4.stex"
 
 [deps]
 
-source_file="res://assets/cards/master.svg"
-source_md5="203bb5560b75318d8073221ade13089f"
+source_file="res://assets/cards/wizard/lava_spikes.png"
+source_md5="09305514eb454fb8aeed80c8b571061d"
 
-dest_files=[ "res://.import/master.svg-dc1ba6d28d61b58ed361c75707e7d886.stex" ]
-dest_md5="32d5f680d8306c376db003d714890afd"
+dest_files=[ "res://.import/lava_spikes.png-7c49a9a90ffd3b4e4a2dc76a162295b4.stex" ]
+dest_md5="7f4d902333c7aa1c0a5ea46e7cb6c2c4"
 
 [params]
 

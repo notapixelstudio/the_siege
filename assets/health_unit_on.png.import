@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/master.svg-dc1ba6d28d61b58ed361c75707e7d886.stex"
+path="res://.import/health_unit_on.png-75789e699556f590208c3c4058b14c1d.stex"
 
 [deps]
 
-source_file="res://assets/cards/master.svg"
-source_md5="203bb5560b75318d8073221ade13089f"
+source_file="res://assets/health_unit_on.png"
+source_md5="062e7de9ea6bba199f4c3ce79151ddbe"
 
-dest_files=[ "res://.import/master.svg-dc1ba6d28d61b58ed361c75707e7d886.stex" ]
-dest_md5="32d5f680d8306c376db003d714890afd"
+dest_files=[ "res://.import/health_unit_on.png-75789e699556f590208c3c4058b14c1d.stex" ]
+dest_md5="8118a322bc9c316e0b3bc8a3a76e7f75"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
