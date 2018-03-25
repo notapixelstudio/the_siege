@@ -2,9 +2,10 @@ extends Node
 
 const NUM_REGNANTS = 2
 const NUM_COUNSELORS = 3
+const MAX_ROUNDS = 10
+const MAX_CARDS =3
 
-var regnants = []
-var counselors = []
+
 
 enum enum_regnant   {KING , QUEEN}
 enum enum_counselor {COMMANDER , CARPENTER, WIZARD}
@@ -18,15 +19,22 @@ var turn_dict 		= {AI: "Enemy", PLAYER:"Player"}
 var moods_dict 		= {HAPPY: "Happy", QUIET: "Quiet", SAD = "Sad", ANGRY = "Angry"}
 var cards_dict = {COMMANDER: "res://assets/cards/commander_card_front.png", CARPENTER: "res://assets/cards/carpenter_card_front.png", WIZARD:"res://assets/cards/wizard_card_front.png"}
  
+
+
 var regnants_alive = 2
-var num_rounds = 4
 var curr_round = 0
 var curr_turn = AI
 var curr_regnant = KING
 
-var these_cards = []
 
-var MAX_CARDS=3
+enum enum_player_state {SETUP,AI_ATTACK, AI_SPAWN, AI_MOVE, AI_END_TURN, P_SUMMON_C, P_PICKED_C, P_FLIP_C,P_EXEC_C,P_END_TURN,P_END_GAME }
+var game_state = SETUP
+
+
+
+var these_cards = []
+var regnants = []
+var counselors = []
 
 class Counselor:
 	var name
@@ -60,39 +68,47 @@ class Regnant:
 		alive = true
 		
 func setup_game():
+	print("Game: Setup")
+	game_state = SETUP
 	for i in range(NUM_REGNANTS):
 		regnants.append(Regnant.new(regnant_dict[i], i))
 	for i in range(NUM_COUNSELORS):
 		counselors.append(Counselor.new(counselor_dict[i], i, cards_dict))
 	$UI.hide_message()
-	
+
 func _ready():
-	
-	print("Game: Setup")
 	setup_game()
 	turn_AI()
-	# turn AI: 
+
+func turn_AI():
+	# turn AI:
 	# 1. attack
 	# 2. spawn
 	# 3. everybody moves
-func turn_AI():
 	curr_round +=1
 	curr_turn = turn_dict[AI]
-	print("Game: Round " + str(curr_round) + ", Turn AI") 	
+
+	$UI.hide_all_cards()
 	$UI.disable_counsellors()
 	$UI.update_ui(curr_round,curr_turn)
+
+	print("Game: Round " + str(curr_round) + ", Turn AI")
 	attack()
 	
+
 func attack():
 	print("Game: do_attack")
+	game_state = AI_ATTACK
 	$Battlefield.do_attack()
 	
 func spawn():
 	print("Game: do_spawn")
+	game_state = AI_SPAWN
 	$Battlefield.do_spawn()
 	
 func move():
 	print("Game: do_move")
+	game_state = AI_MOVE
 	$Battlefield.do_move()
 
 # from signal attack_done
@@ -122,24 +138,28 @@ func _on_move_done():
 """
 
 func turn_player():
+	#Change state
+	curr_turn = turn_dict[PLAYER]
+	#print log info
 	print("Game: Round " + str(curr_round) + ", Turn Player")
-	
-	
+	#clean temporary variables
 	these_cards = []
 	curr_regnant = KING;
-	
-	curr_turn = turn_dict[PLAYER]
+	#update ui
 	$UI.update_ui(curr_round,curr_turn)
 	$UI.enable_counsellors()
+	#next action
 	summon_counselor(curr_regnant)
 	
 func summon_counselor(id):
+	#Change state
+	game_state = P_SUMMON_C
+	#print log info
+	print("Summon a counselor")
+	# update ui
 	var regnant = regnants[id]
 	$UI.do_show_popup_counselor(id,regnant.name)
-	 
-func show_cards(regnant, counselor):
-	$UI.do_show_cards(regnant,counselor)
-	
+
 func _on_btn_commander_pressed():
 	picked_counselor(COMMANDER)
 	
@@ -149,21 +169,25 @@ func _on_btn_carpenter_pressed():
 func _on_btn_wizard_pressed():
 	picked_counselor(WIZARD)
 
-
-
-func get_cards(counselor):
-	return counselor.cards
-
 func picked_counselor(counselor):
+	#Change state
+	game_state = P_PICKED_C
+	#Print log info
 	print("GAME: The " + regnant_dict[curr_regnant] + " summons the " + counselor_dict[counselor])
+
+
+	$UI.hide_message()
+
+	#A Regnant picked a counselor. Show its cards
 	regnants[curr_regnant].summons = counselor
 	counselors[counselor].summoned = true
 	show_cards(regnants[curr_regnant], counselors[counselor])
-	for i in range(3):
+
+	# save the cards for now
+	for i in range(MAX_CARDS):
 		these_cards.append(counselors[counselor].cards[i])
 
-	$UI.hide_message()
-	
+
 	if curr_regnant == QUEEN:
 		# show and choose cards
 		$UI.disable_counsellors()
@@ -175,7 +199,12 @@ func picked_counselor(counselor):
 		curr_regnant = QUEEN
 		summon_counselor(curr_regnant)
 		
-		
+func show_cards(regnant, counselor):
+	$UI.do_show_cards(regnant,counselor)
+
+func get_cards(counselor):
+	return counselor.cards
+
 func flip_cards(cards):
 	print("GAME: flip the cards")
 	$UI.do_flip_cards(cards)
