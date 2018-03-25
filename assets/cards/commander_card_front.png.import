@@ -7,10 +7,10 @@ path="res://.import/commander_card_front.png-73bfa02b06a4155c5fcc0f26885a0a99.st
 [deps]
 
 source_file="res://assets/cards/commander_card_front.png"
-source_md5="ae892e46d96eca9d8f1df304baa7aa03"
+source_md5="d604fac702244cfe7bcfe55cf42d947b"
 
 dest_files=[ "res://.import/commander_card_front.png-73bfa02b06a4155c5fcc0f26885a0a99.stex" ]
-dest_md5="a1a5519cb4cf472819f0faba945b102a"
+dest_md5="9a724d06a270dae798202cde84f6fbf4"
 
 [params]
 
