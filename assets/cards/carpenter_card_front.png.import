@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/queen.png-f1fc1cc68046df93893cc2c7f2ff8f5f.stex"
+path="res://.import/carpenter_card_front.png-6d3fcc6bcd04bd6070bc43868e02985e.stex"
 
 [deps]
 
-source_file="res://assets/characters/queen.png"
-source_md5="378c251b5fb33b98177af365aadd015d"
+source_file="res://assets/cards/carpenter_card_front.png"
+source_md5="741cd9f7ded649bf03c12b78e3818fd9"
 
-dest_files=[ "res://.import/queen.png-f1fc1cc68046df93893cc2c7f2ff8f5f.stex" ]
-dest_md5="0589e7047ddb02892cac287195b6286c"
+dest_files=[ "res://.import/carpenter_card_front.png-6d3fcc6bcd04bd6070bc43868e02985e.stex" ]
+dest_md5="321a06d3eb73f704a2c74cb4daacaf08"
 
 [params]
 
