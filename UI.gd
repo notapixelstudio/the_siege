@@ -9,6 +9,7 @@ var message_label
 
 var btn_cards = []
 
+#back card
 var path_cards = ["res://assets/cards/commander_card_back.png", "res://assets/cards/carpenter_card_back.png" , "res://assets/cards/wizard_card_back.png"]
 func _ready():
 
@@ -39,7 +40,7 @@ func hide_message():
 func show_message():
 	ctn_message.show()
 
-func do_show_cards(regnant,counselor):
+func do_show_cards(regnant):
 	var counselors_id = [] 
 	# get three cards for each chosen counselour
 	print("UI: do_show_cards, for counselor "+ counselor.name)
@@ -66,9 +67,10 @@ func do_show_cards(regnant,counselor):
 	card3.show()
 	
 	#apply texture
-	card1.texture_normal = load(path_cards[counselor.id])
-	card2.texture_normal = load(path_cards[counselor.id])
-	card3.texture_normal = load(path_cards[counselor.id])
+	for card in regnant.hand:
+		card1.texture_normal = card.image_back
+		card2.texture_normal = load(path_cards[counselor.id])
+		card3.texture_normal = load(path_cards[counselor.id])
 	
 	if (counselor.id == 0):
 		card1.connect("pressed",get_node("/root/Game"),"_on_btn_attackcommander_pressed")

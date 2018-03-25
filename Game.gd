@@ -43,24 +43,31 @@ class Counselor:
 	var alive
 	var mood
 	var cards = []
+	var deck
+	
 	const MAX_CARDS = 3
 	
 	func _init(n, id, cards_dict):
 		var Card = preload("res://Card.gd").new().Card
+		var Deck = preload("res://Deck.gd").new().Deck
 		name = n
 		self.id = id
 		summoned = false
 		alive = true
 		mood = HAPPY
+		# TODO: will be deleted. We just need Deck
 		for i in range(MAX_CARDS):
 			cards.append(Card.new(self.id, cards_dict[self.id]))
-		print(cards)
+		
+		self.deck = Deck.new(name)
+		
 
 class Regnant:
 	var name
 	var id
 	var alive
 	var summons
+	var hand
 	
 	func _init(n,id):
 		name = n
@@ -181,13 +188,16 @@ func picked_counselor(counselor):
 	#A Regnant picked a counselor. Show its cards
 	regnants[curr_regnant].summons = counselor
 	counselors[counselor].summoned = true
-	show_cards(regnants[curr_regnant], counselors[counselor])
+
+	# assign to the regnant the hand
+	regnants[curr_regnant].hand = counselor.draw(MAX_CARDS)
+	
+	show_cards(regnants[curr_regnant])
 
 	# save the cards for now
 	for i in range(MAX_CARDS):
 		these_cards.append(counselors[counselor].cards[i])
-
-
+	
 	if curr_regnant == QUEEN:
 		# show and choose cards
 		$UI.disable_counsellors()
@@ -199,8 +209,8 @@ func picked_counselor(counselor):
 		curr_regnant = QUEEN
 		summon_counselor(curr_regnant)
 		
-func show_cards(regnant, counselor):
-	$UI.do_show_cards(regnant,counselor)
+func show_cards(regnant):
+	$UI.do_show_cards(regnant)
 
 func get_cards(counselor):
 	return counselor.cards

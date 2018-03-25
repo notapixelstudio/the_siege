@@ -151,6 +151,7 @@ func _input(event):
 # ---
 
 func set_cursor_shape(card):
+	cursor_shape = card.get_shape()
 	pass
 	
 func raise_wall(pos):
