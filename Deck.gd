@@ -1,5 +1,5 @@
 var all_cards = {
-  'carpenter': {
+  'Carpenter': {
     'build_wall': {
       name: 'Build wall',
       effects_shape: [
@@ -9,7 +9,7 @@ var all_cards = {
       ]
     }
   },
-  'commander': {
+  'Commander': {
     'rain_of_arrows': {
       name: 'Rain of Arrows',
       effects_shape: [
@@ -19,7 +19,7 @@ var all_cards = {
       ]
     }
   },
-  'wizard': {
+  'Wizard': {
     'fireball': {
       name: 'Fireball',
       effects_shape: [
@@ -32,30 +32,134 @@ var all_cards = {
     }
   }
 }
+
 class Deck:
-  var counselor_id
+  var counselor_name
   var cards
+  var Card
 
-  func _init(counselor_id):
-    self.counselor_id = counselor_id
+  func _init(counselor_name):
+    self.Card = preload('res://Card.gd').new().Card
 
-    if counselor_id == 'carpenter':
+    self.counselor_name = counselor_name
+
+    if counselor_name == 'Carpenter':
       add('build_wall')
       add('build_wall')
       add('build_wall')
-    elif counselor_id == 'commander':
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+      add('build_wall')
+    elif counselor_name == 'Commander':
       add('rain_of_arrows')
       add('rain_of_arrows')
       add('rain_of_arrows')
-    elif counselor_id == 'wizard':
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+      add('rain_of_arrows')
+    elif counselor_name == 'Wizard':
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
+      add('fireball')
       add('fireball')
       add('fireball')
       add('fireball')
 
     # TBD shuffle
 
-  func add(card_name):
-    self.cards.append(all_cards[self.counselor_id][card_name])
+  func add(card_id):
+    var card_data = all_cards[self.counselor_name][card_id]
+    self.cards.append(self.Card.new(self.counselor_name, card_id, card_data))
 
   func draw(amount):
     var hand = []
