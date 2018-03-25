@@ -74,27 +74,28 @@ func setup_game():
 		regnants.append(Regnant.new(regnant_dict[i], i))
 	for i in range(NUM_COUNSELORS):
 		counselors.append(Counselor.new(counselor_dict[i], i, cards_dict))
-	
+	$UI.hide_message()
+
 func _ready():
 	setup_game()
 	turn_AI()
-	
+
 func turn_AI():
-		# turn AI: 
+	# turn AI:
 	# 1. attack
 	# 2. spawn
 	# 3. everybody moves
 	curr_round +=1
 	curr_turn = turn_dict[AI]
-	
+
 	$UI.hide_all_cards()
 	$UI.disable_counsellors()
 	$UI.update_ui(curr_round,curr_turn)
-	
-	print("Game: Round " + str(curr_round) + ", Turn AI") 	
+
+	print("Game: Round " + str(curr_round) + ", Turn AI")
 	attack()
 	
-	
+
 func attack():
 	print("Game: do_attack")
 	game_state = AI_ATTACK
@@ -147,18 +148,18 @@ func turn_player():
 	#update ui
 	$UI.update_ui(curr_round,curr_turn)
 	$UI.enable_counsellors()
-	#next action	
+	#next action
 	summon_counselor(curr_regnant)
 	
 func summon_counselor(id):
 	#Change state
 	game_state = P_SUMMON_C
 	#print log info
-	print("Summon a counselor")	
+	print("Summon a counselor")
 	# update ui
 	var regnant = regnants[id]
 	$UI.do_show_popup_counselor(id,regnant.name)
-	 
+
 func _on_btn_commander_pressed():
 	picked_counselor(COMMANDER)
 	
@@ -175,13 +176,13 @@ func picked_counselor(counselor):
 	print("GAME: The " + regnant_dict[curr_regnant] + " summons the " + counselor_dict[counselor])
 
 
-	$UI.hide_message()	
-	
+	$UI.hide_message()
+
 	#A Regnant picked a counselor. Show its cards
 	regnants[curr_regnant].summons = counselor
 	counselors[counselor].summoned = true
 	show_cards(regnants[curr_regnant], counselors[counselor])
-	
+
 	# save the cards for now
 	for i in range(MAX_CARDS):
 		these_cards.append(counselors[counselor].cards[i])
@@ -197,16 +198,13 @@ func picked_counselor(counselor):
 	if regnants_alive == 2 and curr_regnant == KING:
 		curr_regnant = QUEEN
 		summon_counselor(curr_regnant)
-	
-	
-	
 		
 func show_cards(regnant, counselor):
 	$UI.do_show_cards(regnant,counselor)
-	
+
 func get_cards(counselor):
 	return counselor.cards
-		
+
 func flip_cards(cards):
 	print("GAME: flip the cards")
 	$UI.do_flip_cards(cards)

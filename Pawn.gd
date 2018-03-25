@@ -19,13 +19,11 @@ var target_direction = Vector2()
 var last_target_direction = Vector2()
 var is_moving = false
 
-var type
 var battlefield
 
 
 func _ready():
 	battlefield = get_parent()
-	type = battlefield.PAWN
 	$sprite.play('spawn')
 	
 func _physics_process(delta):
