@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/level0_1.tmx" type="PackedScene" id=2]
 [ext_resource path="res://GridVisualizer.gd" type="Script" id=3]
 
-[node name="Battlefield" type="Node" index="0"]
+[node name="Battlefield" type="Node2D" index="0"]
 
 position = Vector2( 300, 10 )
 script = ExtResource( 1 )
