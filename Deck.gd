@@ -54,6 +54,15 @@ class Deck:
 					{'effect': 'fire_damage', 'pos': Vector2( 1, 0)},
 					{'effect': 'fire_damage', 'pos': Vector2( 0, 1)}
 				]
+			},
+			'lava_spikes': {
+				'name': 'Lava Spikes',
+				'effects_shape': [
+					{'effect': 'fire_damage', 'pos': Vector2(-1,-1)},
+					{'effect': 'fire_damage', 'pos': Vector2(-1, 1)},
+					{'effect': 'fire_damage', 'pos': Vector2( 1, 1)},
+					{'effect': 'fire_damage', 'pos': Vector2( 1,-1)}
+				]
 			}
 		}
 	}
@@ -110,28 +119,19 @@ class Deck:
 			add('rain_of_arrows')
 			
 		elif counselor_name == 'Wizard':
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
+			add('lava_spikes')
+			add('lava_spikes')
+			add('lava_spikes')
+			add('lava_spikes')
+			add('lava_spikes')
+			add('lava_spikes')
+			add('lava_spikes')
+			add('lava_spikes')
+			add('lava_spikes')
+			add('lava_spikes')
+			add('lava_spikes')
+			add('lava_spikes')
+			
 			add('fireball')
 			add('fireball')
 			add('fireball')
