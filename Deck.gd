@@ -160,14 +160,14 @@ class Deck:
 
 		return hand
 		
-# from https://godotengine.org/qa/2547/how-to-randomize-a-list-array
-func shuffleList(list):
-	var shuffledList = []
-	var indexList = range(list.size())
-	for i in range(list.size()):
+	# from https://godotengine.org/qa/2547/how-to-randomize-a-list-array
+	func shuffleList(list):
+		var shuffledList = []
+		var indexList = range(list.size())
+		for i in range(list.size()):
 			randomize()
 			var x = randi()%indexList.size()
 			shuffledList.append(list[x])
 			indexList.remove(x)
 			list.remove(x)
-	return shuffledList
+		return shuffledList
