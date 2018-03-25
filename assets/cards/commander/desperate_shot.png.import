@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/commander_card_front_disabled.png-b00eb8a567deca21235e81a312cfd54a.stex"
+path="res://.import/desperate_shot.png-e004d6faf3538051e266ddb3341910b8.stex"
 
 [deps]
 
-source_file="res://assets/cards/commander_card_front_disabled.png"
-source_md5="e86a1b55c03deb4832107c2f918a23a8"
+source_file="res://assets/cards/commander/desperate_shot.png"
+source_md5="3db58bb361c72f7e23e682d373a5322e"
 
-dest_files=[ "res://.import/commander_card_front_disabled.png-b00eb8a567deca21235e81a312cfd54a.stex" ]
-dest_md5="e3d1a0b70ff1c06475793e03cf45e35c"
+dest_files=[ "res://.import/desperate_shot.png-e004d6faf3538051e266ddb3341910b8.stex" ]
+dest_md5="6a852c41b9c1cc856831797ae90c2734"
 
 [params]
 

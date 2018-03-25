@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wizard_card_front.png-fc3c95967d1f6b2d5e35b8ea31194535.stex"
+path="res://.import/small_wall.png-6d8d16da87bd0906835b1c8e8d51fff1.stex"
 
 [deps]
 
-source_file="res://assets/cards/wizard_card_front.png"
-source_md5="2cfa11848bd132ca7461875b2169f6bc"
+source_file="res://assets/cards/carpenter/small_wall.png"
+source_md5="ca8ee9692c0a00254b0221b5bcdda55f"
 
-dest_files=[ "res://.import/wizard_card_front.png-fc3c95967d1f6b2d5e35b8ea31194535.stex" ]
-dest_md5="ce2a582dddd1043ce656a51a9af8f582"
+dest_files=[ "res://.import/small_wall.png-6d8d16da87bd0906835b1c8e8d51fff1.stex" ]
+dest_md5="28f7e608564af4a873126e1bc474c8d2"
 
 [params]
 

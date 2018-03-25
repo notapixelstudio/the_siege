@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/commander_card_front.png-73bfa02b06a4155c5fcc0f26885a0a99.stex"
+path="res://.import/fireball.png-4f19027e4c8642238f14849deaf09467.stex"
 
 [deps]
 
-source_file="res://assets/cards/commander_card_front.png"
-source_md5="d604fac702244cfe7bcfe55cf42d947b"
+source_file="res://assets/cards/wizard/fireball.png"
+source_md5="2cfa11848bd132ca7461875b2169f6bc"
 
-dest_files=[ "res://.import/commander_card_front.png-73bfa02b06a4155c5fcc0f26885a0a99.stex" ]
-dest_md5="9a724d06a270dae798202cde84f6fbf4"
+dest_files=[ "res://.import/fireball.png-4f19027e4c8642238f14849deaf09467.stex" ]
+dest_md5="ce2a582dddd1043ce656a51a9af8f582"
 
 [params]
 

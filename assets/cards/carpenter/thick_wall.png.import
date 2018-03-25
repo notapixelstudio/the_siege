@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/carpenter_card_front_disabled.png-2199fa590efdab3af664c032de44b52d.stex"
+path="res://.import/thick_wall.png-748b7a433e3a889c775f57c10b795a56.stex"
 
 [deps]
 
-source_file="res://assets/cards/carpenter_card_front_disabled.png"
-source_md5="7bb7369ae012813a066937b410b61fef"
+source_file="res://assets/cards/carpenter/thick_wall.png"
+source_md5="72d8043e1626a62c85c563e56839e3e5"
 
-dest_files=[ "res://.import/carpenter_card_front_disabled.png-2199fa590efdab3af664c032de44b52d.stex" ]
-dest_md5="8a94c1643369d49b601ca9eafac7ffc7"
+dest_files=[ "res://.import/thick_wall.png-748b7a433e3a889c775f57c10b795a56.stex" ]
+dest_md5="08119ccd29909d6b6eaee25781da34fc"
 
 [params]
 
