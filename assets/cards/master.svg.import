@@ -7,10 +7,10 @@ path="res://.import/master.svg-dc1ba6d28d61b58ed361c75707e7d886.stex"
 [deps]
 
 source_file="res://assets/cards/master.svg"
-source_md5="552157b373abd58176f3bb15e123449b"
+source_md5="203bb5560b75318d8073221ade13089f"
 
 dest_files=[ "res://.import/master.svg-dc1ba6d28d61b58ed361c75707e7d886.stex" ]
-dest_md5="78d5865dfabd359d0dc93268b8b78bf2"
+dest_md5="32d5f680d8306c376db003d714890afd"
 
 [params]
 

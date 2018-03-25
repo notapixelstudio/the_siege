@@ -38,6 +38,12 @@ var chosen_card
 var game_node
 var ui_node
 
+var HealthBar
+var castle_hb
+var carpenter_hb
+var commander_hb
+var wizard_hb
+
 func _ready():
 	# set up a new random seed
 	# FIXME this should be done at game level
@@ -71,6 +77,28 @@ func _ready():
 				spawn_points[3].append(Vector2(x,y))
 				
 	Pawn = load('res://Pawn.tscn')
+	
+	HealthBar = load('res://HealthBar.tscn')
+	
+	castle_hb = HealthBar.instance()
+	castle_hb.setup(castle_health)
+	castle_hb.position = Vector2(402, 280)
+	add_child(castle_hb)
+	
+	carpenter_hb = HealthBar.instance()
+	carpenter_hb.setup(carpenter_building_health)
+	carpenter_hb.position = Vector2(316, 328)
+	add_child(carpenter_hb)
+	
+	commander_hb = HealthBar.instance()
+	commander_hb.setup(commander_building_health)
+	commander_hb.position = Vector2(484, 256)
+	add_child(commander_hb)
+	
+	wizard_hb = HealthBar.instance()
+	wizard_hb.setup(wizard_building_health)
+	wizard_hb.position = Vector2(364, 208)
+	add_child(wizard_hb)
 	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
@@ -201,6 +229,7 @@ func damage_building(pos):
 		destroy_building(pos)
 	elif tile_id in [5,6,7,25,26,27,45,46,47]: # castle
 		castle_health -= 1
+		castle_hb.update(castle_health)
 		if castle_health == CASTLE_SEVERE_HITPOINTS:
 			game_node.on_castle_severely_hit()
 		elif castle_health <= 0:
@@ -210,6 +239,7 @@ func damage_building(pos):
 			game_node.on_castle_destroyed()
 	elif tile_id in [8,9,28,29]: # carpenter's building
 		carpenter_building_health -= 1
+		carpenter_hb.update(carpenter_building_health)
 		if carpenter_building_health <= 0:
 			for x in [12,13]:
 				for y in [14,15]:
@@ -217,6 +247,7 @@ func damage_building(pos):
 			game_node.on_building_destroyed(game_node.enum_counselor.CARPENTER)
 	elif tile_id in [10,11,30,31]: # commander's building
 		commander_building_health -= 1
+		commander_hb.update(commander_building_health)
 		if commander_building_health <= 0:
 			for x in [19,20]:
 				for y in [11,12]:
@@ -224,6 +255,7 @@ func damage_building(pos):
 			game_node.on_building_destroyed(game_node.enum_counselor.COMMANDER)
 	elif tile_id in [12,13,32,33]: # wizard's building
 		wizard_building_health -= 1
+		wizard_hb.update(wizard_building_health)
 		if wizard_building_health <= 0:
 			for x in [14,15]:
 				for y in [9,10]:
