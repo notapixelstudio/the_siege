@@ -208,7 +208,6 @@ func picked_counselor(counselor):
 
 	# assign to the regnant the hand
 	regnants[curr_regnant].hand = counselors[counselor].deck.draw(MAX_CARDS)
-
 	show_cards(regnants[curr_regnant])
 
 	if game_state == P_PICKED_C1 and regnants_alive == 2:
@@ -218,55 +217,57 @@ func picked_counselor(counselor):
 	# show and choose cards
 	if game_state == P_PICKED_C2:
 		$UI.disable_counsellors()
-		flip_cards(these_cards)
+		for regnant in regnants:
+			flip_cards(regnant)
 		print(these_cards)
 
 
 
-func show_cards(regnant, counselor):
-	$UI.do_show_cards(regnant,counselor)
+func show_cards(regnant):
+	$UI.do_show_cards(regnant)
 
 func get_cards(counselor):
 	return counselor.cards
 
-func flip_cards(cards):
+func flip_cards(regnant):
 	print("GAME: flip the cards")
 
 	game_state = P_FLIP_C
 	$UI.disable_counsellors()
-
-	$UI.do_flip_cards(cards)
+	
+	$UI.do_flip_cards(regnant)
 	
 func player_end_turn():
 
 	game_state = P_END_TURN
 	turn_AI()
 
-func player_execute_cards(counselor_id):
+func player_execute_cards(regnant_id, card_id):
 
+# TODO: this is hard_coded
 	if game_state == P_FLIP_C:
 		if regnants_alive == 2:
 			game_state = P_EXEC_C1
+			curr_regnant = KING
 		else:
+			curr_regnant = QUEEN
 			game_state = P_EXEC_C2
 	else:
 		if game_state == P_EXEC_C1:
+			curr_regnant = QUEEN
 			game_state = P_EXEC_C2
 
 	#DO some stuff
 	#TODO here I choose hardcoded the card of the counselor. change it
-	if game_state == P_EXEC_C1:
-		$Battlefield.set_cursor_shape(these_cards[0])
-		#TODO disable only three cards
-	else:
-		$Battlefield.set_cursor_shape(these_cards[3])
-		#TODO disable only three cards
-
+	$Battlefield.set_cursor_shape(regnants[regnant_id].hand[card_id])
+	
 	if game_state == P_EXEC_C2:
 		player_end_turn()
-
-
+	
 # Player turn ATTACK
+func _on_card_pressed(regnant_id, card_id):
+	player_execute_cards(regnant_id, card_id)
+	
 func _on_btn_attackcommander_pressed():
 	player_execute_cards(COMMANDER)
 
