@@ -7,10 +7,10 @@ path="res://.import/carpenter.png-f5a6df68bca8164e18f2521d9fc8f5bc.stex"
 [deps]
 
 source_file="res://assets/characters/carpenter.png"
-source_md5="d17e65890237fa59ac6e6e647c10e987"
+source_md5="29a5d7fb3a37dfcc9bb330d4608375a5"
 
 dest_files=[ "res://.import/carpenter.png-f5a6df68bca8164e18f2521d9fc8f5bc.stex" ]
-dest_md5="c5f516cd16999e76766935cbe4301b8f"
+dest_md5="c38231f2f5ce2bd6144ef0822ea0ee8d"
 
 [params]
 
