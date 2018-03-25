@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/commander.png-0f3e8a19cfe1165efbee9f9a0304964e.stex"
+path="res://.import/wizard_old.png-5330c5d3f51366c1333acf4c6218a057.stex"
 
 [deps]
 
-source_file="res://assets/characters/commander.png"
-source_md5="dd5c304bea7f931b9dfc259dafb2f9b2"
+source_file="res://assets/characters/wizard_old.png"
+source_md5="6b990329baebe9505dd64a95ce3c7a5e"
 
-dest_files=[ "res://.import/commander.png-0f3e8a19cfe1165efbee9f9a0304964e.stex" ]
-dest_md5="8cfda38ce9e1d13b191c7e574085a945"
+dest_files=[ "res://.import/wizard_old.png-5330c5d3f51366c1333acf4c6218a057.stex" ]
+dest_md5="bff6f157241ffc29bbd6f11dd1b14d27"
 
 [params]
 
