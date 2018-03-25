@@ -7,10 +7,10 @@ path="res://.import/carpenter_card_back.png-b3ea5357d14ff6ce2159fccffb4ad97d.ste
 [deps]
 
 source_file="res://assets/cards/carpenter_card_back.png"
-source_md5="4260bd5e65c9797c4f60110785b3532c"
+source_md5="02147b2fefab33211ac7ba53045cdb96"
 
 dest_files=[ "res://.import/carpenter_card_back.png-b3ea5357d14ff6ce2159fccffb4ad97d.stex" ]
-dest_md5="b0f26d930afd8db58aad8f6291e9430e"
+dest_md5="820545a40bc752ba7ad8c15fc132a799"
 
 [params]
 
