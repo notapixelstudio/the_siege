@@ -190,7 +190,7 @@ func raise_wall(pos):
 	buildings_map.set_cellv(pos, 17) # single tile wall
 
 func damage_building(pos):
-	var tile_id = buildings_map.get_cellv(grid_pos)
+	var tile_id = buildings_map.get_cellv(pos)
 	var breakable = tile_id in tiledict and tiledict[tile_id]["breakable"]
 
 	if breakable:
