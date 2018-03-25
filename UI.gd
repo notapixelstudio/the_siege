@@ -19,10 +19,10 @@ func _ready():
 	btn_carpenter = get_node("TextureCarpenter")
 	btn_wizard = get_node("TextureWizard")
 
-	btn_commander.connect("pressed",get_node("/root/Game"),"_on_btn_commander_pressed")
-	btn_carpenter.connect("pressed",get_node("/root/Game"),"_on_btn_carpenter_pressed")
-	btn_wizard.connect("pressed",get_node("/root/Game"),"_on_btn_wizard_pressed")
-	
+	btn_commander.connect("pressed",game_node,"_on_btn_commander_pressed")
+	btn_carpenter.connect("pressed",game_node,"_on_btn_carpenter_pressed")
+	btn_wizard.connect("pressed",game_node,"_on_btn_wizard_pressed")
+	get_node("btn_restart").connect("pressed",game_node,"restart_game")
 	ctn_message = get_node("ctn_message")
 	message_label = get_node("ctn_message/message")
 
@@ -119,6 +119,7 @@ func update_ui(this_round,this_turn):
 	var string = this_turn + " turn: #" + str(this_round)
 	print("UI: printed ->" + string) 
 	get_node("ctn_turn/turn_label").text = string 
+	get_node("ctn_message/turn_label").text = string
 
 func do_flip_cards(regnant):
 	enable_all_cards(regnant)
