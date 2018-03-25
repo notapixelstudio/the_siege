@@ -16,8 +16,10 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=1600
-window/size/height=900
+window/size/width=1398
+window/size/height=850
+window/stretch/aspect="keep"
+window/stretch/shrink="1"
 
 [editor_plugins]
 

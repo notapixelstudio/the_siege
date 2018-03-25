@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/tileset_2.tsx-a246a40a420dfe4a6b495ede403be694.res"
+
+[deps]
+
+source_file="res://assets/tileset_2.tsx"
+source_md5="fa119c5483ce25db6e330451a0322146"
+
+dest_files=[ "res://.import/tileset_2.tsx-a246a40a420dfe4a6b495ede403be694.res" ]
+dest_md5="5d65110581a6266ade4aee463722c632"
+
+[params]
+
+custom_properties=true
+tile_metadata=true
+image_flags=0
+embed_internal_images=true
+save_tiled_properties=true
+post_import_script=""
