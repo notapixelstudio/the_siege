@@ -1,6 +1,6 @@
 class Card:
 	var counselor_id
-	var cursor_shape
+	var effects_shape
 	var type
 	var id
 	var name
@@ -11,5 +11,7 @@ class Card:
 		self.counselor_id = counselor_id
 		self.res_front = res
 		
-	func resolve(battlefield_node, pos):
-		pass
+	func resolve(battlefield, pos):
+		for effect_tile in effects_shape:
+			battlefield[effect_tile.effect](effect_tile.pos)
+			
