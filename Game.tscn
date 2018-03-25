@@ -12,6 +12,13 @@ script = ExtResource( 1 )
 
 [node name="UI" parent="." index="1" instance=ExtResource( 3 )]
 
+[node name="Timer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
 [connection signal="attack_done" from="Battlefield" to="." method="_on_attack_done"]
 
 [connection signal="move_done" from="Battlefield" to="." method="_on_move_done"]
