@@ -277,3 +277,17 @@ func _on_btn_attackcarpenter_pressed():
 func _on_btn_attackwizard_pressed():
 	player_execute_cards(WIZARD)
 
+# on buildings damaged and destroyed
+func on_castle_severely_hit():
+	print('The Castle has been severely hit -- maybe if there are two regnants one of them should die')
+	
+func on_castle_destroyed():
+	print('GAME OVER: The Castle has been destroyed')
+	
+func on_building_destroyed(counselor_id):
+	if counselor_id == enum_counselor.COMMANDER:
+		print('The Commander has been killed')
+	elif counselor_id == enum_counselor.CARPENTER:
+		print('The Carpenter has been killed')
+	elif counselor_id == enum_counselor.WIZARD:
+		print('The Wizard has been killed')
