@@ -19,22 +19,18 @@ var turn_dict 		= {AI: "Enemy", PLAYER:"Player"}
 var moods_dict 		= {HAPPY: "Happy", QUIET: "Quiet", SAD = "Sad", ANGRY = "Angry"}
 var cards_dict = {COMMANDER: "res://assets/cards/commander_card_front.png", CARPENTER: "res://assets/cards/carpenter_card_front.png", WIZARD:"res://assets/cards/wizard_card_front.png"}
  
-
-
-var regnants_alive = 2
-var curr_round = 0
-var curr_turn = AI
-var curr_regnant = KING
-
-
 enum enum_player_state {SETUP,AI_ATTACK, AI_SPAWN, AI_MOVE, AI_END_TURN, P_BEGIN, P_SUMMON_C1,P_SUMMON_C2, P_PICKED_C1,P_PICKED_C2, P_FLIP_C,P_EXEC_C1,P_EXEC_C1_COMPLETED,P_EXEC_C2,P_END_TURN,P_END_GAME }
-var game_state = SETUP
 
 
+var regnants_alive
+var curr_round
+var curr_turn
+var curr_regnant
+var game_state
+ 
 
-var these_cards = []
-var regnants = []
-var counselors = []
+var regnants
+var counselors
 
 class Counselor:
 	var name
@@ -73,12 +69,40 @@ class Regnant:
 		
 func setup_game():
 	print("Game: Setup")
+	
+	regnants_alive = 2
+	curr_round = 0
+	curr_turn = AI
+	curr_regnant = KING
+	game_state = SETUP
+	regnants = []
+	counselors = []
+
 	game_state = SETUP
 	for i in range(NUM_REGNANTS):
 		regnants.append(Regnant.new(regnant_dict[i], i))
 	for i in range(NUM_COUNSELORS):
 		counselors.append(Counselor.new(counselor_dict[i], i, cards_dict))
+	
 	$UI.hide_message()
+	
+	var text = "Help the King and the Queen survive the Siege \n"
+	text += "until their faraway army comes back at turn 10.\n"
+	text += "The two regnants command three counselors: the Carpenter,\n"
+	text += "the Commander, and the Wizard, that give you options\n"
+	text += "to fight back the attackers in the form of cards.\n"
+	text += "Each regnant is limited to summon a single counselor \n"
+	text += "per turn and play a single card, so you have to choose wisely.\n"
+	text += "Turn after turn, your options become fewer and fewer as \n"
+	text += "the attackers damage your walls and buildings, envy counselors\n"
+	text += "start to fight each other, and one of the rulers get poisoned."
+	
+	$UI.update_message(text)
+	$UI.show_message();
+	
+	
+	
+	
 
 func _ready():
 	setup_game()
@@ -149,7 +173,7 @@ func turn_player():
 	#print log info
 	print("Game: Round " + str(curr_round) + ", Turn Player")
 	#clean temporary variables
-	these_cards = []
+	 
 	curr_regnant = KING;
 	#update ui
 	$UI.update_ui(curr_round,curr_turn)
@@ -219,7 +243,7 @@ func picked_counselor(counselor):
 		$UI.disable_counsellors()
 		for regnant in regnants:
 			flip_cards(regnant)
-		print(these_cards)
+		 
 
 
 
@@ -284,7 +308,17 @@ func on_castle_severely_hit():
 	print('The Castle has been severely hit -- maybe if there are two regnants one of them should die')
 	
 func on_castle_destroyed():
-	print('GAME OVER: The Castle has been destroyed')
+	var text = 'GAME OVER: The Castle has been destroyed'
+	print(text)
+	
+	$UI.update_message(text)
+	$UI.show_message();
+	restart_game();
+
+func restart_game():
+	get_tree().reload_current_scene()
+	 
+	
 	
 func on_building_destroyed(counselor_id):
 	if counselor_id == enum_counselor.COMMANDER:
