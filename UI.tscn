@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/king.png" type="Texture" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/frame_label.png" type="Texture" id=7]
 [ext_resource path="res://assets/fonts/Metamorphous-Regular.ttf" type="DynamicFontData" id=8]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 
 size = 15
 use_mipmaps = false
@@ -17,13 +17,21 @@ use_filter = false
 font_data = ExtResource( 8 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 
 size = 20
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 8 )
 _sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=3]
+
+size = 12
+use_mipmaps = true
+use_filter = false
+font_data = ExtResource( 8 )
+_sections_unfolded = [ "Font", "Resource", "Settings" ]
 
 [node name="UI" type="Node" index="0"]
 
@@ -147,9 +155,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 341.0
-margin_top = 231.0
-margin_right = 1093.0
+margin_left = 319.0
+margin_top = 179.0
+margin_right = 1071.0
 margin_bottom = 593.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -163,6 +171,7 @@ stretch_mode = 0
 
 [node name="turn_label" type="Label" parent="ctn_message" index="0"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.01
@@ -177,13 +186,13 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Player turn : #1"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Anchor", "Margin", "custom_fonts", "custom_styles" ]
+_sections_unfolded = [ "Anchor", "Margin", "Visibility", "custom_fonts", "custom_styles" ]
 
 [node name="message" type="Label" parent="ctn_message" index="1"]
 
@@ -201,7 +210,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "GAME OVER"
 align = 1
@@ -272,12 +281,13 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
+custom_fonts/font = SubResource( 3 )
 text = "Player turn : #1"
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Anchor", "Margin" ]
+_sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
 __meta__ = {
 "_edit_group_": true
 }
@@ -288,6 +298,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_left = 50.0
 margin_top = 220.0
 margin_right = 290.0
 margin_bottom = 840.0
@@ -298,7 +309,11 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Anchor", "Margin" ]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="TextureCard1" type="TextureButton" parent="cnt_king_hand" index="0"]
 
@@ -306,7 +321,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 290.0
+margin_right = 240.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -318,7 +333,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-_sections_unfolded = [ "Grow Direction", "Margin", "Textures", "Visibility" ]
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Textures", "Visibility" ]
 
 [node name="TextureCard2" type="TextureButton" parent="cnt_king_hand" index="1"]
 
@@ -327,7 +342,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 4.0
-margin_right = 290.0
+margin_right = 240.0
 margin_bottom = 4.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -340,7 +355,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin" ]
 
 [node name="TextureCard3" type="TextureButton" parent="cnt_king_hand" index="2"]
 
@@ -349,7 +364,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 8.0
-margin_right = 290.0
+margin_right = 240.0
 margin_bottom = 8.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -362,7 +377,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Anchor", "Margin" ]
 
 [node name="cnt_queen_hand" type="VBoxContainer" parent="." index="8"]
 
@@ -370,7 +385,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1102.0
+margin_left = 1152.0
 margin_top = 220.0
 margin_right = 1398.0
 margin_bottom = 840.0
@@ -382,6 +397,10 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Margin" ]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="TextureCard4" type="TextureButton" parent="cnt_queen_hand" index="0"]
 
@@ -389,7 +408,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 296.0
+margin_right = 246.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -401,7 +420,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin" ]
 
 [node name="TextureCard5" type="TextureButton" parent="cnt_queen_hand" index="1"]
 
@@ -410,7 +429,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 4.0
-margin_right = 296.0
+margin_right = 246.0
 margin_bottom = 4.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -423,7 +442,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Anchor", "Margin" ]
 
 [node name="TextureCard6" type="TextureButton" parent="cnt_queen_hand" index="2"]
 
@@ -432,7 +451,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 8.0
-margin_right = 296.0
+margin_right = 246.0
 margin_bottom = 8.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -445,7 +464,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-_sections_unfolded = [ "Grow Direction", "Margin" ]
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin" ]
 
 [node name="btn_restart" type="Button" parent="." index="9"]
 

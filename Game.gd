@@ -30,7 +30,7 @@ var curr_turn
 var curr_regnant
 var game_state
 
- 
+var timer 
 
 var regnants
 var counselors
@@ -70,6 +70,33 @@ class Regnant:
 		self.id = id
 		alive = true
 		
+		
+func _ready():
+	
+	timer = get_node("Timer");
+	timer.connect("timeout", self, "_on_Timer_timeout")
+	timer.set_wait_time( 1 )
+	
+	setup_game()
+
+
+func _on_ok_pressed():
+	print("game: button ok pressed")
+	if game_state == SETUP:
+		print("start timer")
+		timer.start()
+	elif game_state == P_SUMMON_C1 or game_state == P_SUMMON_C2:
+		$UI.enable_counsellors()
+ 
+
+	
+func _on_Timer_timeout():
+	print("time timeout")
+	if game_state == SETUP:
+		timer.stop()
+		turn_AI();
+
+	
 func setup_game():
 	print("Game: Setup")
 	
@@ -87,8 +114,6 @@ func setup_game():
 	for i in range(NUM_COUNSELORS):
 		counselors.append(Counselor.new(counselor_dict[i], i, cards_dict))
 	
-	$UI.hide_message()
-	
 	var text = "Help the King and the Queen survive the Siege \n"
 	text += "until their faraway army comes back at turn " + str(MAX_ROUNDS) + "\n"
 	text += "The two regnants command three counselors: the Carpenter,\n"
@@ -102,24 +127,22 @@ func setup_game():
 	
 	$UI.update_message(text)
 	$UI.show_message(true);
-	
-	
-	
+
 func player_win():
 	var text = ' YOU WIN! The Castle has survived'
 	print(text)
 	$UI.update_message(text)
 	$UI.show_message(false);
 
-func _ready():
-	setup_game()
-	turn_AI()
+
 
 func turn_AI():
 	# turn AI:
 	# 1. attack
 	# 2. spawn
 	# 3. everybody moves
+	$UI.hide_message()
+	
 	curr_round +=1
 	curr_turn = turn_dict[AI]
 	$UI.update_ui(curr_round,curr_turn)
@@ -324,7 +347,7 @@ func on_castle_severely_hit():
 	$UI.disable_texture_regnant(QUEEN)
 	
 func on_castle_destroyed():
-	player_game_over('GAME OVER: The Castle has been destroyed')
+	player_game_over('GAME OVER: \nThe Castle has been destroyed')
 	
 	
 func player_game_over(text):
@@ -343,8 +366,6 @@ func on_building_destroyed(counselor_id):
 	var text
 	if counselor_id == enum_counselor.COMMANDER:
 		text = 'The Commander has been killed'
-		
-	
 	elif counselor_id == enum_counselor.CARPENTER:
 		text = 'The Carpenter has been killed'
 	elif counselor_id == enum_counselor.WIZARD:
@@ -359,7 +380,7 @@ func on_building_destroyed(counselor_id):
 	$UI.disable_counselor(counselor_id)
 
 	if num_counselors_dead == NUM_COUNSELORS:
-		player_game_over("All counselers are dead!")
+		player_game_over("GAME OVER: \nAll counselers are dead!")
 		
 		
 		
