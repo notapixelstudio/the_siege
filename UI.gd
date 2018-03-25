@@ -8,10 +8,14 @@ var ctn_message
 var message_label
 
 var btn_cards = []
+var game_node
 
+var counselor_id
+#back card
 var path_cards = ["res://assets/cards/commander_card_back.png", "res://assets/cards/carpenter_card_back.png" , "res://assets/cards/wizard_card_back.png"]
 func _ready():
-
+	
+	game_node = get_node("/root/Game")
 	btn_commander = get_node("TextureCommander")
 	btn_carpenter = get_node("TextureCarpenter")
 	btn_wizard = get_node("TextureWizard")
@@ -39,60 +43,30 @@ func hide_message():
 func show_message():
 	ctn_message.show()
 
-func do_show_cards(regnant,counselor):
+func do_show_cards(regnant):
 	var counselors_id = [] 
 	# get three cards for each chosen counselour
-	print("UI: do_show_cards, for counselor "+ counselor.name)
-	var card1 
-	var card2 
-	var card3
-	
-	if regnant.name == "King": 
-		# get cards for king
-		card1 = get_node("TextureCard1")
-		card2 = get_node("TextureCard2")
-		card3 = get_node("TextureCard3")
-		
-	elif regnant.name == "Queen":
-		# get cards for king
-		card1 = get_node("TextureCard4")
-		card2 = get_node("TextureCard5")
-		card3 = get_node("TextureCard6")
-		
-
-	# show them
-	card1.show()
-	card2.show()
-	card3.show()
+	var container_hand
+	print(regnant.name)
+	if regnant.name == "King":
+		container_hand = get_node("cnt_king_hand")
+	else:
+		container_hand = get_node("cnt_queen_hand")
+	container_hand.show()
 	
 	#apply texture
-	card1.texture_normal = load(path_cards[counselor.id])
-	card2.texture_normal = load(path_cards[counselor.id])
-	card3.texture_normal = load(path_cards[counselor.id])
+	var i = 0
+	for card in regnant.hand:
+		var card_button = container_hand.get_child(i)
+		card_button.texture_normal = card.image_back
+		counselor_id = regnant.summons
+		var func_to_be_called = "_on_card_pressed"
+		card_button.connect("pressed", get_node("/root/Game"), func_to_be_called, [regnant.id, i]) 
+		i+=1
+		
+		btn_cards.append(card_button)
 	
-	if (counselor.id == 0):
-		card1.connect("pressed",get_node("/root/Game"),"_on_btn_attackcommander_pressed")
-		card2.connect("pressed",get_node("/root/Game"),"_on_btn_attackcommander_pressed")
-		card3.connect("pressed",get_node("/root/Game"),"_on_btn_attackcommander_pressed")
-	elif(counselor.id == 1):
-		card1.connect("pressed",get_node("/root/Game"),"_on_btn_attackcarpenter_pressed")
-		card2.connect("pressed",get_node("/root/Game"),"_on_btn_attackcarpenter_pressed")
-		card3.connect("pressed",get_node("/root/Game"),"_on_btn_attackcarpenter_pressed")
-	elif(counselor.id == 3):
-		card1.connect("pressed",get_node("/root/Game"),"_on_btn_attackwizard_pressed")
-		card2.connect("pressed",get_node("/root/Game"),"_on_btn_attackwizard_pressed")
-		card3.connect("pressed",get_node("/root/Game"),"_on_btn_attackwizard_pressed")
-	
-	
-	
-	btn_cards.append(card1);
-	btn_cards.append(card2);
-	btn_cards.append(card3);
-	
-	
-	
-	
-func disable_counsellors():	
+func disable_counsellors():
 	btn_commander.disabled = true
 	btn_carpenter.disabled = true
 	btn_wizard.disabled = true 
@@ -106,18 +80,29 @@ func disable_all_cards():
 	for card in btn_cards:
 		card.disabled = true
 	
-func enable_all_cards():
-	for card in btn_cards:
-		card.disabled = false
-		
+func enable_all_cards(regnant):
+	var container_hand
+	if regnant.name == "King":
+		container_hand = get_node("cnt_king_hand")
+	else:
+		container_hand = get_node("cnt_queen_hand")
+	var i = 0
+	for card in regnant.hand:
+		var card_button = container_hand.get_child(i)
+		card_button.texture_normal = card.image_front
+		card_button.disabled = false
+		card_button.show()
+		i += 1
+		#counselor_id = regnant.summons
+			
 		
 func hide_all_cards():
-	for card in btn_cards:
-		card.hide()
+	get_node("cnt_king_hand").hide()
+	get_node("cnt_queen_hand").hide()
 		
 func show_all_cards():
-	for card in btn_cards:
-		card.show()
+	get_node("cnt_king_hand").show()
+	get_node("cnt_queen_hand").show()
 
 	
 func update_ui(this_round,this_turn):
@@ -125,16 +110,10 @@ func update_ui(this_round,this_turn):
 	print("UI: printed ->" + string) 
 	get_node("ctn_turn/turn_label").text = string 
 
-func do_flip_cards(cards):
-	var i = 1
-	for card in cards:
-		get_node("TextureCard"+str(i)).texture_normal = load(card.res_front)
-		i+=1
-	enable_all_cards()
+func do_flip_cards(regnant):
+	enable_all_cards(regnant)
 	
 		
 func reset_cards():
-	
 	btn_cards = []
-	
 	
