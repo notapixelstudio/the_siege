@@ -7,10 +7,10 @@ path="res://.import/queen.png-f1fc1cc68046df93893cc2c7f2ff8f5f.stex"
 [deps]
 
 source_file="res://assets/characters/queen.png"
-source_md5="7ac2471a06925f85ced4f83463aa0e8c"
+source_md5="378c251b5fb33b98177af365aadd015d"
 
 dest_files=[ "res://.import/queen.png-f1fc1cc68046df93893cc2c7f2ff8f5f.stex" ]
-dest_md5="143dd58650503e512ecfe39313334e9e"
+dest_md5="0589e7047ddb02892cac287195b6286c"
 
 [params]
 
