@@ -1,15 +1,18 @@
 class Card:
-	var counselor_id
+	var counselor_name
 	var effects_shape
-	var type
 	var id
 	var name
-	var res_front
-	var res_back
+	var image_front
+	var image_back
 	
-	func _init(counselor_id, res):
-		self.counselor_id = counselor_id
-		self.res_front = res
+	func _init(counselor_name, id, data):
+		self.counselor_name = counselor_name
+		self.id = id
+		self.name = data.name
+		self.effects_shape = data.effects_shape
+		self.image_front = load('res://assets/cards/'+counselor_name+'_card_front.png'
+		self.image_back = load('res://assets/cards/'+counselor_name+'_card_back.png'
 
 	func get_shape():
 		var shape = []
