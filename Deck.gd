@@ -4,12 +4,11 @@ class Deck:
 	var Card
 	var all_cards = {
 		'Carpenter': {
-			'build_wall': {
-				'name': 'Build wall',
+			'small_wall': {
+				'name': 'Small wall',
 				'effects_shape': [
 					{'effect': 'raise_wall', 'pos': Vector2( 0,-1)},
-					{'effect': 'raise_wall', 'pos': Vector2( 0, 0)},
-					{'effect': 'raise_wall', 'pos': Vector2( 0, 1)}
+					{'effect': 'raise_wall', 'pos': Vector2( 0, 0)}
 				]
 			}
 		},
@@ -19,7 +18,7 @@ class Deck:
 				'effects_shape': [
 					{'effect': 'kill_pawn', 'pos': Vector2( 0,-1)},
 					{'effect': 'kill_pawn', 'pos': Vector2( 0, 0)},
-					{'effect': 'kill_pawn', 'pos': Vector2( 0, 1)}
+					{'effect': 'kill_pawn', 'pos': Vector2(-1, 0)}
 				]
 			}
 		},
@@ -43,45 +42,76 @@ class Deck:
 		self.counselor_name = counselor_name
 
 		if counselor_name == 'Carpenter':
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
-			add('build_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
+			add('small_wall')
 		elif counselor_name == 'Commander':
 			add('rain_of_arrows')
 			add('rain_of_arrows')
