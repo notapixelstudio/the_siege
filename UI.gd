@@ -78,9 +78,7 @@ func do_show_cards(regnant,counselor):
 		card2.connect("pressed",get_node("/root/Game"),"_on_btn_attackwizard_pressed")
 		card3.connect("pressed",get_node("/root/Game"),"_on_btn_attackwizard_pressed")
 	
-
 	
- 
 	
 	btn_cards.append(card1);
 	btn_cards.append(card2);

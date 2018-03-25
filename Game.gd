@@ -180,7 +180,7 @@ func flip_cards(cards):
 	$UI.do_flip_cards(cards)
 	
 	
-	
+# Player turn ATTACK
 func _on_btn_attackcommander_pressed():
 	
 	print("GAME: ATTACCCK")
