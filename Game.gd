@@ -261,8 +261,7 @@ func player_execute_cards(regnant_id, card_id):
 	#TODO here I choose hardcoded the card of the counselor. change it
 	$Battlefield.set_cursor_shape(regnants[regnant_id].hand[card_id])
 	
-	if game_state == P_EXEC_C2:
-		player_end_turn()
+
 	
 # Player turn ATTACK
 func _on_card_pressed(regnant_id, card_id):
