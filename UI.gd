@@ -7,7 +7,6 @@ var btn_wizard
 var ctn_message
 var message_label
 
-var btn_cards = []
 var game_node
 
 var counselor_id
@@ -41,6 +40,7 @@ func hide_message():
 	ctn_message.hide()
 	
 func show_message():
+	disable_counsellors()
 	ctn_message.show()
 
 func do_show_cards(regnant):
@@ -63,8 +63,7 @@ func do_show_cards(regnant):
 		var func_to_be_called = "_on_card_pressed"
 		card_button.connect("pressed", get_node("/root/Game"), func_to_be_called, [regnant.id, i]) 
 		i+=1
-		
-		btn_cards.append(card_button)
+		 
 	
 func disable_counsellors():
 	btn_commander.disabled = true
@@ -76,9 +75,20 @@ func enable_counsellors():
 	btn_carpenter.disabled = false
 	btn_wizard.disabled = false
  
-func disable_all_cards():
-	for card in btn_cards:
-		card.disabled = true
+func disable_all_cards(regnant):
+	var container_hand
+	if regnant.name == "King":
+		container_hand = get_node("cnt_king_hand")
+	else:
+		container_hand = get_node("cnt_queen_hand")
+	var i = 0
+	for card in regnant.hand:
+		var card_button = container_hand.get_child(i)
+		card_button.texture_normal = card.image_front_disabled
+		card_button.disabled = true
+		card_button.show()
+		i += 1
+	
 	
 func enable_all_cards(regnant):
 	var container_hand
@@ -113,7 +123,8 @@ func update_ui(this_round,this_turn):
 func do_flip_cards(regnant):
 	enable_all_cards(regnant)
 	
-		
-func reset_cards():
-	btn_cards = []
-	
+
+func _on_btn_ok_pressed():
+	hide_message()
+	enable_counsellors()
+	pass # replace with function body

@@ -7,10 +7,10 @@ path="res://.import/wizard.png-0a9e600c5b77ae654053294df68b55c0.stex"
 [deps]
 
 source_file="res://assets/characters/wizard.png"
-source_md5="0665feed01942faac79763570bc1d838"
+source_md5="0a5325d0805804ed62459a96ca2f6034"
 
 dest_files=[ "res://.import/wizard.png-0a9e600c5b77ae654053294df68b55c0.stex" ]
-dest_md5="7d04cc4ce120820518af082f39536068"
+dest_md5="f3c7defa8632b39e24541a0868b126f3"
 
 [params]
 

@@ -20,6 +20,13 @@ var pawns = []
 
 var spawn_points = [[], [], [], []] # NSWE
 
+# health of buildings
+var castle_health = 6
+const CASTLE_SEVERE_HITPOINTS = 2
+var wizard_building_health = 3
+var commander_building_health = 3
+var carpenter_building_health = 3
+
 # cursor
 var cursor_shape = [Vector2(0,-1),Vector2(0,0),Vector2(0,1)]
 var last_cursor_pos = Vector2(0,0)
@@ -29,6 +36,7 @@ var cursor_map
 var chosen_card
 
 var game_node
+var ui_node
 
 func _ready():
 	# set up a new random seed
@@ -36,7 +44,7 @@ func _ready():
 	randomize()
 	
 	game_node = get_node("/root/Game")
-	
+	ui_node = get_node("/root/Game/UI")
 	map = get_node("GridMap/base")
 	buildings_map = get_node("GridMap/buildings")
 	cursor_map = get_node("GridMap/cursor")
@@ -87,7 +95,37 @@ func break_cell(pos, direction):
 	
 	if breakable:
 		destroy_building(grid_pos)
-	
+	elif tile_id in [5,6,7,25,26,27,45,46,47]: # castle
+		castle_health -= 1
+		if castle_health == CASTLE_SEVERE_HITPOINTS:
+			game_node.on_castle_severely_hit()
+		elif castle_health <= 0:
+			for x in [15,16,17]:
+				for y in [12,13,14]:
+					destroy_building(Vector2(x,y))
+			game_node.on_castle_destroyed()
+	elif tile_id in [8,9,28,29]: # carpenter's building
+		carpenter_building_health -= 1
+		if carpenter_building_health <= 0:
+			for x in [12,13]:
+				for y in [14,15]:
+					destroy_building(Vector2(x,y))
+			game_node.on_building_destroyed(game_node.enum_counselor.CARPENTER)
+	elif tile_id in [10,11,30,31]: # commander's building
+		commander_building_health -= 1
+		if commander_building_health <= 0:
+			for x in [19,20]:
+				for y in [11,12]:
+					destroy_building(Vector2(x,y))
+			game_node.on_building_destroyed(game_node.enum_counselor.COMMANDER)
+	elif tile_id in [12,13,32,33]: # wizard's building
+		wizard_building_health -= 1
+		if wizard_building_health <= 0:
+			for x in [14,15]:
+				for y in [9,10]:
+					destroy_building(Vector2(x,y))
+			game_node.on_building_destroyed(game_node.enum_counselor.WIZARD)
+			
 func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array
 	# Returns the new target world position of the child
@@ -144,7 +182,7 @@ func _process(delta):
 			emit_signal('move_done')
 
 func _input(event):
-	if game_node.game_state == game_node.P_EXEC_C1 or game_node.game_state == game_node.P_EXEC_C1 :
+	if game_node.game_state == game_node.P_EXEC_C1 or game_node.game_state == game_node.P_EXEC_C2 :
 		if event is InputEventMouseMotion:
 			var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
 			if pos != last_cursor_pos:
@@ -152,27 +190,49 @@ func _input(event):
 					cursor_map.set_cellv(cell + last_cursor_pos, -1)
 				last_cursor_pos = pos
 				for cell in cursor_shape:
-					cursor_map.set_cellv(cell + pos, 78)
+					var cursor_tile = cell + pos
+					if is_within_the_grid(cursor_tile):
+						cursor_map.set_cellv(cursor_tile, 78)
 		if event is InputEventMouseButton:
-			print("KABOOOM")
 			chosen_card.resolve(get_node("/root/Game/Battlefield"), last_cursor_pos)
+			for cell in cursor_shape:
+					cursor_map.set_cellv(cell + last_cursor_pos, -1)
+			if game_node.game_state == game_node.P_EXEC_C2:
+				game_node.player_end_turn()
+			else:
+				game_node.game_state=game_node.P_EXEC_C1_COMPLETED
+			
 		
+func set_cursor_shape(card):
+	cursor_shape = card.get_shape()
+	chosen_card = card
+	
 # ---
 # board-altering methods
 # ---
 
-func set_cursor_shape(card):
-	cursor_shape = card.get_shape()
-	chosen_card = card
-	pass
+func is_within_the_grid(pos):
+	return pos.x >= 0 and pos.x < grid_size.x and pos.y >= 0 and pos.y < grid_size.y
 	
 func raise_wall(pos):
+	if not is_within_the_grid(pos):
+		return
+		
+	if grid[pos.x][pos.y] != null:
+		return
+
 	buildings_map.set_cellv(pos, 17) # single tile wall
 
 func destroy_building(pos):
+	if not is_within_the_grid(pos):
+		return
+		
 	buildings_map.set_cellv(pos, -1)
 
 func spawn_pawn(pos, direction):
+	if not is_within_the_grid(pos):
+		return
+		
 	var pawn = Pawn.instance()
 	pawns.append(pawn)
 	pawn.position = map.map_to_world(pos) + tile_size/2 # bleargh
@@ -184,6 +244,9 @@ func spawn_pawn(pos, direction):
 	return pawn
 
 func kill_pawn(pos):
+	if not is_within_the_grid(pos):
+		return
+		
 	var pawn = grid[pos.x][pos.y]
 	if pawn != null:
 		var i = 0
