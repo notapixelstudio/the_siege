@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/master.svg-dc1ba6d28d61b58ed361c75707e7d886.stex"
+path="res://.import/carpenter_card_disabled.png-ea495c44ac26b36f34cf91914fbfcf5a.stex"
 
 [deps]
 
-source_file="res://assets/cards/master.svg"
-source_md5="801706f1fa7c81050161acbfeafb4329"
+source_file="res://assets/cards/carpenter_card_disabled.png"
+source_md5="0cd1d3872b4d84b6eff7973dd42676ef"
 
-dest_files=[ "res://.import/master.svg-dc1ba6d28d61b58ed361c75707e7d886.stex" ]
-dest_md5="78d5865dfabd359d0dc93268b8b78bf2"
+dest_files=[ "res://.import/carpenter_card_disabled.png-ea495c44ac26b36f34cf91914fbfcf5a.stex" ]
+dest_md5="43b8f87d416c85e8841ec35f3cd2bcbe"
 
 [params]
 

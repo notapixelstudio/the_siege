@@ -2,7 +2,7 @@ extends Node
 
 const NUM_REGNANTS = 2
 const NUM_COUNSELORS = 3
-const MAX_ROUNDS = 10
+const MAX_ROUNDS = 8
 const MAX_CARDS =3
 
 
@@ -21,12 +21,15 @@ var cards_dict = {COMMANDER: "res://assets/cards/commander_card_front.png", CARP
  
 enum enum_player_state {SETUP,AI_ATTACK, AI_SPAWN, AI_MOVE, AI_END_TURN, P_BEGIN, P_SUMMON_C1,P_SUMMON_C2, P_PICKED_C1,P_PICKED_C2, P_FLIP_C,P_EXEC_C1,P_EXEC_C1_COMPLETED,P_EXEC_C2,P_END_TURN,P_END_GAME }
 
+var num_counselors_dead = 0
 
 var regnants_alive
+ 
 var curr_round
 var curr_turn
 var curr_regnant
 var game_state
+
  
 
 var regnants
@@ -87,7 +90,7 @@ func setup_game():
 	$UI.hide_message()
 	
 	var text = "Help the King and the Queen survive the Siege \n"
-	text += "until their faraway army comes back at turn 10.\n"
+	text += "until their faraway army comes back at turn " + str(MAX_ROUNDS) + "\n"
 	text += "The two regnants command three counselors: the Carpenter,\n"
 	text += "the Commander, and the Wizard, that give you options\n"
 	text += "to fight back the attackers in the form of cards.\n"
@@ -98,11 +101,15 @@ func setup_game():
 	text += "start to fight each other, and one of the rulers get poisoned."
 	
 	$UI.update_message(text)
-	$UI.show_message();
+	$UI.show_message(true);
 	
 	
 	
-	
+func player_win():
+	var text = ' YOU WIN! The Castle has survived'
+	print(text)
+	$UI.update_message(text)
+	$UI.show_message(false);
 
 func _ready():
 	setup_game()
@@ -115,13 +122,16 @@ func turn_AI():
 	# 3. everybody moves
 	curr_round +=1
 	curr_turn = turn_dict[AI]
-
+	$UI.update_ui(curr_round,curr_turn)
 	$UI.hide_all_cards()
 	$UI.disable_counsellors()
-	$UI.update_ui(curr_round,curr_turn)
-
 	print("Game: Round " + str(curr_round) + ", Turn AI")
-	attack()
+			
+	if curr_round == MAX_ROUNDS:
+		player_win()
+		 
+	else:
+		attack()
 	
 
 func attack():
@@ -307,13 +317,22 @@ func _on_btn_attackwizard_pressed():
 func on_castle_severely_hit():
 	print('The Castle has been severely hit -- maybe if there are two regnants one of them should die')
 	
-func on_castle_destroyed():
-	var text = 'GAME OVER: The Castle has been destroyed'
-	print(text)
 	
+	regnants_alive -= 1
+	$UI.update_message("The Castle has been severely hit. The queen died in the fight!")
+	$UI.show_message(true);
+	$UI.disable_texture_regnant(QUEEN)
+	
+func on_castle_destroyed():
+	player_game_over('GAME OVER: The Castle has been destroyed')
+	
+	
+func player_game_over(text):
+	print(text)	
+	game_state = P_END_GAME
 	$UI.update_message(text)
-	$UI.show_message();
-	restart_game();
+	$UI.show_message(false);
+	 
 
 func restart_game():
 	get_tree().reload_current_scene()
@@ -321,9 +340,26 @@ func restart_game():
 	
 	
 func on_building_destroyed(counselor_id):
+	var text
 	if counselor_id == enum_counselor.COMMANDER:
-		print('The Commander has been killed')
+		text = 'The Commander has been killed'
+		
+	
 	elif counselor_id == enum_counselor.CARPENTER:
-		print('The Carpenter has been killed')
+		text = 'The Carpenter has been killed'
 	elif counselor_id == enum_counselor.WIZARD:
-		print('The Wizard has been killed')
+		text = 'The Wizard has been killed'
+
+	print(text)
+	$UI.update_message(text)
+	$UI.show_message(true);
+		
+	num_counselors_dead += 1	
+	counselors[counselor_id].alive = false	
+	$UI.disable_counselor(counselor_id)
+
+	if num_counselors_dead == NUM_COUNSELORS:
+		player_game_over("All counselers are dead!")
+		
+		
+		

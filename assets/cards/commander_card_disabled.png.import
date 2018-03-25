@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/master.svg-dc1ba6d28d61b58ed361c75707e7d886.stex"
+path="res://.import/commander_card_disabled.png-bcb81d9b0ce4c2c254439aa4c97639f4.stex"
 
 [deps]
 
-source_file="res://assets/cards/master.svg"
-source_md5="801706f1fa7c81050161acbfeafb4329"
+source_file="res://assets/cards/commander_card_disabled.png"
+source_md5="f393b51121d6b906af08497826c12015"
 
-dest_files=[ "res://.import/master.svg-dc1ba6d28d61b58ed361c75707e7d886.stex" ]
-dest_md5="78d5865dfabd359d0dc93268b8b78bf2"
+dest_files=[ "res://.import/commander_card_disabled.png-bcb81d9b0ce4c2c254439aa4c97639f4.stex" ]
+dest_md5="40f93a5e598b6adbe568d70f576d9880"
 
 [params]
 

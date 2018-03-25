@@ -3,6 +3,7 @@ extends Node
 var btn_commander
 var btn_carpenter
 var btn_wizard
+var btn_ok
 
 var ctn_message
 var message_label
@@ -18,20 +19,22 @@ func _ready():
 	btn_commander = get_node("TextureCommander")
 	btn_carpenter = get_node("TextureCarpenter")
 	btn_wizard = get_node("TextureWizard")
-
+	btn_ok = get_node("ctn_message/btn_ok")
+	
 	btn_commander.connect("pressed",game_node,"_on_btn_commander_pressed")
 	btn_carpenter.connect("pressed",game_node,"_on_btn_carpenter_pressed")
 	btn_wizard.connect("pressed",game_node,"_on_btn_wizard_pressed")
 	get_node("btn_restart").connect("pressed",game_node,"restart_game")
 	ctn_message = get_node("ctn_message")
 	message_label = get_node("ctn_message/message")
+	
 
 
 func do_show_popup_counselor(i,name):
 	var text = "The "+ name +" requires to talk with ... (choose a counselour)"
 	print("UI: do_show_popup_counselor, by the " + name)
 	update_message(text)
-	show_message()
+	show_message(true)
 
 func update_message(text):
 	message_label.text = text
@@ -39,9 +42,13 @@ func update_message(text):
 func hide_message():
 	ctn_message.hide()
 	
-func show_message():
+func show_message(show_button):
 	disable_counsellors()
 	ctn_message.show()
+	if (show_button):
+		btn_ok.show()
+	else:
+		btn_ok.hide()
 
 func do_show_cards(regnant):
 	var counselors_id = [] 
@@ -63,7 +70,27 @@ func do_show_cards(regnant):
 		var func_to_be_called = "_on_card_pressed"
 		card_button.connect("pressed", get_node("/root/Game"), func_to_be_called, [regnant.id, i]) 
 		i+=1
-		 
+
+func disable_counselor(counselor_id):
+
+	if counselor_id ==	game_node.COMMANDER:
+		btn_commander.disabled = true;
+		btn_commander.hide()
+	if counselor_id ==	game_node.CARPENTER:
+		btn_carpenter.disabled = true;
+		btn_carpenter.hide()
+
+	if counselor_id ==	game_node.WIZARD:
+		btn_wizard.disabled = true;
+		btn_wizard.hide()
+	
+func disable_texture_regnant(id_regnant):
+	
+	if (id_regnant == game_node.KING):
+		get_node("TextureKing").hide()
+	else:
+		get_node("TextureQueen").hide()
+	
 	
 func disable_counsellors():
 	btn_commander.disabled = true
@@ -71,9 +98,13 @@ func disable_counsellors():
 	btn_wizard.disabled = true 
 	
 func enable_counsellors():	
-	btn_commander.disabled = false
-	btn_carpenter.disabled = false
-	btn_wizard.disabled = false
+
+	if	game_node.counselors[0].alive:
+		btn_commander.disabled = false
+	if	game_node.counselors[1].alive:
+		btn_carpenter.disabled = false
+	if	game_node.counselors[2].alive:
+		btn_wizard.disabled = false
  
 func disable_all_cards(regnant):
 	var container_hand
