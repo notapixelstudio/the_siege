@@ -158,11 +158,13 @@ func _input(event):
 						cursor_map.set_cellv(cursor_tile, 78)
 		if event is InputEventMouseButton:
 			chosen_card.resolve(get_node("/root/Game/Battlefield"), last_cursor_pos)
-			
-			
-			
+			for cell in cursor_shape:
+					cursor_map.set_cellv(cell + last_cursor_pos, -1)
 			if game_node.game_state == game_node.P_EXEC_C2:
 				game_node.player_end_turn()
+			else:
+				game_node.game_state=game_node.P_EXEC_C1_COMPLETED
+			
 		
 func set_cursor_shape(card):
 	cursor_shape = card.get_shape()

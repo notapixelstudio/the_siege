@@ -27,7 +27,7 @@ var curr_turn = AI
 var curr_regnant = KING
 
 
-enum enum_player_state {SETUP,AI_ATTACK, AI_SPAWN, AI_MOVE, AI_END_TURN, P_BEGIN, P_SUMMON_C1,P_SUMMON_C2, P_PICKED_C1,P_PICKED_C2, P_FLIP_C,P_EXEC_C1,P_EXEC_C2,P_END_TURN,P_END_GAME }
+enum enum_player_state {SETUP,AI_ATTACK, AI_SPAWN, AI_MOVE, AI_END_TURN, P_BEGIN, P_SUMMON_C1,P_SUMMON_C2, P_PICKED_C1,P_PICKED_C2, P_FLIP_C,P_EXEC_C1,P_EXEC_C1_COMPLETED,P_EXEC_C2,P_END_TURN,P_END_GAME }
 var game_state = SETUP
 
 
@@ -255,7 +255,7 @@ func player_execute_cards(regnant_id, card_id):
 			curr_regnant = QUEEN
 			game_state = P_EXEC_C2
 	else:
-		if game_state == P_EXEC_C1:
+		if game_state == P_EXEC_C1_COMPLETED:
 			curr_regnant = QUEEN
 			game_state = P_EXEC_C2
 
