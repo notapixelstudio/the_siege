@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tilemap_1.png-73b277d21c19bb6581ea0dd78081d74a.stex"
+path="res://.import/commander.png-0f3e8a19cfe1165efbee9f9a0304964e.stex"
 
 [deps]
 
-source_file="res://assets/tilemap_1.png"
-source_md5="cf2f56120a4ad3dd63c05d4e195326c8"
+source_file="res://assets/characters/commander.png"
+source_md5="c9daefdbed8f44b91273c150fa0bab10"
 
-dest_files=[ "res://.import/tilemap_1.png-73b277d21c19bb6581ea0dd78081d74a.stex" ]
-dest_md5="aa861975f7de16be713acea250e5cf6a"
+dest_files=[ "res://.import/commander.png-0f3e8a19cfe1165efbee9f9a0304964e.stex" ]
+dest_md5="2c0ff6444ecf26a99312c8a5897286b6"
 
 [params]
 

@@ -14,6 +14,13 @@ config/name="THE SIEGE"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1600
+window/size/height=900
+window/stretch/aspect="keep"
+window/stretch/shrink="1"
+
 [editor_plugins]
 
 enabled=PoolStringArray( "net.kivano.fsm", "vnen.tiled_importer" )

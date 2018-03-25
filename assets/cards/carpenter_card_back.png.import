@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tilemap_1.png-73b277d21c19bb6581ea0dd78081d74a.stex"
+path="res://.import/carpenter_card_back.png-b3ea5357d14ff6ce2159fccffb4ad97d.stex"
 
 [deps]
 
-source_file="res://assets/tilemap_1.png"
-source_md5="cf2f56120a4ad3dd63c05d4e195326c8"
+source_file="res://assets/cards/carpenter_card_back.png"
+source_md5="4260bd5e65c9797c4f60110785b3532c"
 
-dest_files=[ "res://.import/tilemap_1.png-73b277d21c19bb6581ea0dd78081d74a.stex" ]
-dest_md5="aa861975f7de16be713acea250e5cf6a"
+dest_files=[ "res://.import/carpenter_card_back.png-b3ea5357d14ff6ce2159fccffb4ad97d.stex" ]
+dest_md5="b0f26d930afd8db58aad8f6291e9430e"
 
 [params]
 

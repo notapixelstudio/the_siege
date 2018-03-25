@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tilemap_1.png-73b277d21c19bb6581ea0dd78081d74a.stex"
+path="res://.import/wizard_card_front.png-fc3c95967d1f6b2d5e35b8ea31194535.stex"
 
 [deps]
 
-source_file="res://assets/tilemap_1.png"
-source_md5="cf2f56120a4ad3dd63c05d4e195326c8"
+source_file="res://assets/cards/wizard_card_front.png"
+source_md5="1ffa561df878c80d33066b7fc83ffb81"
 
-dest_files=[ "res://.import/tilemap_1.png-73b277d21c19bb6581ea0dd78081d74a.stex" ]
-dest_md5="aa861975f7de16be713acea250e5cf6a"
+dest_files=[ "res://.import/wizard_card_front.png-fc3c95967d1f6b2d5e35b8ea31194535.stex" ]
+dest_md5="36c13cd662b8929be36a0c4ce2169483"
 
 [params]
 
