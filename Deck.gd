@@ -48,11 +48,11 @@ class Deck:
 			'fireball': {
 				'name': 'Fireball',
 				'effects_shape': [
-					{'effect': 'kill_pawn', 'pos': Vector2( 0,-1)},
-					{'effect': 'kill_pawn', 'pos': Vector2(-1, 0)},
-					{'effect': 'kill_pawn', 'pos': Vector2( 0, 0)},
-					{'effect': 'kill_pawn', 'pos': Vector2( 1, 0)},
-					{'effect': 'kill_pawn', 'pos': Vector2( 0, 1)}
+					{'effect': 'fire_damage', 'pos': Vector2( 0,-1)},
+					{'effect': 'fire_damage', 'pos': Vector2(-1, 0)},
+					{'effect': 'fire_damage', 'pos': Vector2( 0, 0)},
+					{'effect': 'fire_damage', 'pos': Vector2( 1, 0)},
+					{'effect': 'fire_damage', 'pos': Vector2( 0, 1)}
 				]
 			}
 		}
