@@ -114,11 +114,13 @@ func wave():
 	var direction = [Vector2(0,1),Vector2(0,-1),Vector2(1,0),Vector2(-1,0)][random_dir_index]
 	var active_spawn_points = spawn_points[random_dir_index]
 	
+	var busy = 0
 	# spawn one pawn from each spawn point, directed towards the center
 	for spawn_point in active_spawn_points:
-		spawn_pawn(spawn_point, direction)
+		if spawn_pawn(spawn_point, direction) != null:
+			busy += 1
 		
-	return len(active_spawn_points)
+	return busy
 	
 func do_move():
 	state = 'move'
@@ -236,10 +238,10 @@ func destroy_building(pos):
 
 func spawn_pawn(pos, direction):
 	if not is_within_the_grid(pos):
-		return
+		return null
 
 	if grid[pos.x][pos.y] != null:
-		return
+		return null
 		
 	var pawn = Pawn.instance()
 	pawns.append(pawn)
