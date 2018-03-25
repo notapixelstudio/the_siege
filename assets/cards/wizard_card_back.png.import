@@ -7,10 +7,10 @@ path="res://.import/wizard_card_back.png-d06c9d4c016fd2e44d6d828ff5cd840f.stex"
 [deps]
 
 source_file="res://assets/cards/wizard_card_back.png"
-source_md5="a5dec89925c3ad692de6e147ab50627a"
+source_md5="f7f7e0a05f8f27fe0be2a0eac0f54289"
 
 dest_files=[ "res://.import/wizard_card_back.png-d06c9d4c016fd2e44d6d828ff5cd840f.stex" ]
-dest_md5="378a00783dcf74dc4df259123f76ed97"
+dest_md5="7277eb90962eeaa5a31c3742886acf8f"
 
 [params]
 
