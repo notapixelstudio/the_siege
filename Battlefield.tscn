@@ -6,12 +6,8 @@
 
 [node name="Battlefield" type="Node2D" index="0"]
 
-position = Vector2( 402, 0 )
+position = Vector2( 300, 10 )
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="GridMap" parent="." index="0" instance=ExtResource( 2 )]
 
