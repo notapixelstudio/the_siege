@@ -12,46 +12,55 @@
  <tile id="3" terrain="0,0,0,0"/>
  <tile id="4">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="5">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="6">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="7">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="8">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="9">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="10">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="11">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="12">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
@@ -97,46 +106,55 @@
  <tile id="23" terrain="0,0,0,0"/>
  <tile id="24">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="25">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="26">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="27">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="28">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="29">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="30">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="31">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="32">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
@@ -164,16 +182,19 @@
  <tile id="43" terrain="0,0,0,0"/>
  <tile id="44">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="45">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="46">
   <properties>
+   <property name="breakable" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
