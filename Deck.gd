@@ -94,48 +94,6 @@ class Deck:
 			add('tiny_wall')
 			add('tiny_wall')
 			
-			add('thick_wall')
-			add('thick_wall')
-			add('thick_wall')
-			
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			
-			add('thick_wall')
-			add('thick_wall')
-			add('thick_wall')
-			
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			add('small_wall')
-			
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			add('tiny_wall')
-			
 		elif counselor_name == 'Commander':
 			add('desperate_shot')
 			add('desperate_shot')
@@ -159,32 +117,7 @@ class Deck:
 			add('rain_of_arrows')
 			add('rain_of_arrows')
 			add('rain_of_arrows')
-			
-			add('desperate_shot')
-			add('desperate_shot')
-			add('desperate_shot')
-			add('desperate_shot')
-			add('desperate_shot')
-			add('desperate_shot')
-			add('desperate_shot')
-			add('desperate_shot')
-			add('desperate_shot')
-			add('desperate_shot')
-			add('desperate_shot')
-			add('desperate_shot')
 
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			add('rain_of_arrows')
-			
-			
-			
 		elif counselor_name == 'Wizard':
 			add('lava_spikes')
 			add('lava_spikes')
@@ -198,7 +131,7 @@ class Deck:
 			add('lava_spikes')
 			add('lava_spikes')
 			add('lava_spikes')
-			
+
 			add('fireball')
 			add('fireball')
 			add('fireball')
@@ -214,35 +147,6 @@ class Deck:
 			add('fireball')
 			add('fireball')
 
-			add('lava_spikes')
-			add('lava_spikes')
-			add('lava_spikes')
-			add('lava_spikes')
-			add('lava_spikes')
-			add('lava_spikes')
-			add('lava_spikes')
-			add('lava_spikes')
-			add('lava_spikes')
-			add('lava_spikes')
-			add('lava_spikes')
-			add('lava_spikes')
-			
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			add('fireball')
-			
-			
 		self.cards = shuffleList(self.cards)
 
 	func add(card_id):
