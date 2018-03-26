@@ -123,8 +123,8 @@ func setup_game():
 	text += "Each regnant is limited to summon a single counselor \n"
 	text += "per turn and play a single card, so you have to choose wisely.\n"
 	text += "Turn after turn, your options become fewer and fewer as \n"
-	text += "the attackers damage your walls and buildings and \n"
-	text += "one of the rulers get poisoned."
+	text += "the attackers damage your walls and buildings, envy counselors\n"
+	text += "start to fight each other, and one of the rulers get poisoned."
 	
 	$UI.update_message(text)
 	$UI.show_message(true);
@@ -151,7 +151,10 @@ func turn_AI():
 	$UI.disable_counsellors()
 	print("Game: Round " + str(curr_round) + ", Turn AI")
 			
-	attack()
+	if curr_round == MAX_ROUNDS:
+		player_win()
+	else:
+		attack()
 	
 
 func attack():
@@ -197,10 +200,7 @@ func _on_move_done():
 
 func turn_player():
 	#Change state
-	if curr_round == MAX_ROUNDS:
-		player_win()
-		return
-	
+
 	game_state = P_BEGIN
 	curr_turn = turn_dict[PLAYER]
 	#print log info
