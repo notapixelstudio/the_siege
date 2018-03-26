@@ -7,7 +7,11 @@ path="res://.import/level0_2.tmx-bc0a653d80f3c9c3892f72d18e35690c.scn"
 [deps]
 
 source_file="res://assets/level0_2.tmx"
+<<<<<<< HEAD
+source_md5="1ebbe6c30711d858bf69fea33b28ceca"
+=======
 source_md5="055e25403a03eef4e2d265b464064d26"
+>>>>>>> origin/master
 
 dest_files=[ "res://.import/level0_2.tmx-bc0a653d80f3c9c3892f72d18e35690c.scn" ]
 dest_md5="a2a1957214d285bd0bac8376c8a3af7d"
