@@ -9,6 +9,7 @@ var ctn_message
 var message_label
 
 var game_node
+signal signal_call
 
 var counselor_id
 #back card
@@ -28,10 +29,11 @@ func _ready():
 	ctn_message = get_node("ctn_message")
 	message_label = get_node("ctn_message/message")
 	
+	connect("signal_call",game_node,"_on_ok_pressed")
 
 
 func do_show_popup_counselor(i,name):
-	var text = "The "+ name +" requires to talk with ... (choose a counselour)"
+	var text = "The "+ name +" requires to talk with the... (choose a counselour)"
 	print("UI: do_show_popup_counselor, by the " + name)
 	update_message(text)
 	show_message(true)
@@ -150,6 +152,7 @@ func update_ui(this_round,this_turn):
 	var string = this_turn + " turn: #" + str(this_round)
 	print("UI: printed ->" + string) 
 	get_node("ctn_turn/turn_label").text = string 
+	get_node("ctn_message/turn_label").show()
 	get_node("ctn_message/turn_label").text = string
 
 func do_flip_cards(regnant):
@@ -158,5 +161,4 @@ func do_flip_cards(regnant):
 
 func _on_btn_ok_pressed():
 	hide_message()
-	enable_counsellors()
-	pass # replace with function body
+	emit_signal("signal_call")
