@@ -117,7 +117,7 @@ class Deck:
 			add('rain_of_arrows')
 			add('rain_of_arrows')
 			add('rain_of_arrows')
-			
+
 		elif counselor_name == 'Wizard':
 			add('lava_spikes')
 			add('lava_spikes')
@@ -131,7 +131,7 @@ class Deck:
 			add('lava_spikes')
 			add('lava_spikes')
 			add('lava_spikes')
-			
+
 			add('fireball')
 			add('fireball')
 			add('fireball')
