@@ -12,9 +12,9 @@ class Card:
 		self.id = id
 		self.name = data.name
 		self.effects_shape = data.effects_shape
-		self.image_front = load('res://assets/cards/'+counselor_name+'/'+id+'.png')
-		self.image_front_disabled = load('res://assets/cards/'+counselor_name+'_card_disabled.png')
-		self.image_back = load('res://assets/cards/'+counselor_name+'_card_back.png')
+		self.image_front = load('res://assets/cards/'+counselor_name.to_lower()+'/'+id+'.png')
+		self.image_front_disabled = load('res://assets/cards/'+counselor_name.to_lower()+'_card_disabled.png')
+		self.image_back = load('res://assets/cards/'+counselor_name.to_lower()+'_card_back.png')
 
 	func get_shape():
 		var shape = []
