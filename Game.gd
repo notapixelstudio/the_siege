@@ -116,15 +116,14 @@ func setup_game():
 		counselors.append(Counselor.new(counselor_dict[i], i, cards_dict))
 	
 	var text = "Help the King and the Queen survive the Siege \n"
-	text += "until their faraway army comes back at turn " + str(MAX_ROUNDS) + "\n"
+	text += "until their faraway army comes back at turn " + str(MAX_ROUNDS+1) + ".\n"
 	text += "The two regnants command three counselors: the Carpenter,\n"
 	text += "the Commander, and the Wizard, that give you options\n"
 	text += "to fight back the attackers in the form of cards.\n"
 	text += "Each regnant is limited to summon a single counselor \n"
 	text += "per turn and play a single card, so you have to choose wisely.\n"
 	text += "Turn after turn, your options become fewer and fewer as \n"
-	text += "the attackers damage your walls and buildings and \n"
-	text += "one of the rulers get poisoned."
+	text += "the attackers damage your walls and buildings..."
 	
 	$UI.update_message(text)
 	$UI.show_message(true);
