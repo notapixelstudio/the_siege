@@ -345,6 +345,7 @@ func on_castle_severely_hit():
 	print('The Castle has been severely hit -- maybe if there are two regnants one of them should die')
 	
 	if(regnants[QUEEN].alive):
+		$UI.show_queen_help()
 		player_queen_died("The castle has been severely hit. The Queen died in the fight!")
 	
 func player_queen_died(text):

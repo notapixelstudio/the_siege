@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/king.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/frame_label.png" type="Texture" id=7]
 [ext_resource path="res://assets/fonts/Metamorphous-Regular.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://assets/comics/comic.png" type="Texture" id=9]
+[ext_resource path="res://assets/comics/comic2.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -494,6 +495,7 @@ align = 1
 
 [node name="Queen_comic" type="TextureButton" parent="." index="10"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -504,6 +506,7 @@ margin_right = 1243.0
 margin_bottom = 115.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -539,33 +542,19 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors" ]
 
-[node name="Container" type="Container" parent="Queen_comic" index="1"]
+[node name="King_comic2" type="TextureButton" parent="." index="11"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 34.0
-margin_top = 26.0
-margin_right = 74.0
-margin_bottom = 66.0
+margin_left = 228.0
+margin_top = 52.0
+margin_right = 356.0
+margin_bottom = 152.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="King_comic" type="TextureButton" parent="." index="11"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -574,24 +563,35 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
+texture_normal = ExtResource( 10 )
+expand = true
+_sections_unfolded = [ "Margin", "Textures" ]
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Label" type="Label" parent="King_comic" index="0"]
+[node name="Label" type="Label" parent="King_comic2" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 41.0
+margin_top = 41.0
+margin_right = 86.0
+margin_bottom = 55.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "HELP"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+_sections_unfolded = [ "custom_colors" ]
 
 [node name="Carpenter_comic" type="TextureButton" parent="." index="12"]
 
@@ -603,6 +603,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -641,6 +642,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -679,6 +681,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1

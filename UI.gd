@@ -158,6 +158,8 @@ func update_ui(this_round,this_turn):
 func do_flip_cards(regnant):
 	enable_all_cards(regnant)
 	
+func show_queen_help():
+	get_node("Queen_comic").show()
 
 func _on_btn_ok_pressed():
 	hide_message()
