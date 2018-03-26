@@ -4,7 +4,7 @@ const NUM_REGNANTS = 2
 const NUM_COUNSELORS = 3
 const MAX_ROUNDS = 8
 const MAX_CARDS =3
-
+const ROUND_QUEEN_DIED = 5
 
 
 enum enum_regnant   {KING , QUEEN}
@@ -87,7 +87,8 @@ func _on_ok_pressed():
 		timer.start()
 	elif game_state == P_SUMMON_C1 or game_state == P_SUMMON_C2:
 		$UI.enable_counsellors()
- 
+	elif game_state == P_END_TURN and curr_round == ROUND_QUEEN_DIED:
+		turn_AI()
 
 	
 func _on_Timer_timeout():
@@ -152,7 +153,6 @@ func turn_AI():
 			
 	if curr_round == MAX_ROUNDS:
 		player_win()
-		 
 	else:
 		attack()
 	
@@ -299,7 +299,11 @@ func player_end_turn():
 	$UI.disable_all_cards(regnants[curr_regnant])	
 			
 	game_state = P_END_TURN
-	turn_AI()
+	
+	if curr_round == ROUND_QUEEN_DIED:
+		player_queen_died("The Queen has been poisoned. God save the King!")
+	else:
+		turn_AI()
 
 func player_execute_cards(regnant_id, card_id):
 
@@ -340,9 +344,14 @@ func _on_btn_attackwizard_pressed():
 func on_castle_severely_hit():
 	print('The Castle has been severely hit -- maybe if there are two regnants one of them should die')
 	
+	if(regnants[QUEEN].alive):
+		player_queen_died("The castle has been severely hit. The Queen died in the fight!")
+	
+func player_queen_died(text):
 	
 	regnants_alive -= 1
-	$UI.update_message("The Castle has been severely hit. The queen died in the fight!")
+	regnants[QUEEN].alive = false
+	$UI.update_message(text)
 	$UI.show_message(true);
 	$UI.disable_texture_regnant(QUEEN)
 	
