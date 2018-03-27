@@ -129,10 +129,19 @@ func setup_game():
 	$UI.show_message(true);
 
 func player_win():
+	
+	game_state = P_END_GAME
+	
 	var text = ' YOU WIN! The Castle has survived'
 	print(text)
 	$UI.update_message(text)
 	$UI.show_message(false);
+	
+	
+	$UI.disable_all_cards(regnants[KING])
+	$UI.disable_all_cards(regnants[QUEEN])
+	
+	$UI.disable_counsellors()
 
 
 
@@ -299,7 +308,7 @@ func player_end_turn():
 			
 	game_state = P_END_TURN
 	
-	if curr_round == ROUND_QUEEN_DIED:
+	if curr_round == ROUND_QUEEN_DIED and regnants_alive == NUM_REGNANTS:
 		player_queen_died("The Queen has been poisoned. God save the King!")
 	else:
 		turn_AI()
@@ -361,6 +370,10 @@ func on_castle_destroyed():
 func player_game_over(text):
 	print(text)	
 	game_state = P_END_GAME
+	$UI.disable_all_cards(regnants[KING])
+	$UI.disable_all_cards(regnants[QUEEN])
+	
+	$UI.disable_counsellors()
 	$UI.update_message(text)
 	$UI.show_message(false);
 	 
