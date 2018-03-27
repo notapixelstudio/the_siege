@@ -29,6 +29,7 @@ var curr_round
 var curr_turn
 var curr_regnant
 var game_state
+var game_finished = false
 
 var timer 
 
@@ -150,32 +151,37 @@ func turn_AI():
 	# 1. attack
 	# 2. spawn
 	# 3. everybody moves
-	$UI.hide_message()
-	
-	curr_round +=1
-	curr_turn = turn_dict[AI]
-	$UI.update_ui(curr_round,curr_turn)
-	$UI.hide_all_cards()
-	$UI.disable_counsellors()
-	print("Game: Round " + str(curr_round) + ", Turn AI")
-			
-	attack()
+	if !game_finished:
+		game_state = AI_ATTACK
+		$UI.hide_message()
+		
+		curr_round +=1
+		curr_turn = turn_dict[AI]
+		$UI.update_ui(curr_round,curr_turn)
+		$UI.hide_all_cards()
+		$UI.disable_counsellors()
+		print("Game: Round " + str(curr_round) + ", Turn AI")
+				
+		attack()
 	
 
 func attack():
-	print("Game: do_attack")
-	game_state = AI_ATTACK
-	$Battlefield.do_attack()
+	if !game_finished:
+		print("Game: do_attack")
+		game_state = AI_ATTACK
+		$Battlefield.do_attack()
 	
 func spawn():
-	print("Game: do_spawn")
-	game_state = AI_SPAWN
-	$Battlefield.do_spawn()
+	if !game_finished:
+		print("Game: do_spawn")
+		game_state = AI_SPAWN
+		$Battlefield.do_spawn()
 	
 func move():
-	print("Game: do_move")
-	game_state = AI_MOVE
-	$Battlefield.do_move()
+	if !game_finished:
+		print("Game: do_move")
+		game_state = AI_MOVE
+		$Battlefield.do_move()
 
 # from signal attack_done
 func _on_attack_done():
@@ -187,7 +193,8 @@ func _on_spawn_done():
 
 # from signal move_done
 func _on_move_done():
-	turn_player()
+	if !game_finished:
+		turn_player()
 	
 """
 # turn PLAYER:
@@ -364,11 +371,14 @@ func player_queen_died(text):
 	$UI.disable_texture_regnant(QUEEN)
 	
 func on_castle_destroyed():
+	game_state = P_END_GAME
+	game_finished = true
 	player_game_over('GAME OVER: \nThe Castle has been destroyed')
 	
 	
 func player_game_over(text):
 	print(text)	
+	game_finished = true
 	game_state = P_END_GAME
 	$UI.disable_all_cards(regnants[KING])
 	$UI.disable_all_cards(regnants[QUEEN])
@@ -384,24 +394,27 @@ func restart_game():
 	
 	
 func on_building_destroyed(counselor_id):
-	var text
-	if counselor_id == enum_counselor.COMMANDER:
-		text = 'The Commander has been killed'
-	elif counselor_id == enum_counselor.CARPENTER:
-		text = 'The Carpenter has been killed'
-	elif counselor_id == enum_counselor.WIZARD:
-		text = 'The Wizard has been killed'
-
-	print(text)
-	$UI.update_message(text)
-	$UI.show_message(true);
-		
-	num_counselors_dead += 1	
-	counselors[counselor_id].alive = false	
-	$UI.disable_counselor(counselor_id)
-
-	if num_counselors_dead == NUM_COUNSELORS:
-		player_game_over("GAME OVER: \nAll counselers are dead!")
+	
+	if game_state != P_END_GAME:
+		var text
+		if counselor_id == enum_counselor.COMMANDER:
+			text = 'The Commander has been killed'
+		elif counselor_id == enum_counselor.CARPENTER:
+			text = 'The Carpenter has been killed'
+		elif counselor_id == enum_counselor.WIZARD:
+			text = 'The Wizard has been killed'
+	
+		print(text)
+		$UI.update_message(text)
+		$UI.show_message(true);
+			
+		num_counselors_dead += 1	
+		counselors[counselor_id].alive = false	
+		$UI.disable_counselor(counselor_id)
+	
+		if num_counselors_dead == NUM_COUNSELORS:
+			game_finished
+			player_game_over("GAME OVER: \nAll counselers are dead!")
 		
 		
 		
